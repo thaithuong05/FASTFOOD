@@ -171,20 +171,25 @@
             .luffyfood {
             font-size: 30px;
         }
+        @media(max-width:555px) {
+        
+        .luffyfood {
+        font-size: 20px;
+    }
         
         }
     </style>
 </head>
 <body>
     <div class="hang1">
-        <div></div>
-        <div class="input-container">
+        <div style="flex:1"></div>
+        <div class="input-container" style="flex:1">
             <input type="text" id="tensp" placeholder="Tên của bạn">
             <i class="fa-solid fa-magnifying-glass input-icon"></i>
         </div>
-        <div>
-            <i class="fa-solid fa-cart-shopping" style="font-size: 35px; margin-right: 70px; cursor: pointer;"></i>
-            <i class="fa-solid fa-circle-user" style="font-size: 40px; margin-right: 70px; cursor: pointer;"></i>
+        <div style="display: flex; flex:1;align-items: center;justify-content: center;">
+            <i class="fa-solid fa-cart-shopping" style="margin-right: 20%;font-size: 35px; cursor: pointer;"></i>
+            <i class="fa-solid fa-circle-user" style="font-size: 40px; cursor: pointer;"></i>
         </div>
     </div>
 
