@@ -4,74 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+    <title>LUFFY FOOD</title>
     <style>
         body {
             margin: 0;
         }
-
+        * {
+           box-sizing: border-box;
+        }
         .hang1 {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgb(90, 35, 35);
-            width: 100%; /* Đảm bảo chiều rộng 100% */
+            width: 100%;
             height: 100px;
+            background-color:#b2b2b2;
         }
-
-
         .hang1 div {
-            display: flex; 
-            align-items: center;
-        }
-
-        .gio {
-            font-size: 60px;
-            text-align: center;
+            display: flex;
             flex: 1;
+            align-items: center;
+            justify-content: right;
         }
-
+        .hang1 input {
+            width: 100%;
+            height: 52%;
+            border:none;
+        }
+        .input-container input:focus {
+           outline: none;
+           border: none; /* Thêm viền màu khác nếu cần */
+           box-shadow: 0 0 50px rgb(44, 44, 44); /* Hiệu ứng bóng nếu muốn */
+        }
+        .input-container {
+            position: relative;
+        }
+        .input-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 51.5%;
+            position: absolute;
+            font-size: 25px;
+            color: #000000;
+            cursor: pointer;
+            background-color: rgb(161, 161, 161);
+            border: none;
+        }
+        .input-icon:hover {
+            background-color: #4b3632;
+        }
+        .divluffyfood{
+            height: 200px;
+            width: 33.33%;
+            top: 0px;
+            left: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+        }
         .luffyfood {
-            position: absolute; /* Để có thể đặt vị trí chính xác */
-             color: #e9a3a3; /* Màu chữ chính là trắng */
-             font-family: 'Spicy Rice', cursive;
-             font-size: 80px;
-             height: 100px;
-             top: 40px;
-             left: 20px; /* Đặt vị trí theo chiều ngang */
-             text-shadow: 
-                        -5px -5px 10px rgb(228, 147, 144),
-                        5px 5px 10px rgb(96, 66, 45);
+            color: #000000;
+            font-family: 'Nosifer', cursive;
+            font-size: 50px;
+            text-shadow: 
+                
+                -4px -4px 2px #ffffff,
+                -3px -3px 2px #000000,
+                -2px -2px 2px #000000,
+                -1px -1px 2px #000000;
         }
-
-        .letter {
-            display: inline-block;
-            animation: jump 0.8s ease-in-out infinite;
+        .luffyfood:hover{
+            font-family: 'Nosifer', cursive;
+            color: rgb(255, 255, 255);
+            text-shadow: 
+                
+                -4px -4px 2px #ffffff,
+                -3px -3px 2px #000000,
+                -2px -2px 2px #000000,
+                -1px -1px 2px #000000;;
         }
-
-        @keyframes jump {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
+        
         .hang2 {
             display: flex;
-            background-color: antiquewhite;
+            background-color: rgb(241, 241, 241);
             width: 100%;
             height: 100px;
             align-items: center;
-            justify-content: center;; /* Chỉnh sửa để các phần tử bắt đầu từ trái */
-            overflow-x: auto; /* Cho phép cuộn ngang */
-            overflow-y: hidden; /* Không cho phép cuộn dọc */
-            scrollbar-width: none;
-            -ms-overflow-style: none;        
+            justify-content: center;
         }
-        
         .hang2 div {
             display: flex;
             flex-direction: column;
@@ -79,7 +102,6 @@
             justify-content: center;
             margin: 40px;
         }
-
         .hang2 ul {
             display: flex;
             flex-direction: column;
@@ -87,14 +109,12 @@
             padding: 0;
             margin: 0;
         }
-
         .hang2 img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             border: 4px solid #ffffff;
         }
-
         .hang2 button {
             width: 100%;
             height: 100%;
@@ -103,196 +123,610 @@
             background: transparent;
             cursor: pointer;
         }
-
         .hang2 li {
             list-style-type: none;
         }
-
-
-        .hang3 {
+        .lopmonmoi {
+            margin: 100px;
             display: flex;
-            height: auto;
-            list-style-type: none;
             flex-wrap: wrap;
             justify-content: center;
+            background-color: antiquewhite;
         }
-        .hang3div1
-        {
+        .lopburger, .lopgaran, .lopdouong {
+            display: none;
             margin: 100px;
-            background-image: url('images/nenhang1.jpg');
-            background-size: cover;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: antiquewhite;
         }
-
         .hang3div {
-            width: auto;
-            height: auto;
-            margin: 40px;
-            border: 4px solid black;
-            text-align: center;
-        }
-
-        .hang3div div {
-            width: auto;
-            border-bottom: 2px solid #00FF00;
-            flex: 1;
-            margin: 5px;
-        }
-
-        .hang3 img {
-            max-width: 100%;
-            height: 200px;
-            border: 4px solid red;
-            border-radius: 10%;
-            object-fit: cover;
-        }
-
-        .hang4 {
+            margin: 10px; /* Không có khoảng cách */
+            padding: 0; /* Không có padding */
             display: flex;
-            background-color:rgb(96, 66, 45);
-            width: 100%;
-            height: 20vh;
+            flex-direction: column; /* Để hình ảnh nằm trên các thông tin khác */
+            align-items: center;
+            justify-content: flex-start; /* Đưa nội dung lên trên cùng */
+            background-color: #ababab;
+            width: 250px;
+            height: 350px;
+        }
+        .hang3div:hover {
+           text-shadow: 0px 0px 10px rgb(21, 19, 19); /* Bạn có thể giữ lại hoặc thay đổi */
+           box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5); /* Hiệu ứng đổ bóng */
         }
 
 
+        .hang3div img {
+            object-fit: cover; /* Đảm bảo ảnh lấp đầy không gian */
+            max-width: 100%;
+            height: 200px; /* Để duy trì tỷ lệ khung hình */
+            margin: 0; /* Không có khoảng cách */
+            padding: 0; /* Không có padding */
+            filter: blur(0px); /* Điều chỉnh giá trị px để thay đổi mức độ mờ ảnh */
+        }
 
+        
     </style>
 </head>
 <body>
     <div class="hang1">
-        <div style="flex: 1"></div>
-        <b><div class="gio" style="flex: 1;"></div></b>
-        <div style="flex: 1; display: flex; justify-content: flex-end;">
-            <i class="fa-solid fa-cart-shopping" style="font-size: 35px;margin-right: 70px;cursor: pointer;"></i>
-            <i class="fa-solid fa-circle-user" style="font-size: 40px;margin-right: 70px;cursor: pointer;"></i>
+        <div></div>
+        <div class="input-container">
+            <input type="text" id="tensp" placeholder="Tên của bạn">
+            <i class="fa-solid fa-magnifying-glass input-icon"></i>
+        </div>
+        <div>
+            <i class="fa-solid fa-cart-shopping" style="font-size: 35px; margin-right: 70px; cursor: pointer;"></i>
+            <i class="fa-solid fa-circle-user" style="font-size: 40px; margin-right: 70px; cursor: pointer;"></i>
         </div>
     </div>
-    
-    
+
     <div class="hang2">
         <div>
             <ul>
-                <li><button><img src="images/new.jpg"></button></li>
-                <li><button>Món mới</button></li>
+                <li><button class="nutmonmoi"><img src="images/new.jpg"></button></li>
+                <li><button class="nutmonmoi">Món mới</button></li>
             </ul>
         </div>
         <div>
             <ul>
-                <li><button><img src="images/combo.jpg"></button></li>
-                <li><button>Món mới</button></li>
+                <li><button class="nutburger"><img src="images/burger.jpg"></button></li>
+                <li><button class="nutburger">Burger</button></li>
             </ul>
         </div>
         <div>
             <ul>
-                <li><button><img src="images/burger.jpg"></button></li>
-                <li><button>Món mới</button></li>
+                <li><button class="nutgaran"><img src="images/garan.jpg"></button></li>
+                <li><button class="nutgaran">Gà rán</button></li>
             </ul>
         </div>
         <div>
             <ul>
-                <li><button><img src="images/garan.jpg"></button></li>
-                <li><button>Món mới</button></li>
+                <li><button class="nutdouong"><img src="images/douong.jpg"></button></li>
+                <li><button class="nutdouong">Đồ uống</button></li>
             </ul>
         </div>
-        <div>
-            <ul>
-                <li><button><img src="images/douong.jpg"></button></li>
-                <li><button>Món mới</button></li>
-            </ul>
-        </div>
-
     </div>
 
-    <div class="luffyfood"></div>
+    <div class="divluffyfood"><p class="luffyfood">LUFFY<br>FOOD</p></div>
 
-    <div class="hang3div1">
     <div class="hang3">
-        <div class="hang3div">
-            <a href="#"><img src="images/garan.jpg"></a>
-            <div>Mã sp : 1</div>
-            <div>Gà Rán Ngon Nhức Nách</div>
-            <div>Giá : 1 viên kc của cô Hằng</div>
-            <div><span><button class="link">Mua</button></span></div>
-            <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-        </div>
-        <div class="hang3div">
-            <a href="#"><img src="images/garan.jpg"></a>
-            <div>Mã sp : 1</div>
-            <div>Gà Rán Ngon Nhức Nách</div>
-            <div>Giá : 1 viên kc của cô Hằng</div>
-            <div><span><button class="link">Mua</button></span></div>
-            <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-        </div>
-        <div class="hang3div">
-            <a href="#"><img src="images/garan.jpg"></a>
-            <div>Mã sp : 1</div>
-            <div>Gà Rán Ngon Nhức Nách</div>
-            <div>Giá : 1 viên kc của cô Hằng</div>
-            <div><span><button class="link">Mua</button></span></div>
-            <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-        </div>
-        <div class="hang3div">
-            <a href="#"><img src="images/garan.jpg"></a>
-            <div>Mã sp : 1</div>
-            <div>Gà Rán Ngon Nhức Nách</div>
-            <div>Giá : 1 viên kc của cô Hằng</div>
-            <div><span><button class="link">Mua</button></span></div>
-            <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-        </div>
-        <div class="hang3div">
-            <a href="#"><img src="images/garan.jpg"></a>
-            <div>Mã sp : 1</div>
-            <div>Gà Rán Ngon Nhức Nách</div>
-            <div>Giá : 1 viên kc của cô Hằng</div>
-            <div><span><button class="link">Mua</button></span></div>
-            <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+
+        <div class="lopmonmoi">
+
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/new.jpg"></a>
+                <div>Mã sp : 1</div>
+                <div>Gà Rán Ngon Nhức Nách</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+
         </div>
 
+        <div class="lopburger">
+
+            <div class="hang3div">
+                <a href="#"><img src="images/burger.jpg"></a>
+                <div>Mã sp : 2</div>
+                <div>Burger Ngon Tuyệt</div>
+                <div>Giá : 2 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/burger.jpg"></a>
+                <div>Mã sp : 2</div>
+                <div>Burger Ngon Tuyệt</div>
+                <div>Giá : 2 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/burger.jpg"></a>
+                <div>Mã sp : 2</div>
+                <div>Burger Ngon Tuyệt</div>
+                <div>Giá : 2 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/burger.jpg"></a>
+                <div>Mã sp : 2</div>
+                <div>Burger Ngon Tuyệt</div>
+                <div>Giá : 2 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/burger.jpg"></a>
+                <div>Mã sp : 2</div>
+                <div>Burger Ngon Tuyệt</div>
+                <div>Giá : 2 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+
+        </div>
+
+        <div class="lopgaran">
+
+            <div class="hang3div">
+                <a href="#"><img src="images/garan.jpg"></a>
+                <div>Mã sp : 3</div>
+                <div>Gà Rán Ngon Tuyệt</div>
+                <div>Giá : 3 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/garan.jpg"></a>
+                <div>Mã sp : 3</div>
+                <div>Gà Rán Ngon Tuyệt</div>
+                <div>Giá : 3 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/garan.jpg"></a>
+                <div>Mã sp : 3</div>
+                <div>Gà Rán Ngon Tuyệt</div>
+                <div>Giá : 3 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/garan.jpg"></a>
+                <div>Mã sp : 3</div>
+                <div>Gà Rán Ngon Tuyệt</div>
+                <div>Giá : 3 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/garan.jpg"></a>
+                <div>Mã sp : 3</div>
+                <div>Gà Rán Ngon Tuyệt</div>
+                <div>Giá : 3 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+
+        </div>
+
+        <div class="lopdouong">
+
+            <div class="hang3div">
+                <a href="#"><img src="images/douong.jpg"></a>
+                <div>Mã sp : 4</div>
+                <div>Trà Sữa Thơm Ngon</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/douong.jpg"></a>
+                <div>Mã sp : 4</div>
+                <div>Trà Sữa Thơm Ngon</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/douong.jpg"></a>
+                <div>Mã sp : 4</div>
+                <div>Trà Sữa Thơm Ngon</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/douong.jpg"></a>
+                <div>Mã sp : 4</div>
+                <div>Trà Sữa Thơm Ngon</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+            <div class="hang3div">
+                <a href="#"><img src="images/douong.jpg"></a>
+                <div>Mã sp : 4</div>
+                <div>Trà Sữa Thơm Ngon</div>
+                <div>Giá : 1 viên kc của cô Hằng</div>
+                <div><span><button class="link">Mua</button></span></div>
+                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+            </div>
+
+        </div>
     </div>
-    </div>
 
-
-    <footer style="background-color: #945050; padding: 20px; text-align: center;">
+    <footer style="background-color: #7c7c7c; padding: 20px; text-align: center;">
         <h2 style="margin: 0;">Thực Đơn Thức Ăn Nhanh</h2>
         <p style="margin: 10px 0;">Chào mừng bạn đến với thế giới thức ăn nhanh thơm ngon!</p>
-        <ul style="list-style-type: none; padding: 0;">
-            <li><strong>Burger:</strong> Nướng tươi mỗi ngày với nguyên liệu chất lượng.</li>
-            <li><strong>Pizza:</strong> Đế bánh giòn, topping phong phú, phục vụ nóng hổi.</li>
-            <li><strong>Khoai tây chiên:</strong> Giòn rụm, chấm tương ớt hay sốt mayonnaise.</li>
-            <li><strong>Đồ uống:</strong> Thức uống mát lạnh, từ soda đến trà sữa.</li>
-        </ul>
-        <p style="margin: 10px 0;">Liên hệ với chúng tôi: <a href="thicute37@gmail.com">thicute37@gmail.com</a></p>
+        <p>Liên hệ với chúng tôi: <a href="mailto:thicute37@gmail.com">thicute37@gmail.com</a></p>
         <p>&copy; 2024 Thức Ăn Nhanh. Tất cả các quyền được bảo lưu.</p>
     </footer>
-    
-
-
-
 
     <script>
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.querySelector('.gio').textContent = `${hours}:${minutes}:${seconds}`;
+
+        const buttons = {
+            nutmonmoi: document.querySelectorAll('.nutmonmoi'),
+            nutburger: document.querySelectorAll('.nutburger'),
+            nutgaran: document.querySelectorAll('.nutgaran'),
+            nutdouong: document.querySelectorAll('.nutdouong'),
+        };
+
+        const sections = {
+            lopmonmoi: document.querySelector('.lopmonmoi'),
+            lopburger: document.querySelector('.lopburger'),
+            lopgaran: document.querySelector('.lopgaran'),
+            lopdouong: document.querySelector('.lopdouong'),
+        };
+
+        function showSection(section) {
+            Object.keys(sections).forEach(key => {
+                sections[key].style.display = key === section ? 'flex' : 'none';
+            });
         }
 
-        setInterval(updateClock, 1000); // Cập nhật đồng hồ mỗi giây
-        updateClock(); // Gọi hàm một lần ngay khi tải trang
-
-        const textContainer = document.querySelector('.luffyfood');
-        const text = "LUFFY FOOD"; // Sử dụng chuỗi này
-        textContainer.textContent = ''; // Xóa nội dung ban đầu
-
-        // Tạo từng chữ cái và thêm vào container
-        text.split('').forEach((char, index) => {
-            const span = document.createElement('span');
-            span.textContent = char;
-            span.classList.add('letter');
-            // Thêm độ trễ cho mỗi chữ cái
-            span.style.animationDelay = `${index * 0.1}s`; // Thay đổi giá trị 0.1s cho độ trễ
-            textContainer.appendChild(span);
+        buttons.nutmonmoi.forEach(button => {
+            button.addEventListener('click', () => {
+                showSection('lopmonmoi');
+            });
         });
+
+        buttons.nutburger.forEach(button => {
+            button.addEventListener('click', () => {
+                showSection('lopburger');
+            });
+        });
+
+        buttons.nutgaran.forEach(button => {
+            button.addEventListener('click', () => {
+                showSection('lopgaran');
+            });
+        });
+
+        buttons.nutdouong.forEach(button => {
+            button.addEventListener('click', () => {
+                showSection('lopdouong');
+            });
+        });
+
     </script>
 </body>
 </html>
