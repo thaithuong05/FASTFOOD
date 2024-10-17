@@ -7,35 +7,33 @@
     <title>Document</title>
     <style>
         body {
-            margin: 0; /* Xóa khoảng cách mặc định */
+            margin: 0;
         }
 
         .hang1 {
             display: flex;
-            justify-content: space-between; /* Đẩy các phần tử sang hai bên */
-            align-items: center; /* Căn giữa theo chiều dọc */
-            background-color: #fbff2d;
+            justify-content: space-between;
+            align-items: center;
+            background-color:rgb(90, 35, 35);
             width: 100%;
             height: 100px;
-            border: 0px solid red;
         }
-        
+
         .hang1 div {
-            display: flex;
-            align-items: center;
+            display: flex; 
             justify-content: center;
         }
-        
+
         .hang1 input, button {
             margin: 0;
             padding: 0;
             border: none;
             height: 50px;
-            box-sizing: border-box; /* Đảm bảo chiều cao bao gồm cả padding và border */
+            box-sizing: border-box;
         }
 
         .hang1 input {
-            width: 100%; /* Giữ ô tìm kiếm chiếm 80% chiều rộng của khung chứa */
+            width: 100%;
         }
 
         .hang1 button img {
@@ -46,47 +44,66 @@
         
         .luffyfood {
             position: absolute; /* Để có thể đặt vị trí chính xác */
-            color: rgb(0, 0, 0);
-            font-family: 'Spicy Rice', cursive;
-            font-size: 80px;
-            height: 100px;
-            top: 40px;
-            left: 20px; /* Đặt vị trí theo chiều ngang */
+             color: #e9a3a3; /* Màu chữ chính là trắng */
+             font-family: 'Spicy Rice', cursive;
+             font-size: 80px;
+             height: 100px;
+             top: 40px;
+             left: 20px; /* Đặt vị trí theo chiều ngang */
+             text-shadow: 
+                        -5px -5px 10px rgb(228, 147, 144),
+                        5px 5px 10px rgb(96, 66, 45);
+        }
+
+        .letter {
+            display: inline-block;
+            animation: jump 0.8s ease-in-out infinite;
+        }
+
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         .hang2 {
             display: flex;
-            background-color: #2cffca;
+            background-color: antiquewhite;
             width: 100%;
             height: 100px;
-            align-items: center; /* Căn giữa theo chiều dọc */
-            justify-content: center; /* Căn giữa theo chiều ngang */
-            border: 0px solid red;
+            align-items: center;
+            justify-content: center;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         
         .hang2 div {
-            display: flex; /* Đảm bảo các phần tử bên trong div sẽ dùng flexbox */
-            flex-direction: column; /* Các phần tử bên trong sẽ xếp theo chiều dọc */
-            align-items: center; /* Căn giữa các phần tử theo chiều ngang */
-            justify-content: center; /* Căn giữa các phần tử theo chiều dọc */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             margin: 20px;
-            border: 0px solid red;
         }
-        
+
         .hang2 ul {
-            display: flex; /* Sử dụng flexbox cho <ul> */
-            flex-direction: column; /* Xếp các <li> theo chiều dọc */
-            align-items: center; /* Căn giữa các phần tử theo chiều ngang */
-            padding: 0; /* Xóa padding mặc định */
-            margin: 0; /* Xóa margin mặc định */
-        }        
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
+
         .hang2 img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            border: 4px solid #b5b9b5;
+            border: 4px solid #ffffff;
         }
-        
+
         .hang2 button {
             width: 100%;
             height: 100%;
@@ -94,64 +111,222 @@
             background: transparent;
             cursor: pointer;
         }
-        
+
         .hang2 li {
             list-style-type: none;
         }
 
-        .hang3 {
-            display: flex;
-            width: 100%;
-            background-color: #f2c180;
-        }
-
         .gio {
-            font-size: 60px; /* Đặt kích thước chữ */
-            text-align: center; /* Căn giữa văn bản */
-            flex: 1; /* Cho phép nó chiếm không gian còn lại */
+            font-size: 60px;
+            text-align: center;
+            flex: 1;
         }
 
         .hang3 {
             display: flex;
             border: 1px dashed #0d0d0d;
-            margin: 10px;
+            margin: 0px;
             height: auto;
             list-style-type: none;
             flex-wrap: wrap;
-            justify-content: center; /* Căn giữa các phần tử */
-            
+            justify-content: center;
         }
-        .hang3div{
+
+        .hang3div {
             width: auto;
             height: auto;
             margin: 4px;
             border: 4px solid black;
             text-align: center;
-
         }
-        .hang3div div{
+
+        .hang3div div {
             width: auto;
             border-bottom: 2px solid #00FF00;
-            flex: 1; /* Các phần tử sẽ chiếm đều không gian */
+            flex: 1;
             margin: 5px;
-            
-            
         }
-       
-        
-        .hang3 img{
+
+        .hang3 img {
             max-width: 100%;
             height: 200px;
             border: 4px solid red;
             border-radius: 10%;
-            object-fit: cover; /* Giữ tỷ lệ khung hình và không làm méo ảnh */
+            object-fit: cover;
+        }
+
+        .hang4 {
+            display: flex;
+            background-color:rgb(96, 66, 45);
+            width: 100%;
+            height: 20vh;
+        }
+
+
+
+        @media (max-width: 768px) {
+            body {
+            margin: 0;
+        }
+
+        .hang1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color:rgb(90, 35, 35);
+            width: 100%;
+            height: 100px;
+        }
+
+        .hang1 div {
+            display: flex; 
+            justify-content: center;
+        }
+
+        .hang1 input, button {
+            margin: 0;
+            padding: 0;
+            border: none;
+            height: 50px;
+            box-sizing: border-box;
+        }
+
+        .hang1 input {
+            width: 100%;
+        }
+
+        .hang1 button img {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .luffyfood {
+            position: absolute; /* Để có thể đặt vị trí chính xác */
+             color: #e9a3a3; /* Màu chữ chính là trắng */
+             font-family: 'Spicy Rice', cursive;
+             font-size: 40px;
+             height: 100px;
+             top: 40px;
+             left: 20px; /* Đặt vị trí theo chiều ngang */
+             text-shadow: 
+                        -5px -5px 10px rgb(228, 147, 144),
+                        5px 5px 10px rgb(96, 66, 45);
+        }
+
+        .letter {
+            display: inline-block;
+            animation: jump 0.8s ease-in-out infinite;
+        }
+
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hang2 {
+            display: flex;
+            background-color: antiquewhite;
+            width: 100%;
+            height: 100px;
+            align-items: center;
+            justify-content: center;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .hang2 div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .hang2 ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .hang2 img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+        }
+
+        .hang2 button {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .hang2 li {
+            list-style-type: none;
+        }
+
+        .gio {
+            font-size: 30px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .hang3 {
+            display: flex;
+            border: 1px dashed #0d0d0d;
+            margin: 0px;
+            height: auto;
+            list-style-type: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hang3div {
+            width: auto;
+            height: auto;
+            margin: 4px;
+            border: 4px solid black;
+            text-align: center;
+        }
+
+        .hang3div div {
+            width: auto;
+            border-bottom: 2px solid #00FF00;
+            flex: 1;
+            margin: 5px;
+        }
+
+        .hang3 img {
+            max-width: 100%;
+            height: 200px;
+            border: 4px solid red;
+            border-radius: 10%;
+            object-fit: cover;
+        }
+
+        .hang4 {
+            display: flex;
+            background-color:rgb(96, 66, 45);
+            width: 100%;
+            height: 20vh;
+        }
         }
     </style>
 </head>
 <body>
     <div class="hang1">
-        <div style="flex: 2"></div> <!-- Cột bên trái -->
-        <b><div class="gio" style="flex: 1;"></div></b> <!-- Đồng hồ ở giữa -->
+        <div style="flex: 2"></div>
+        <b><div class="gio" style="flex: 1;"></div></b>
         <div style="flex: 1">
             <button style="border-radius: 50%;"><img style="border-radius: 50%;width:50px; height: 50px;" src="images/giohang.jpg" alt="Giỏ hàng"></button>
         </div>
@@ -191,69 +366,27 @@
                 <li><button>Món mới</button></li>
             </ul>
         </div>
+
     </div>
-    <div class="luffyfood"><b>LUFFY FOOD</b></div>
+
+    <div class="luffyfood"></div>
 
     <div class="hang3">
-            <div class="hang3div">
-                <a href="#"><img src="images/garan.jpg"></a>
-                <div>Mã sp : 1</div>
-                <div>Gà Rán Ngon Nhức Nách</div>
-                <div>Giá : 1 viên kc của cô Hằng</div>
-                <div><span><button class="link">Mua</button></span></div>
-                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-            </div>
-            <div class="hang3div">
-                <a href="#"><img src="images/garan.jpg"></a>
-                <div>Mã sp : 1</div>
-                <div>Gà Rán Ngon Nhức Nách</div>
-                <div>Giá : 1 viên kc của cô Hằng</div>
-                <div><span><button class="link">Mua</button></span></div>
-                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-            </div>
-            <div class="hang3div">
-                <a href="#"><img src="images/garan.jpg"></a>
-                <div>Mã sp : 1</div>
-                <div>Gà Rán Ngon Nhức Nách</div>
-                <div>Giá : 1 viên kc của cô Hằng</div>
-                <div><span><button class="link">Mua</button></span></div>
-                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-            </div>
-            <div class="hang3div">
-                <a href="#"><img src="images/garan.jpg"></a>
-                <div>Mã sp : 1</div>
-                <div>Gà Rán Ngon Nhức Nách</div>
-                <div>Giá : 1 viên kc của cô Hằng</div>
-                <div><span><button class="link">Mua</button></span></div>
-                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-            </div>
-            <div class="hang3div">
-                <a href="#"><img src="images/garan.jpg"></a>
-                <div>Mã sp : 1</div>
-                <div>Gà Rán Ngon Nhức Nách</div>
-                <div>Giá : 1 viên kc của cô Hằng</div>
-                <div><span><button class="link">Mua</button></span></div>
-                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-            </div>
-            <div class="hang3div">
-                <a href="#"><img src="images/garan.jpg"></a>
-                <div>Mã sp : 1</div>
-                <div>Gà Rán Ngon Nhức Nách</div>
-                <div>Giá : 1 viên kc của cô Hằng</div>
-                <div><span><button class="link">Mua</button></span></div>
-                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-            </div>
-            <div class="hang3div">
-                <a href="#"><img src="images/garan.jpg"></a>
-                <div>Mã sp : 1</div>
-                <div>Gà Rán Ngon Nhức Nách</div>
-                <div>Giá : 1 viên kc của cô Hằng</div>
-                <div><span><button class="link">Mua</button></span></div>
-                <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
-            </div>
-    
+        <div class="hang3div">
+            <a href="#"><img src="images/garan.jpg"></a>
+            <div>Mã sp : 1</div>
+            <div>Gà Rán Ngon Nhức Nách</div>
+            <div>Giá : 1 viên kc của cô Hằng</div>
+            <div><span><button class="link">Mua</button></span></div>
+            <div><span><button class="link">Thêm vào giỏ hàng</button></span></div>
+        </div>
+        <!-- Thêm các sản phẩm khác nếu cần -->
     </div>
 
+
+    <div class="hang4">
+        Thông tin page
+    </div>
     <script>
         function updateClock() {
             const now = new Date();
@@ -265,6 +398,20 @@
 
         setInterval(updateClock, 1000); // Cập nhật đồng hồ mỗi giây
         updateClock(); // Gọi hàm một lần ngay khi tải trang
+
+        const textContainer = document.querySelector('.luffyfood');
+        const text = "LUFFY FOOD"; // Sử dụng chuỗi này
+        textContainer.textContent = ''; // Xóa nội dung ban đầu
+
+        // Tạo từng chữ cái và thêm vào container
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.classList.add('letter');
+            // Thêm độ trễ cho mỗi chữ cái
+            span.style.animationDelay = `${index * 0.1}s`; // Thay đổi giá trị 0.1s cho độ trễ
+            textContainer.appendChild(span);
+        });
     </script>
 </body>
 </html>
