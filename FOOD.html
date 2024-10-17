@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet">
-    <title>LUFFY FOOD</title>
+    <title>Document</title>
     <style>
         body {
             margin: 0;
@@ -12,36 +13,25 @@
 
         .hang1 {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background-color:rgb(90, 35, 35);
-            width: 100%;
+            background-color: rgb(90, 35, 35);
+            width: 100%; /* Đảm bảo chiều rộng 100% */
             height: 100px;
         }
 
+
         .hang1 div {
             display: flex; 
-            justify-content: center;
+            align-items: center;
         }
 
-        .hang1 input, button {
-            margin: 0;
-            padding: 0;
-            border: none;
-            height: 50px;
-            box-sizing: border-box;
+        .gio {
+            font-size: 60px;
+            text-align: center;
+            flex: 1;
         }
 
-        .hang1 input {
-            width: 100%;
-        }
-
-        .hang1 button img {
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-        
         .luffyfood {
             position: absolute; /* Để có thể đặt vị trí chính xác */
              color: #e9a3a3; /* Màu chữ chính là trắng */
@@ -75,10 +65,11 @@
             width: 100%;
             height: 100px;
             align-items: center;
-            justify-content: center;
-            overflow: auto;
+            justify-content: center;; /* Chỉnh sửa để các phần tử bắt đầu từ trái */
+            overflow-x: auto; /* Cho phép cuộn ngang */
+            overflow-y: hidden; /* Không cho phép cuộn dọc */
             scrollbar-width: none;
-            -ms-overflow-style: none;
+            -ms-overflow-style: none;        
         }
         
         .hang2 div {
@@ -107,6 +98,7 @@
         .hang2 button {
             width: 100%;
             height: 100%;
+            border: none;
             border-radius: 50%;
             background: transparent;
             cursor: pointer;
@@ -116,11 +108,6 @@
             list-style-type: none;
         }
 
-        .gio {
-            font-size: 60px;
-            text-align: center;
-            flex: 1;
-        }
 
         .hang3 {
             display: flex;
@@ -167,20 +154,19 @@
         }
 
 
-        
+
     </style>
 </head>
 <body>
     <div class="hang1">
-        <div style="flex: 2"></div>
+        <div style="flex: 1"></div>
         <b><div class="gio" style="flex: 1;"></div></b>
-        <div style="flex: 1">
-            <button style="border-radius: 50%;"><img style="border-radius: 50%;width:50px; height: 50px;" src="images/giohang.jpg" alt="Giỏ hàng"></button>
-        </div>
-        <div style="flex: 1">
-            <button style="border-radius: 50%;"><img style="border-radius: 50%;width:50px; height: 50px;" src="images/daidien.jpg" alt="Đại diện"></button>
+        <div style="flex: 1; display: flex; justify-content: flex-end;">
+            <i class="fa-solid fa-cart-shopping" style="font-size: 35px;margin-right: 70px;cursor: pointer;"></i>
+            <i class="fa-solid fa-circle-user" style="font-size: 40px;margin-right: 70px;cursor: pointer;"></i>
         </div>
     </div>
+    
     
     <div class="hang2">
         <div>
