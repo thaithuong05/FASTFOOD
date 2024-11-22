@@ -4,7 +4,7 @@
 
 //Khi bấm các nút ở list menu
 function open_product_of_team(products) {
-  const productlist = document.getElementById('productlist');
+  const productlist = document.getElementById('productList');
   productlist.innerHTML = ''; // Xóa nội dung cũ
 
   if (products.length == 0) {
@@ -91,7 +91,7 @@ function searchProducts() {
   var input, filter, productlist, products, i, txtValue;
   input = document.getElementById('search-input');
   filter = input.value.toLowerCase(); // Chuyển giá trị input thành chữ thường
-  productlist = document.getElementById('productlist');
+  productlist = document.getElementById('productList');
   products = productlist.getElementsByClassName('product-item');
 
   open_product('home');
