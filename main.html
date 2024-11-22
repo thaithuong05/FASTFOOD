@@ -107,7 +107,8 @@
         <br>
         <!-- Mật khẩu -->
         <label for="sign-up-password1">Xác nhận mật khẩu:</label>
-        <input type="password" id="sign-up-password1" name="password1" placeholder="Vui lòng nhập lại mật khẩu" required>
+        <input type="password" id="sign-up-password1" name="password1" placeholder="Vui lòng nhập lại mật khẩu"
+            required>
         <span class="error-message" id="error-password1"></span>
         <br>
         <!-- Checkbox đồng ý -->
@@ -139,30 +140,32 @@
     <aside class="header-aside" id="header-aside">
         <div class="header-aside-left">
             <p>Phân loại</p>
-            <select class="header-aside-left-select">
-                <option>Tất cả</option>
-                <option>Món mới</option>
-                <option>Combo</option>
-                <option>Burger</option>
-                <option>Gà rán</option>
-                <option>Đồ uống</option>
+            <select id="category-search-price" onchange="search_price()" class="header-aside-left-select">
+                <option value="home">Trang chủ</option>
+                <option value="new">Món mới</option>
+                <option value="combo">Combo</option>
+                <option value="burger">Burger</option>
+                <option value="chicken">Gà rán</option>
+                <option value="drink">Đồ uống</option>
             </select>
         </div>
         <div class="header-aside-between">
             <p>Giá từ </p>
-            <input class="header-aside-between-input" type="number" id="min-price" placeholder="Tối thiểu">
+            <input class="header-aside-between-input" onkeyup="search_price()" type="number" id="min-price"
+                placeholder="Tối thiểu">
             <p>đến</p>
-            <input class="header-aside-between-input" type="number" id="max-price" placeholder="Tối đa">
+            <input class="header-aside-between-input" onchange="search_price()" type="number" id="max-price"
+                placeholder="Tối đa">
             <div class="header-aside-between-i">
-                <i class="fa-solid fa-magnifying-glass" onclick=""></i>
+                <i class="fa-solid fa-magnifying-glass" onclick="search_price()"></i>
             </div>
         </div>
         <div class="header-aside-right">
             <div class="header-aside-right-i">
-                <i class="fa-solid fa-up-long"></i>
+                <i class="fa-solid fa-up-long" onclick="search_price_thap_cao()"></i>
             </div>
             <div class="header-aside-right-i">
-                <i class="fa-solid fa-down-long"></i>
+                <i class="fa-solid fa-down-long" onclick="search_price_cao_thap()"></i>
             </div>
             <div class="header-aside-right-i" onclick="moveto()">
                 <i class="fa-solid fa-xmark"></i>
@@ -184,10 +187,11 @@
         <div id="productList" class="productList">
             <!--Danh sách sản phẩm-->
         </div>
-        <div class="page">
-            <button id="prevPage">Trang trước</button>
-            <button id="nextPage">Trang tiếp</button>
-            <span id="pageInfo"></span>
+        <!-- Điều khiển phân trang -->
+        <div id="pagination" class="pagination">
+            <button onclick="changePage('prev')">Trang trước</button>
+            <span id="pageNumber">Trang 1</span>
+            <button onclick="changePage('next')">Trang sau</button>
         </div>
     </main>
 
@@ -271,4 +275,5 @@
         window.onload = displayProductsMain;
     </script>
 </body>
+
 </html>
