@@ -1,38 +1,43 @@
-*{
+* {
   box-sizing: border-box;
 }
+
 body {
   margin: 0px;
   background-color: #fcf6f5;
 }
 
-.display-account-admin{
-  margin:15% 15%;
-  padding:0 20%;
+.display-account-admin {
+  margin: 15% 15%;
+  padding: 0 20%;
   border: 2px solid black;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  background-color:#09d1c7;
+  background-color: #09d1c7;
 }
-.display-account-admin h1{
+
+.display-account-admin h1 {
   text-align: center;
 }
-.display-account-admin-form input{
-  width:100%;
+
+.display-account-admin-form input {
+  width: 100%;
   height: 50px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-.display-account-admin-form button{
-  height:50px;
-  display:flex;
+
+.display-account-admin-form button {
+  height: 50px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background-color:#a36361;
+  background-color: #a36361;
 }
-.display-account-admin-form button:active{
-  background-color:#d2bdbd;
+
+.display-account-admin-form button:active {
+  background-color: #d2bdbd;
 }
 
 .productList {
@@ -40,7 +45,8 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-wrap: wrap; /* Cho phép các item xếp xuống dòng khi không đủ không gian */
+  flex-wrap: wrap;
+  /* Cho phép các item xếp xuống dòng khi không đủ không gian */
   align-items: center;
   justify-content: start;
   border: 2px solid black;
@@ -48,31 +54,36 @@ body {
 
 .product-item {
   width: 150px;
-  height: auto; /* Thay đổi từ height cố định sang auto để tự động điều chỉnh */
+  height: auto;
+  /* Thay đổi từ height cố định sang auto để tự động điều chỉnh */
   background-color: #987676;
   color: rgb(101, 0, 0);
   border: 2px solid #000000;
   box-shadow: 0 0.1px 10px 0px #dbd8d8;
   text-align: center;
-  margin: 10px; /* Thêm margin giữa các item để dễ nhìn */
+  margin: 10px;
+  /* Thêm margin giữa các item để dễ nhìn */
 }
 
 .product-item img {
   width: 100%;
   height: 150px;
-  object-fit: cover; /* Giữ hình ảnh đúng tỷ lệ mà không bị kéo dãn */
+  object-fit: cover;
+  /* Giữ hình ảnh đúng tỷ lệ mà không bị kéo dãn */
 }
 
 .product-item h3 {
   font-size: 15px;
   padding: 0;
-  height: auto; /* Cho phép chiều cao thay đổi theo nội dung */
+  height: auto;
+  /* Cho phép chiều cao thay đổi theo nội dung */
   border: 2px solid red;
 }
 
 .product-item p {
   font-size: 14px;
-  height: auto; /* Chiều cao tự động điều chỉnh */
+  height: auto;
+  /* Chiều cao tự động điều chỉnh */
   border: 2px solid red;
 }
 
@@ -82,8 +93,10 @@ body {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  font-size: 15px; /* Đảm bảo font không quá lớn */
-  width: 100%; /* Chiều rộng đầy đủ của button */
+  font-size: 15px;
+  /* Đảm bảo font không quá lớn */
+  width: 100%;
+  /* Chiều rộng đầy đủ của button */
 }
 
 
