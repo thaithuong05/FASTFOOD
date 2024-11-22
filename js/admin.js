@@ -19,7 +19,7 @@ loginForm.addEventListener('submit', (e) => {
   if (username === 'thi' && password === '123') {
     open_admin.style.display = 'block';
     loginForm.style.display = 'none';
-    display_account_admin.style.display='none';
+    display_account_admin.style.display = 'none';
     displayProducts(); // Lấy danh sách sản phẩm
   } else {
     alert('Thông tin đăng nhập không hợp lệ!');
