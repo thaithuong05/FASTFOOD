@@ -16,7 +16,7 @@ body {
   width: 100%;
   height: 60px;
   position: fixed;
-  background-color: #63d1f6;
+  background-color: #0c969c;
   box-shadow: 0 0.1px 1px 0px #9a9a9a;
   display: flex;
   align-items: center;
@@ -27,8 +27,8 @@ body {
 /* Header- LEFT*/
 
 .header-left {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -48,19 +48,23 @@ body {
 /*HEADER- BETWEEN*/
 
 .header-between {
-  position: relative;  /* Để icon có thể nằm trong input */
-  width:100%;
-  height:100%; /* Chiếm toàn bộ chiều rộng của container */
-  max-width: 500px; /* Giới hạn chiều rộng tối đa của input */
+  position: relative;
+  /* Để icon có thể nằm trong input */
+  width: 100%;
+  height: 100%;
+  /* Chiếm toàn bộ chiều rộng của container */
+  max-width: 500px;
+  /* Giới hạn chiều rộng tối đa của input */
 }
 
 .header-between input {
-  position:absolute;
+  position: absolute;
   width: 100%;
-  height:30px;
+  height: 30px;
   top: 50%;
   transform: translateY(-50%);
-  padding: 15px 40px 15px 15px;  /* Padding trái và phải để chừa chỗ cho icon */
+  padding: 15px 40px 15px 15px;
+  /* Padding trái và phải để chừa chỗ cho icon */
   background-color: #f0f0f0;
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -74,25 +78,29 @@ body {
 
 .header-between i {
   position: absolute;
-  right: 10px;  /* Đặt icon ở góc phải của input */
+  right: 10px;
+  /* Đặt icon ở góc phải của input */
   top: 50%;
-  transform: translateY(-50%);  /* Đảm bảo icon nằm chính giữa theo chiều dọc */
-  font-size: 18px;  /* Kích thước của icon */
-  cursor: pointer;  /* Thêm hiệu ứng khi hover */
+  transform: translateY(-50%);
+  /* Đảm bảo icon nằm chính giữa theo chiều dọc */
+  font-size: 18px;
+  /* Kích thước của icon */
+  cursor: pointer;
+  /* Thêm hiệu ứng khi hover */
 }
 
 .header-between i:active {
-  color: #e3693f;
+  color: #0c969c;
 }
 
 /*HEADER-RIGHT*/
 
 .header-right {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 
 
@@ -100,12 +108,12 @@ body {
   width: 50px;
   height: 30px;
   border-radius: 20px;
-  background-color: #ca9b6c;
-  cursor:pointer;
+  background-color: #274d60;
+  cursor: pointer;
 }
 
 .header-right button:active {
-  background-color: #deb995;
+  background-color: #fff;
 }
 
 .header-right i {
@@ -113,11 +121,11 @@ body {
   display: flex;
   justify-content: center;
   cursor: pointer;
-  color: #b57c43;
+  color: #274d60;
 }
 
 .header-right i:active {
-  color: #f3eb77;
+  color: #fff;
 }
 
 /*OVERLAY*/
@@ -173,7 +181,7 @@ body {
 .shopping-pay {
   width: 100%;
   height: 100px;
-  background-color: aqua;
+  background-color: #0c969c;
   border-top: 2px solid black;
   position: absolute;
   bottom: 0;
@@ -226,13 +234,13 @@ body {
   display: none;
   width: 100%;
   max-width: 400px;
-  margin: 50px auto;
+  margin: 0px auto;
   padding: 20px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position:fixed;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -338,7 +346,7 @@ p {
   display: none;
   position: fixed;
   z-index: 1001;
-  max-width: 400px;
+  width: 400px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -514,23 +522,24 @@ p {
 
 .header-aside-between-i {
   font-size: 15px;
-  background-color:#63d1f6;
+  background-color: #0c969c;
   width: 30px;
   height: 30px;
-  background-color:#63d1f6;
+  background-color: #0c969c;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   border: 2px solid black;
-  cursor:pointer;
-}
-.header-aside-between-i:active{
-  background-color:#fff;
+  cursor: pointer;
 }
 
-.header-aside-between i:active {
-  color: #ca9b6c;
+.header-aside-between-i:active {
+  background-color: #0c969c;
+}
+
+.header-aside-between-i:active {
+  background-color: #fff;
 }
 
 .header-aside-right {
@@ -546,16 +555,17 @@ p {
 .header-aside-right-i {
   width: 30px;
   height: 30px;
-  background-color:#63d1f6;
+  background-color: #0c969c;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   border: 2px solid black;
-  cursor:pointer;
+  cursor: pointer;
 }
+
 .header-aside-right-i:active {
-  background-color:#fff;
+  background-color: #fff;
 }
 
 /*LIST-MENU*/
@@ -600,7 +610,7 @@ p {
 }
 
 .list-menu-div button:active {
-  background-color: #63d1f6;
+  background-color: #0c969c;
 }
 
 .list-menu-div button::after {
@@ -610,7 +620,7 @@ p {
   bottom: 0;
   width: 0;
   height: 2.5px;
-  background-color: #63d1f6;
+  background-color: #0c969c;
   transition: width 0.4s ease, left 0.3s ease;
 }
 
@@ -635,7 +645,7 @@ p {
 }
 
 .poster-container {
-  margin-top: 120px;
+  margin-top: 105px;
   padding: 20px 15%;
   background-color: #000000;
 }
@@ -678,21 +688,21 @@ p {
   width: 100%;
   height: 100%;
   padding: 0px 15%;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .main-h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 40px;
 
 }
 
 .main-h1-border-bottom {
   border-bottom: 5px solid #000000;
   box-shadow: 0 0.1px 10px 0px #836e6e;
-  background-color: #ffd167;
+  background-color: #0a7075;
   border-radius: 10px;
 }
 
@@ -700,26 +710,28 @@ p {
   margin: 50px 0;
   width: 100%;
   height: 100%;
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  background-color: #06d7a0;
-  border: 2px solid black;
+  background-color: #0c969c;
+  box-shadow: 0 0px 150px 150px #0c969c;
+  gap: 30px;
 }
 
 .product-item {
-  width: 200px;
-  height: auto;
-  background-color: #987676;
+  width: 20%;
+  height: 300px;
+  background-color: #6ba3be;
   color: rgb(101, 0, 0);
-  border: 1px solid #ccc;
-  box-shadow: 0 0.1px 10px 0px #dbd8d8;
+  box-shadow: 0 0.1px 10px 0px #0c969c;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid black;
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .product-item img {
@@ -727,27 +739,43 @@ p {
   height: 200px;
 }
 
+.product-item img:hover {
+  transform: scale(1.1);
+}
+
+.product-item h3 {
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.product-item p {
+  margin-top: 0px;
+  font-size: 15px;
+}
+
 .product-item button {
-  background-color: #007bff;
+  background-color: #98a77c;
+  box-shadow: 0 0 1px 2px #836e6e;
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 3px;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 
 .product-item button:hover {
-  background-color: #0056b3;
+  background-color: #b6c99b;
 }
 
-.page {
+.pagination {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.page button {
-  height: 50px;
+.pagination button {
+  height: 30px;
 }
 
 
@@ -756,7 +784,7 @@ p {
 .footer {
   width: 100%;
   height: auto;
-  background-color: #fcf6f5;
+  background-color: #274d60;
   border-top: 2px solid #d1825f;
   padding: 20px 15%;
 }
