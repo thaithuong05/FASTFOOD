@@ -74,7 +74,7 @@ function createproductList() {
       {
         id: '1',
         title: 'MÓN MỚI KO BÁN',
-        price: 200000,
+        price: 60000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         category: 'new',
         img: 'assets/images/products/new/1.jpg',
@@ -82,7 +82,7 @@ function createproductList() {
       {
         id: '2',
         title: 'COMBO KO NGON',
-        price: 200000,
+        price: 50000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         category: 'combo',
         img: 'assets/images/products/combo/101.png',
@@ -90,7 +90,7 @@ function createproductList() {
       {
         id: '3',
         title: 'BURGER KẸP VÀNG',
-        price: 200000,
+        price: 45000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         category: 'burger',
         img: 'assets/images/products/burger/201.png',
@@ -98,7 +98,7 @@ function createproductList() {
       {
         id: '4',
         title: 'GÀ HẢO HẠN',
-        price: 200000,
+        price: 40000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         category: 'chicken',
         img: 'assets/images/products/chicken/301.jpg',
@@ -106,11 +106,107 @@ function createproductList() {
       {
         id: '5',
         title: 'DRINK KHẠC KHỌT',
-        price: 200000,
+        price: 35000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         category: 'drink',
         img: 'assets/images/products/drink/401.jpg',
-      }
+      },
+      {
+        id: '6',
+        title: 'MÓN MỚI KO BÁN',
+        price: 32000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'new',
+        img: 'assets/images/products/new/2.jpg',
+      },
+      {
+        id: '7',
+        title: 'MÓN MỚI KO BÁN',
+        price: 32000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'new',
+        img: 'assets/images/products/new/3.jpg',
+      },
+      {
+        id: '8',
+        title: 'MÓN MỚI KO BÁN',
+        price: 31000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'new',
+        img: 'assets/images/products/new/4.jpg',
+      },
+      {
+        id: '9',
+        title: 'BURGER KẸP VÀNG',
+        price: 30000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'burger',
+        img: 'assets/images/products/burger/202.png',
+      },
+      {
+        id: '10',
+        title: 'BURGER KẸP VÀNG',
+        price: 20000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'burger',
+        img: 'assets/images/products/burger/203.png',
+      },
+      {
+        id: '11',
+        title: 'BURGER KẸP VÀNG',
+        price: 21000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'burger',
+        img: 'assets/images/products/burger/204.png',
+      },
+      {
+        id: '12',
+        title: 'GÀ HẢO HẠN',
+        price: 22000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'chicken',
+        img: 'assets/images/products/chicken/302.png',
+      },
+      {
+        id: '13',
+        title: 'DRINK KHẠC KHỌT',
+        price: 23000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'drink',
+        img: 'assets/images/products/drink/402.jpg',
+      },
+      {
+        id: '14',
+        title: 'GÀ HẢO HẠN',
+        price: 24000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'chicken',
+        img: 'assets/images/products/chicken/303.png',
+      },
+      {
+        id: '15',
+        title: 'DRINK KHẠC KHỌT',
+        price: 25000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'drink',
+        img: 'assets/images/products/drink/403.jpg',
+      },
+      {
+        id: '16',
+        title: 'GÀ HẢO HẠN',
+        price: 26000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'chicken',
+        img: 'assets/images/products/chicken/304.png',
+      },
+      {
+        id: '17',
+        title: 'DRINK KHẠC KHỌT',
+        price: 27000,
+        description: 'Một món chay ngon miệng với nấm đùi gà...',
+        category: 'drink',
+        img: 'assets/images/products/drink/404.jpg',
+      },
     ];
     localStorage.setItem('products', JSON.stringify(defaultProducts));
   }
@@ -212,7 +308,7 @@ function displayProductsMain() {
 
 // Khởi tạo danh sách sản phẩm khi trang được tải
 window.onload = function () {
-    // Kiểm tra trang hiện tại và gọi hàm thích hợp
+  // Kiểm tra trang hiện tại và gọi hàm thích hợp
   if (window.location.href.includes('admin.html')) {
     displayProducts(); // Hiển thị sản phẩm cho trang admin
   }
