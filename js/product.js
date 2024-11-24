@@ -12,6 +12,7 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
   const name = document.getElementById('name').value;
   const price = document.getElementById('price').value;
   const description = document.getElementById('description').value;
+  const quantity = document.getElementById('quantity').value.trim();
   const category = document.getElementById('category').value;
   const imgInput = document.getElementById('img');
   const file = imgInput.files[0];  // Lấy file ảnh được chọn
@@ -76,6 +77,7 @@ function createproductList() {
         title: 'MÓN MỚI KO BÁN',
         price: 60000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'new',
         img: 'assets/images/products/new/1.jpg',
       },
@@ -84,6 +86,7 @@ function createproductList() {
         title: 'COMBO KO NGON',
         price: 50000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'combo',
         img: 'assets/images/products/combo/101.png',
       },
@@ -92,6 +95,7 @@ function createproductList() {
         title: 'BURGER KẸP VÀNG',
         price: 45000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'burger',
         img: 'assets/images/products/burger/201.png',
       },
@@ -100,6 +104,7 @@ function createproductList() {
         title: 'GÀ HẢO HẠN',
         price: 40000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'chicken',
         img: 'assets/images/products/chicken/301.jpg',
       },
@@ -108,6 +113,7 @@ function createproductList() {
         title: 'DRINK KHẠC KHỌT',
         price: 35000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'drink',
         img: 'assets/images/products/drink/401.jpg',
       },
@@ -116,6 +122,7 @@ function createproductList() {
         title: 'MÓN MỚI KO BÁN',
         price: 32000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'new',
         img: 'assets/images/products/new/2.jpg',
       },
@@ -124,6 +131,7 @@ function createproductList() {
         title: 'MÓN MỚI KO BÁN',
         price: 32000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'new',
         img: 'assets/images/products/new/3.jpg',
       },
@@ -132,6 +140,7 @@ function createproductList() {
         title: 'MÓN MỚI KO BÁN',
         price: 31000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'new',
         img: 'assets/images/products/new/4.jpg',
       },
@@ -140,6 +149,7 @@ function createproductList() {
         title: 'BURGER KẸP VÀNG',
         price: 30000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'burger',
         img: 'assets/images/products/burger/202.png',
       },
@@ -148,6 +158,7 @@ function createproductList() {
         title: 'BURGER KẸP VÀNG',
         price: 20000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'burger',
         img: 'assets/images/products/burger/203.png',
       },
@@ -156,6 +167,7 @@ function createproductList() {
         title: 'BURGER KẸP VÀNG',
         price: 21000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'burger',
         img: 'assets/images/products/burger/204.png',
       },
@@ -164,6 +176,7 @@ function createproductList() {
         title: 'GÀ HẢO HẠN',
         price: 22000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'chicken',
         img: 'assets/images/products/chicken/302.png',
       },
@@ -172,6 +185,7 @@ function createproductList() {
         title: 'DRINK KHẠC KHỌT',
         price: 23000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'drink',
         img: 'assets/images/products/drink/402.jpg',
       },
@@ -180,6 +194,7 @@ function createproductList() {
         title: 'GÀ HẢO HẠN',
         price: 24000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'chicken',
         img: 'assets/images/products/chicken/303.png',
       },
@@ -188,6 +203,7 @@ function createproductList() {
         title: 'DRINK KHẠC KHỌT',
         price: 25000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'drink',
         img: 'assets/images/products/drink/403.jpg',
       },
@@ -196,6 +212,7 @@ function createproductList() {
         title: 'GÀ HẢO HẠN',
         price: 26000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'chicken',
         img: 'assets/images/products/chicken/304.png',
       },
@@ -204,6 +221,7 @@ function createproductList() {
         title: 'DRINK KHẠC KHỌT',
         price: 27000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
+        quantity: '5',
         category: 'drink',
         img: 'assets/images/products/drink/404.jpg',
       },
@@ -221,7 +239,7 @@ function displayProducts() {
   productList.innerHTML = ''; // Xóa nội dung cũ
 
   if (products.length === 0) {
-    productList.innerHTML = 'Tìm kiếm không có kết quả <br> Xin lỗi, chúng tôi không thể tìm được kết quả hợp với tìm kiếm của bạn';
+    productList.innerHTML = 'Chưa có sản phẩm.';
   } else {
     console.log(products.length); // Kiểm tra số sản phẩm
     products.forEach((product, index) => {
@@ -233,6 +251,7 @@ function displayProducts() {
         <h3>Tên : ${product.title}</h3>
         <p>Mô tả : ${product.description}</p>
         <p>Giá: ${product.price} VND</p>
+        <p>Số lượng : ${product.quantity}</p>
         <p>Danh mục: ${product.category}</p>
         <button onclick="editProduct(${index})">Sửa</button>
         <button onclick="deleteProduct(${index})">Xóa</button>
@@ -274,8 +293,10 @@ function editProduct(index) {
   const product = products[index];
 
   // Điền thông tin vào form
+  document.getElementById('id').value = product.id;
   document.getElementById('name').value = product.title;
   document.getElementById('price').value = product.price;
+  document.getElementById('quantity').value = product.quantity;
   document.getElementById('description').value = product.description;
   document.getElementById('category').value = product.category;
 
@@ -305,6 +326,8 @@ function displayProductsMain() {
     });
   }
 }
+
+
 
 // Khởi tạo danh sách sản phẩm khi trang được tải
 window.onload = function () {
