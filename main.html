@@ -16,7 +16,6 @@
     <div class="header">
         <div class="header-left">
             <img src="assets/images/admin/logo.jpg" alt="LOGO">
-            <p>LUFFY FOOD</p>
         </div>
         <div class="header-between">
             <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Tìm kiếm sản phẩm">
@@ -29,31 +28,127 @@
                 <i id="button-shopping" onclick="open_shopping()" class="fa-solid fa-cart-shopping"></i>
             </div>
             <div class="button-account">
-                <p id="name-account">Đăng nhập/Đăng kí</p>
-                <div class="button-account-child">
-                    <div onclick="open_account_log_in()">Đăng nhập</div>
-                    <div onclick="open_account_sign_up()">Đăng kí</div>
+                <div id="new-tk" class="button-account-1" style="display:block;">
+                    <p id="name-account">Đăng nhập/Đăng kí</p>
+                    <div class="button-account-child">
+                        <div onclick="open_account_log_in()">Đăng nhập</div>
+                        <div onclick="open_account_sign_up()">Đăng kí</div>
+                    </div>
                 </div>
-                <i class="fa-solid fa-user"></i>
+                <div id="name-tk" style="display:none;"></div>
+                <i id="icon-tk" class="fa-solid fa-user"></i>
             </div>
         </div>
     </div>
+
+
+    <div id="tk" class="tk">
+        <button class="close-x-shopping" onclick="close_x_overlay()">X</button>
+        <p>Tài Khoản</p>
+        <button onclick="log_out()">Đăng xuất</button>
+    </div>
+
+
 
     <!--Mờ Màn Hình-->
     <div class="overlay" id="overlay" onclick="close_x_overlay()"></div>
 
     <!--Shopping-->
     <div class="shopping" id="shopping">
-        <div class="shopping-container">
+        <button class="close-x-shopping" onclick="close_x_overlay()">X</button>
+        <h1>Giỏ hàng</h1>
+        <div id="cartList" class="shopping-products">
+            <!--Danh sach san pham-->
+
+        </div>
+        <div class="shopping-pay">
+            <p><span id="totalPrice"></span></p>
+            <button onclick="open_pay()">Thanh toán</button>
+        </div>
+    </div>
+
+
+    <!-- Nội dung chính của thanh toán -->
+    <div id="open-pay" class="open-pay">
+        <div class="pay-container">
             <button class="close-x-shopping" onclick="close_x_overlay()">X</button>
-            <h1>Giỏ hàng</h1>
-            <div class="shopping-products">
-                <!--Danh sach san pham-->
-                <ul id="cartList"></ul>
-                <p><strong>Tổng cộng:</strong> <span id="totalPrice">0</span> VND</p>
+            <!-- Phần 1: Thông tin đơn hàng -->
+            <div class="order-info">
+                <h2 class="section-title">THÔNG TIN ĐƠN HÀNG</h2>
+                <div class="delivery-method">
+                    <p>Hình thức giao nhận</p>
+                    <div class="delivery-options">
+                        <button id="delivery" class="selected" onclick="updateShippingFee('delivery')">
+                            <img src="giaohang.png" alt="Giao tận nơi" class="logo-placeholder">
+                            Giao tận nơi
+                        </button>
+                        <button id="pickup" onclick="updateShippingFee('pickup')">
+                            <img src="images.png" alt="Tự đến lấy" class="logo-placeholder">
+                            Tự đến lấy
+                        </button>
+                    </div>
+                </div>
+                <div class="delivery-date">
+                    <p>Ngày giao hàng</p>
+                    <div class="date-options">
+                        <button class="date-button" onclick="selectDate('today')">Hôm nay<br>24/11</button>
+                        <button class="date-button" onclick="selectDate('tomorrow')">Ngày mai<br>25/11</button>
+                        <button class="date-button" onclick="selectDate('next')">Ngày kia<br>26/11</button>
+                    </div>
+                </div>
+                <div class="delivery-time">
+                    <p>Thời gian giao hàng</p>
+                    <label>
+                        <input type="radio" name="delivery-time" value="asap"> Giao ngay khi xong
+                    </label>
+                    <label>
+                        <input type="radio" name="delivery-time" value="time-slot"> Giao vào giờ
+                        <select>
+                            <option>08:00 - 09:00</option>
+                            <option>09:00 - 10:00</option>
+                            <option>10:00 - 11:00</option>
+                            <option>11:00 - 12:00</option>
+                            <option>13:00 - 14:00</option>
+                            <option>14:00 - 15:00</option>
+                            <option>15:00 - 16:00</option>
+                            <option>15:00 - 16:00</option>
+                            <option>16:00 - 17:00</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="order-note">
+                    <p>Ghi chú đơn hàng</p>
+                    <textarea id="note" placeholder="Nhập ghi chú"></textarea>
+                </div>
             </div>
-            <div class="shopping-pay">
-                <button>Thanh toán</button>
+
+            <!-- Phần 2: Đơn hàng -->
+            <div class="order-summary">
+                <h2 class="section-title">Đơn hàng</h2>
+                <div class="order-item">
+                    <!-- Điền sản phẩm tại đây -->
+                    <p>1x Bánh lava phô mai nướng</p>
+                </div>
+                <hr>
+                <p>Tiền hàng: 180.000 đ</p>
+                <p id="shipping-fee">Phí vận chuyển: 30.000 đ</p>
+                <hr>
+                <p class="total">Tổng tiền: <span id="total-amount">210.000 đ</span></p>
+                <button class="checkout-button" onclick="submitOrder()">Đặt hàng</button>
+            </div>
+
+            <!-- Phần 3: Thông tin người nhận -->
+            <div class="customer-info">
+                <h2 class="section-title">THÔNG TIN NGƯỜI NHẬN</h2>
+                <form id="customer-form">
+                    <label for="name">Tên người nhận</label>
+                    <input type="text" id="name" name="name" placeholder="Nhập tên người nhận">
+                    <label for="phone">Số điện thoại nhận hàng</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" id="address" name="address" placeholder="Nhập địa chỉ">
+                </form>
+                <p id="error-message" style="color: red; display: none;">Vui lòng nhập đầy đủ thông tin!</p>
             </div>
         </div>
     </div>
@@ -112,10 +207,13 @@
         <span class="error-message" id="error-password1"></span>
         <br>
         <!-- Checkbox đồng ý -->
-        <input type="checkbox" id="sign-up-checkbox">
-        <label for="sign-up-checkbox">Tôi đồng ý với điều khoản của trang web.</label>
-        <span class="error-message" id="error-checkbox"></span>
+        <label for="sign-up-checkbox">
+            <input type="checkbox" id="sign-up-checkbox">
+            Tôi đồng ý với điều khoản của trang web.
+        </label>
+        <span class="error-message" id="error-checkbox"></span> <!-- Phần này sẽ hiển thị lỗi -->
         <br>
+
         <!--Nút đăng ký-->
         <button type="submit">Đăng ký</button><br>
         <!-- Liên kết tới form đăng nhập -->
@@ -189,9 +287,7 @@
         </div>
         <!-- Điều khiển phân trang -->
         <div id="pagination" class="pagination">
-            <button onclick="changePage('prev')">Trang trước</button>
-            <span id="pageNumber">Trang 1</span>
-            <button onclick="changePage('next')">Trang sau</button>
+            <!--Phân trang-->
         </div>
     </main>
 
@@ -203,24 +299,11 @@
             <div class="footer-top">
                 <div class="footer-top-left">
                     <img class="footer-top-left-logo-img" src="assets/images/admin/logo.jpg">
-                    <div class="footer-top-left-logo-text">
-                        <p>LUFFY FOOD</p>
-                    </div>
-                </div>
-                <div class="footer-top-right">
-                    <div class="footer-top-right-top">
-                        <p style="font-size:25px;"><b>ĐĂNG KÍ NHẬN THÔNG TIN</b></p>
-                    </div>
-                    <div class="footer-top-right-bottom">
-                        <input class="footer-top-right-bottom-input" type="email" id="email" name="email" required
-                            placeholder="Nhập email của bạn ">
-                        <button class="footer-top-right-bottom-button">ĐĂNG KÍ</button>
-                    </div>
                 </div>
             </div>
             <!--BOTTOM-->
             <div class="footer-bottom">
-                <div>
+                <div class="footer-bottom-1">
                     <ul>
                         <li>
                             <h3>Về chúng tôi</h3>
@@ -232,7 +315,7 @@
                         </li>
                     </ul>
                 </div>
-                <div>
+                <div class="footer-bottom-2">
                     <ul>
                         <li>
                             <h3>Liên kết</h3>
@@ -244,25 +327,24 @@
                         <li><a href="#">Tin tức</a></li>
                     </ul>
                 </div>
-                <div>
+                <div class="footer-bottom-3">
                     <ul>
                         <li>
                             <h3>Thực đơn</h3>
                         </li>
-                        <li><a href="#">Điểm tâm</a></li>
-                        <li><a href="#">Món chay</a></li>
-                        <li><a href="#">Món mặn</a> </li>
-                        <li><a href="#">Nước uống</a></li>
-                        <li><a href="#">Tráng miệng</a></li>
+                        <li><a href="#">Món mới</a></li>
+                        <li><a href="#">Combo</a></li>
+                        <li><a href="#">Burger</a> </li>
+                        <li><a href="#">Chicken</a></li>
+                        <li><a href="#">Đồ uống</a></li>
                     </ul>
                 </div>
-                <div>
+                <div class="footer-bottom-4">
                     <h3>Liên hệ</h3>
                     <p>Địa chỉ: 273 An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh</p>
                     <p>Điện thoại: 0123 456 789</p>
-                    <p>Điện thoại: 0987 654 321</p>
-                    <p>Email: <a href="mailto:abc@domain.com">abc@domain.com</a>, <a
-                            href="mailto:infoabc@domain.com">infoabc@domain.com</a></p>
+                    <p>Email: <a href="mailto:abc@domain.com">luffyfood@gmail.com</a>, <a
+                            href="mailto:infoabc@domain.com">thaivanthuong290605@gmail.com</a></p>
                 </div>
             </div>
         </div>
@@ -271,8 +353,21 @@
     <script src="js/main.js"></script>
     <script src="js/product.js"></script>
     <script>
+        // Ngừng tải lại trang khi nhấn F5 hoặc Ctrl + R
+        window.addEventListener('keydown', function (event) {
+            // Kiểm tra xem phím người dùng nhấn có phải là F5 (keyCode 116) hoặc Ctrl + R
+            if ((event.keyCode === 116) || (event.ctrlKey && event.key === 'r')) {
+                event.preventDefault(); // Ngừng hành động mặc định của F5 và Ctrl + R
+                alert('Tải lại trang bị vô hiệu hóa!');
+                const name_tk = document.getElementById('name-tk');
+                name_tk.style.display = 'block';
+                const new_tk = document.getElementById('new-tk');
+                new_tk.style.display = 'none';
+            }
+        });
         // Khởi tạo danh sách sản phẩm khi trang được tải
         window.onload = displayProductsMain;
+        window.onload = open_product('home');
     </script>
 </body>
 
