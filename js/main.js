@@ -1,6 +1,327 @@
 
 //************MAIN****************/
 
+//LƯU TÀI KHOẢN NGƯỜI DÙNG LÊN LOCALSTORAGE
+let users = JSON.parse(localStorage.getItem('users')) || [];
+const user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng từ localStorage
+// Khi người dùng nhấn đăng ký
+document.getElementById('account-sign-up').addEventListener('submit', function (event) {
+  event.preventDefault(); // Ngừng form reload lại trang
+
+  // Lấy giá trị các trường nhập liệu
+  const sign_up_username = document.getElementById('sign-up-username').value;
+  const sign_up_tel = document.getElementById('sign-up-tel').value.trim();
+  const sign_up_password = document.getElementById('sign-up-password').value;
+  const sign_up_password1 = document.getElementById('sign-up-password1').value;
+  const sign_up_checkbox = document.getElementById('sign-up-checkbox');
+
+  let ktra_form = true; // Biến để kiểm tra tính hợp lệ của form
+
+  // Kiểm tra tên đăng nhập
+  if (!sign_up_username) {
+    document.getElementById('error-username').textContent = "Tên đăng nhập không được để trống.";
+    ktra_form = false;
+  } else {
+    document.getElementById('error-username').textContent = "";
+  }
+
+  // Kiểm tra số điện thoại
+  if (!sign_up_tel) {
+    document.getElementById('error-tel').textContent = "Số điện thoại không được để trống.";
+    ktra_form = false;
+  } else if (!/^\d{10}$/.test(sign_up_tel)) {  // Kiểm tra số điện thoại (10 chữ số)
+    document.getElementById('error-tel').textContent = "Số điện thoại không hợp lệ.";
+    ktra_form = false;
+  } else {
+    document.getElementById('error-tel').textContent = "";
+  }
+
+  // Kiểm tra mật khẩu
+  if (!sign_up_password) {
+    document.getElementById('error-password').textContent = "Mật khẩu không được để trống.";
+    ktra_form = false;
+  } else {
+    document.getElementById('error-password').textContent = "";
+  }
+
+  // Kiểm tra xác nhận mật khẩu
+  if (!sign_up_password1) {
+    document.getElementById('error-password1').textContent = "Vui lòng xác nhận mật khẩu.";
+    ktra_form = false;
+  } else if (sign_up_password !== sign_up_password1) {
+    document.getElementById('error-password1').textContent = "Mật khẩu xác nhận không khớp.";
+    ktra_form = false;
+  } else {
+    document.getElementById('error-password1').textContent = "";
+  }
+
+  // Kiểm tra checkbox
+  if (!sign_up_checkbox.checked) {
+    document.getElementById('error-checkbox').textContent = "Bạn cần đồng ý điều khoản.";
+    ktra_form = false;
+  } else {
+    document.getElementById('error-checkbox').textContent = "";
+  }
+
+  // Nếu form hợp lệ, tiếp tục xử lý đăng ký
+  if (ktra_form) {
+    // Tạo đối tượng người dùng mới
+    const newUser = {
+      id: sign_up_tel,      // Số điện thoại làm ID
+      tel: sign_up_tel,   // Số điện thoại người dùng
+      password: sign_up_password,  // Mật khẩu người dùng (nên mã hóa trước khi lưu)
+      username: sign_up_username // Tên đăng nhập người dùng
+    };
+
+    // Gọi hàm đăng ký người dùng
+    registerUser(newUser);
+
+    // Reset form sau khi đăng ký thành công
+    document.getElementById('account-sign-up').reset();
+
+    // Đóng overlay nếu cần (hãy chắc chắn bạn đã định nghĩa hàm close_x_overlay())
+    close_x_overlay();
+  }
+});
+
+// Hàm đăng ký tài khoản mới với số điện thoại làm ID
+function registerUser(newUser) {
+  // Lấy danh sách tất cả người dùng đã lưu trong localStorage (nếu có) hoặc tạo mảng mới
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Kiểm tra xem số điện thoại đã tồn tại chưa
+  const userExists = users.some(user => user.tel === newUser.tel);
+  if (userExists) {
+    alert('Số điện thoại đã được đăng ký!');
+    return;
+  }
+
+  // Thêm người dùng mới vào mảng users
+  users.push(newUser);
+
+  // Lưu lại mảng users vào localStorage
+  localStorage.setItem('users', JSON.stringify(users));
+
+  alert('Đăng ký thành công!');
+}
+
+// Hàm kiểm tra số điện thoại hợp lệ (ví dụ kiểm tra độ dài và chỉ chứa chữ số)
+function validatetel(tel) {
+  const telPattern = /^[0-9]{10,11}$/;  // Kiểm tra số điện thoại có 10-11 chữ số
+  return telPattern.test(tel);
+}
+
+
+
+function ktra_user() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (!user) {
+    alert("Chưa đăng nhập");
+  }
+  return user;
+}
+
+
+// Lấy thông tin từ localStorage và kiểm tra đăng nhập
+document.getElementById('account-log-in').addEventListener('submit', function (event) {
+  event.preventDefault(); // Ngừng form reload lại trang
+
+  const log_in_tel = document.getElementById('log-in-tel').value.trim();
+  const log_in_password = document.getElementById('log-in-password').value;
+
+  // Lấy danh sách người dùng từ localStorage (nếu có)
+  const users = JSON.parse(localStorage.getItem('users')) || []; // Mảng người dùng
+  const user = users.find(user => user.tel === log_in_tel);
+
+  if (user) {
+    // Kiểm tra mật khẩu
+    if (user.password === log_in_password) {
+      let cart = JSON.parse(localStorage.getItem(`cart_${user.tel}`)) || [];
+      // Nếu đăng nhập thành công
+      localStorage.setItem('user', JSON.stringify(user));
+      alert('Đăng nhập thành công!');
+
+      const new_tk = document.getElementById('new-tk');
+      new_tk.style.display = 'none';
+      const name_tk = document.getElementById('name-tk');
+      name_tk.innerHTML = `${user.username}`;
+      name_tk.style.display = 'block';
+      const icon_tk = document.getElementById('icon-tk');
+      // Gán sự kiện onclick
+      icon_tk.addEventListener('click', open_tk);
+      capNhatGioHang(cart);
+      close_x_overlay();
+    } else {
+      // Nếu mật khẩu không đúng
+      document.getElementById('error-tel').textContent = 'Số điện thoại hoặc mật khẩu không đúng.';
+    }
+  } else {
+    // Nếu không tìm thấy người dùng với số điện thoại đó
+    document.getElementById('error-tel').textContent = 'Không tìm thấy tài khoản với số điện thoại này.';
+  }
+});
+
+function log_out() {
+  // Xóa thông tin người dùng khỏi localStorage
+  localStorage.removeItem('user');
+  // Cập nhật giao diện: Ẩn tên tài khoản, nút đăng xuất, v.v.
+  const name_tk = document.getElementById('name-tk');
+  name_tk.innerHTML = '';  // Xóa tên người dùng
+  name_tk.style.display = 'none';
+  const new_tk = document.getElementById('new-tk');
+  new_tk.style.display = 'block';
+  const icon_tk = document.getElementById('icon-tk');
+  icon_tk.removeEventListener('click', open_tk); // Xóa sự kiện onclick nếu có
+  const totalPrice = document.getElementById('totalPrice');
+  totalPrice.innerHTML = "";
+  close_x_overlay()
+
+  const cartItems = document.getElementById('cartList');
+  cartItems.innerHTML = '';  // Xóa giỏ hàng cũ
+  // Hiển thị lại phần đăng nhập nếu cần
+  alert('Đăng xuất thành công!');
+
+  // Bạn có thể chuyển hướng trang nếu cần, ví dụ:
+  // window.location.href = 'login.html'; // Dẫn đến trang đăng nhập
+}
+
+
+//************************************************************* */
+document.addEventListener('DOMContentLoaded', function () {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (user) {
+    localStorage.setItem('user', JSON.stringify(user));
+    const new_tk = document.getElementById('new-tk');
+    new_tk.style.display = 'none';
+    const name_tk = document.getElementById('name-tk');
+    name_tk.innerHTML = `${user.username}`;
+    name_tk.style.display = 'block';
+    const icon_tk = document.getElementById('icon-tk');
+    // Gán sự kiện onclick
+    icon_tk.addEventListener('click', open_tk);
+    // Có thể thực hiện các thay đổi khác như hiển thị thông tin tài khoản hoặc giỏ hàng...
+    let cart = JSON.parse(localStorage.getItem(`cart_${user.tel}`)) || [];
+    capNhatGioHang(cart);
+  } else {
+    // Nếu không có thông tin người dùng, có thể hiển thị giao diện đăng nhập
+    alert("Chưa đăng nhập");
+  }
+});
+
+
+
+
+
+// Giỏ hàng
+const products = JSON.parse(localStorage.getItem('products')) || [];
+
+// Lấy giỏ hàng của người dùng từ localStorage theo user
+let cart = JSON.parse(localStorage.getItem(`cart_${user}`)) || [];
+
+// Lấy phần tử chứa danh sách sản phẩm
+const productList = document.getElementById('productList');
+
+// Hàm thêm sản phẩm vào giỏ hàng
+function themvaogiohang(index) {
+  const user = ktra_user(); // Lấy thông tin người dùng từ localStorage
+  if (!user) return;
+
+  const product = products[index]; // Lấy sản phẩm theo index từ mảng products
+  let cart = JSON.parse(localStorage.getItem(`cart_${user.tel}`)) || [];
+  // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
+  const existingProduct = cart.find(item => item.id === product.id);
+
+  if (existingProduct) {
+    // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
+    existingProduct.quantity++;
+  } else {
+    // Nếu sản phẩm chưa có, thêm mới vào giỏ hàng với số lượng 1
+    product.quantity = 1;
+    cart.push(product);
+  }
+
+  // Cập nhật giỏ hàng vào localStorage cho người dùng
+  localStorage.setItem(`cart_${user.tel}`, JSON.stringify(cart));
+
+  // Cập nhật giỏ hàng hiển thị
+  capNhatGioHang(cart);
+}
+
+// Hàm cập nhật giỏ hàng
+function capNhatGioHang(cart) {
+  const cartItems = document.getElementById('cartList');
+  cartItems.innerHTML = '';  // Xóa giỏ hàng cũ
+
+  // Hiển thị tất cả sản phẩm trong giỏ hàng
+  cart.forEach(product => {
+    const div = document.createElement('div');
+    div.classList.add('shopping-product');
+    div.innerHTML = `
+    <img src="${product.img}" alt="${product.title}">
+    <h3>${product.title}</h3> 
+    <p>${product.price.toLocaleString()} VND</p> 
+    
+    <div class="quantity-container">
+      <button class="decrease-btn" onclick="capNhatSoLuong(${product.id}, 'decrease')">-</button>
+      <span>${product.quantity}</span>
+      <button class="increase-btn" onclick="capNhatSoLuong(${product.id}, 'increase')">+</button>
+    </div>
+    
+    <button class="remove-btn" onclick="xoaSanPham(${product.id})">Xóa</button>
+  `;
+    cartItems.appendChild(div);
+  });
+
+  // Tính tổng giá trị giỏ hàng
+  const totalPrice = cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
+  const totalElement = document.getElementById('totalPrice');
+  totalElement.textContent = `Tổng cộng : ${totalPrice.toLocaleString()} VND`;
+}
+
+
+// Xóa sản phẩm khỏi giỏ hàng
+function xoaSanPham(productId) {
+  let cart = JSON.parse(localStorage.getItem('cart_' + user.tel)) || [];  // Lấy giỏ hàng từ localStorage
+
+  // Tìm chỉ số của sản phẩm trong giỏ hàng
+  const productIndex = cart.find(p => p.id === productId);
+  if (productIndex === null) return;  // Nếu không tìm thấy sản phẩm thì không làm gì
+
+  // Xóa sản phẩm khỏi giỏ hàng
+  cart.splice(productIndex, 1);
+
+    localStorage.setItem('cart_' + user.tel, JSON.stringify(cart));
+
+  // Cập nhật giỏ hàng hiển thị
+  capNhatGioHang(cart);
+}
+
+
+// Cập nhật số lượng sản phẩm trong giỏ hàng
+function capNhatSoLuong(productId, action) {
+
+  let cart = JSON.parse(localStorage.getItem('cart_' + user.tel)) || [];  // Lấy giỏ hàng từ localStorage
+
+  const productt = cart.find(p => p.id === productId);
+  if (productt===null) return;
+
+  if (action === 'increase') {
+    productt.quantity++;
+  } else if (action === 'decrease' && productt.quantity > 1) {
+    productt.quantity--;
+  }
+
+  // Cập nhật lại giỏ hàng vào localStorage
+  localStorage.setItem('cart_' + user.tel, JSON.stringify(cart));
+
+  // Cập nhật giỏ hàng hiển thị
+  capNhatGioHang(cart);
+}
+
+
+
+//************************88 */
 let currentPage = 1; // Trang mặc định
 const itemsPerPage = 8; // Số sản phẩm mỗi trang
 //Khi bấm các nút ở list menu
@@ -501,319 +822,5 @@ loc_sanpham.addEventListener("click", function () {
   });
 });
 
-
-
-
-//LƯU TÀI KHOẢN NGƯỜI DÙNG LÊN LOCALSTORAGE
-let users = JSON.parse(localStorage.getItem('users')) || [];
-const user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng từ localStorage
-// Khi người dùng nhấn đăng ký
-document.getElementById('account-sign-up').addEventListener('submit', function (event) {
-  event.preventDefault(); // Ngừng form reload lại trang
-
-  // Lấy giá trị các trường nhập liệu
-  const sign_up_username = document.getElementById('sign-up-username').value;
-  const sign_up_tel = document.getElementById('sign-up-tel').value.trim();
-  const sign_up_password = document.getElementById('sign-up-password').value;
-  const sign_up_password1 = document.getElementById('sign-up-password1').value;
-  const sign_up_checkbox = document.getElementById('sign-up-checkbox');
-
-  let ktra_form = true; // Biến để kiểm tra tính hợp lệ của form
-
-  // Kiểm tra tên đăng nhập
-  if (!sign_up_username) {
-    document.getElementById('error-username').textContent = "Tên đăng nhập không được để trống.";
-    ktra_form = false;
-  } else {
-    document.getElementById('error-username').textContent = "";
-  }
-
-  // Kiểm tra số điện thoại
-  if (!sign_up_tel) {
-    document.getElementById('error-tel').textContent = "Số điện thoại không được để trống.";
-    ktra_form = false;
-  } else if (!/^\d{10}$/.test(sign_up_tel)) {  // Kiểm tra số điện thoại (10 chữ số)
-    document.getElementById('error-tel').textContent = "Số điện thoại không hợp lệ.";
-    ktra_form = false;
-  } else {
-    document.getElementById('error-tel').textContent = "";
-  }
-
-  // Kiểm tra mật khẩu
-  if (!sign_up_password) {
-    document.getElementById('error-password').textContent = "Mật khẩu không được để trống.";
-    ktra_form = false;
-  } else {
-    document.getElementById('error-password').textContent = "";
-  }
-
-  // Kiểm tra xác nhận mật khẩu
-  if (!sign_up_password1) {
-    document.getElementById('error-password1').textContent = "Vui lòng xác nhận mật khẩu.";
-    ktra_form = false;
-  } else if (sign_up_password !== sign_up_password1) {
-    document.getElementById('error-password1').textContent = "Mật khẩu xác nhận không khớp.";
-    ktra_form = false;
-  } else {
-    document.getElementById('error-password1').textContent = "";
-  }
-
-  // Kiểm tra checkbox
-  if (!sign_up_checkbox.checked) {
-    document.getElementById('error-checkbox').textContent = "Bạn cần đồng ý điều khoản.";
-    ktra_form = false;
-  } else {
-    document.getElementById('error-checkbox').textContent = "";
-  }
-
-  // Nếu form hợp lệ, tiếp tục xử lý đăng ký
-  if (ktra_form) {
-    // Tạo đối tượng người dùng mới
-    const newUser = {
-      id: sign_up_tel,      // Số điện thoại làm ID
-      tel: sign_up_tel,   // Số điện thoại người dùng
-      password: sign_up_password,  // Mật khẩu người dùng (nên mã hóa trước khi lưu)
-      username: sign_up_username, // Tên đăng nhập người dùng
-      cart: []
-    };
-
-    // Gọi hàm đăng ký người dùng
-    registerUser(newUser);
-
-    // Reset form sau khi đăng ký thành công
-    document.getElementById('account-sign-up').reset();
-
-    // Đóng overlay nếu cần (hãy chắc chắn bạn đã định nghĩa hàm close_x_overlay())
-    close_x_overlay();
-  }
-});
-
-// Hàm đăng ký tài khoản mới với số điện thoại làm ID
-function registerUser(newUser) {
-  // Lấy danh sách tất cả người dùng đã lưu trong localStorage (nếu có) hoặc tạo mảng mới
-  let users = JSON.parse(localStorage.getItem('users')) || [];
-
-  // Kiểm tra xem số điện thoại đã tồn tại chưa
-  const userExists = users.some(user => user.tel === newUser.tel);
-  if (userExists) {
-    alert('Số điện thoại đã được đăng ký!');
-    return;
-  }
-
-  // Thêm người dùng mới vào mảng users
-  users.push(newUser);
-
-  // Lưu lại mảng users vào localStorage
-  localStorage.setItem('users', JSON.stringify(users));
-
-  alert('Đăng ký thành công!');
-}
-
-// Hàm kiểm tra số điện thoại hợp lệ (ví dụ kiểm tra độ dài và chỉ chứa chữ số)
-function validatetel(tel) {
-  const telPattern = /^[0-9]{10,11}$/;  // Kiểm tra số điện thoại có 10-11 chữ số
-  return telPattern.test(tel);
-}
-
-
-
-function ktra_user() {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (!user) {
-    alert("Chưa đăng nhập");
-  }
-  return user;
-}
-
-
-// Lấy thông tin từ localStorage và kiểm tra đăng nhập
-document.getElementById('account-log-in').addEventListener('submit', function (event) {
-  event.preventDefault(); // Ngừng form reload lại trang
-
-  const log_in_tel = document.getElementById('log-in-tel').value.trim();
-  const log_in_password = document.getElementById('log-in-password').value;
-
-  // Lấy danh sách người dùng từ localStorage (nếu có)
-  const users = JSON.parse(localStorage.getItem('users')) || []; // Mảng người dùng
-  const user = users.find(user => user.tel === log_in_tel);
-
-  if (user) {
-    // Kiểm tra mật khẩu
-    if (user.password === log_in_password) {
-      let cart = JSON.parse(localStorage.getItem(`cart_${user.tel}`)) || [];
-      // Nếu đăng nhập thành công
-      localStorage.setItem('user', JSON.stringify(user));
-      alert('Đăng nhập thành công!');
-
-      const new_tk = document.getElementById('new-tk');
-      new_tk.style.display = 'none';
-      const name_tk = document.getElementById('name-tk');
-      name_tk.innerHTML = `${user.username}`;
-      name_tk.style.display = 'block';
-      const icon_tk = document.getElementById('icon-tk');
-      // Gán sự kiện onclick
-      icon_tk.addEventListener('click', open_tk);
-      capNhatGioHang(cart);
-      close_x_overlay();
-    } else {
-      // Nếu mật khẩu không đúng
-      document.getElementById('error-tel').textContent = 'Số điện thoại hoặc mật khẩu không đúng.';
-    }
-  } else {
-    // Nếu không tìm thấy người dùng với số điện thoại đó
-    document.getElementById('error-tel').textContent = 'Không tìm thấy tài khoản với số điện thoại này.';
-  }
-});
-
-function log_out() {
-  // Xóa thông tin người dùng khỏi localStorage
-  localStorage.removeItem('user');
-  // Cập nhật giao diện: Ẩn tên tài khoản, nút đăng xuất, v.v.
-  const name_tk = document.getElementById('name-tk');
-  name_tk.innerHTML = '';  // Xóa tên người dùng
-  name_tk.style.display = 'none';
-  const new_tk = document.getElementById('new-tk');
-  new_tk.style.display = 'block';
-  const icon_tk = document.getElementById('icon-tk');
-  icon_tk.removeEventListener('click', open_tk); // Xóa sự kiện onclick nếu có
-  const totalPrice = document.getElementById('totalPrice');
-  totalPrice.innerHTML = "";
-  close_x_overlay()
-
-  const cartItems = document.getElementById('cartList');
-  cartItems.innerHTML = '';  // Xóa giỏ hàng cũ
-  // Hiển thị lại phần đăng nhập nếu cần
-  alert('Đăng xuất thành công!');
-
-  // Bạn có thể chuyển hướng trang nếu cần, ví dụ:
-  // window.location.href = 'login.html'; // Dẫn đến trang đăng nhập
-}
-
-
-//************************************************************* */
-document.addEventListener('DOMContentLoaded', function () {
-  const user = JSON.parse(localStorage.getItem('user'));
-
-  if (user) {
-    localStorage.setItem('user', JSON.stringify(user));
-    const new_tk = document.getElementById('new-tk');
-    new_tk.style.display = 'none';
-    const name_tk = document.getElementById('name-tk');
-    name_tk.innerHTML = `${user.username}`;
-    name_tk.style.display = 'block';
-    const icon_tk = document.getElementById('icon-tk');
-    // Gán sự kiện onclick
-    icon_tk.addEventListener('click', open_tk);
-    // Có thể thực hiện các thay đổi khác như hiển thị thông tin tài khoản hoặc giỏ hàng...
-    let cart = JSON.parse(localStorage.getItem(`cart_${user.tel}`)) || [];
-    capNhatGioHang(cart);
-  } else {
-    // Nếu không có thông tin người dùng, có thể hiển thị giao diện đăng nhập
-    alert("Chưa đăng nhập");
-  }
-});
-
-
-
-
-
-// Giỏ hàng
-const products = JSON.parse(localStorage.getItem('products')) || [];
-
-// Lấy giỏ hàng của người dùng từ localStorage theo user
-let cart = JSON.parse(localStorage.getItem(`cart_${user}`)) || [];
-
-// Lấy phần tử chứa danh sách sản phẩm
-const productList = document.getElementById('productList');
-
-// Hàm thêm sản phẩm vào giỏ hàng
-function themvaogiohang(index) {
-  const user = ktra_user(); // Lấy thông tin người dùng từ localStorage
-  if (!user) return;
-
-  const product = products[index]; // Lấy sản phẩm theo index từ mảng products
-  let cart = JSON.parse(localStorage.getItem(`cart_${user.tel}`)) || [];
-  // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
-  const existingProduct = cart.find(item => item.id === product.id);
-
-  if (existingProduct) {
-    // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
-    existingProduct.quantity++;
-  } else {
-    // Nếu sản phẩm chưa có, thêm mới vào giỏ hàng với số lượng 1
-    product.quantity = 1;
-    cart.push(product);
-  }
-
-  // Cập nhật giỏ hàng vào localStorage cho người dùng
-  localStorage.setItem(`cart_${user.tel}`, JSON.stringify(cart));
-
-  // Cập nhật giỏ hàng hiển thị
-  capNhatGioHang(cart);
-}
-
-// Hàm cập nhật giỏ hàng
-function capNhatGioHang(cart) {
-  const cartItems = document.getElementById('cartList');
-  cartItems.innerHTML = '';  // Xóa giỏ hàng cũ
-
-  // Hiển thị tất cả sản phẩm trong giỏ hàng
-  cart.forEach(product => {
-    const li = document.createElement('li');
-    li.textContent = `${product.title} - ${product.price.toLocaleString()} VND x ${product.quantity}`;
-    cartItems.appendChild(li);
-  });
-
-  // Tính tổng giá trị giỏ hàng
-  const totalPrice = cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
-  const totalElement = document.getElementById('totalPrice');
-  totalElement.textContent = `Tổng cộng : ${totalPrice.toLocaleString()} VND`;
-}
-
-
-// Cập nhật giỏ hàng khi người dùng xóa sản phẩm
-function xoaSanPham(index) {
-  const user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng từ localStorage
-
-  if (!user) {
-    alert("Chưa đăng nhập");
-    return;
-  }
-
-  let cart = JSON.parse(localStorage.getItem(`cart_${user.tel}`)) || [];
-
-  // Xóa sản phẩm khỏi giỏ hàng
-  cart.splice(index, 1);
-
-  // Cập nhật lại giỏ hàng trong localStorage
-  localStorage.setItem(`cart_${user.tel}`, JSON.stringify(cart));
-
-  // Cập nhật lại hiển thị giỏ hàng
-  capNhatGioHang(cart);
-}
-
-
-// Cập nhật số lượng sản phẩm trong giỏ hàng
-function capNhatSoLuong(index, newQuantity) {
-  const user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng từ localStorage
-
-  if (!user) {
-    alert("Chưa đăng nhập");
-    return;
-  }
-
-  let cart = JSON.parse(localStorage.getItem(`cart_${user.tel}`)) || [];
-
-  if (newQuantity <= 0) return; // Không cho phép số lượng nhỏ hơn hoặc bằng 0
-
-  // Cập nhật số lượng sản phẩm
-  cart[index].quantity = newQuantity;
-
-  // Lưu lại giỏ hàng trong localStorage
-  localStorage.setItem(`cart_${user.tel}`, JSON.stringify(cart));
-
-  // Cập nhật giỏ hàng hiển thị
-  capNhatGioHang(cart);
-}
 
 
