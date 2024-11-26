@@ -11,7 +11,10 @@
 </head>
 
 <body>
-
+    <div id="chua-dangnhap" class="chua-dangnhap">
+        <!--Lỗi khi chưa đăng nhập-->
+        <p>Chưa đăng nhập !</p>
+    </div>
     <!--HEADER-->
     <div class="header">
         <div class="header-left">
@@ -154,72 +157,77 @@
     </div>
     <!--ACCOUNT-->
 
+    <!--Đăng nhập tài khoản-->
+
     <form class="account-log-in" id="account-log-in">
         <button class="close-x-log-in" type="button" onclick="close_x_overlay()">X</button>
-        <h1>Đăng Nhập Tài Khoản</h1>
-
+        <h1>Đăng Nhập</h1>
         <!-- Số điện thoại -->
         <label for="log-in-tel">Số điện thoại *</label>
         <input type="tel" id="log-in-tel" placeholder="Nhập số điện thoại" required>
-        <span class="error-message" id="error-tel"></span>
-
+        <span class="error-message" id="log-in-error-tel"></span>
+        <br>
         <!-- Mật khẩu -->
         <label for="log-in-password">Nhập mật khẩu</label>
         <input type="password" id="log-in-password" placeholder="Nhập mật khẩu" required>
-        <span class="error-message" id="error-tel"></span>
-
+        <span class="error-message" id="log-in-error-tel"></span>
+        <br>
         <!-- Checkbox đồng ý -->
-        <input type="checkbox" id="log-in-checkbox">
-        <label for="log-in-checkbox">Tôi đồng ý với điều khoản của trang web.</label>
-        <span class="error-message" id="error-checkbox"></span>
+        <div class="checkbox-container">
+            <input type="checkbox" id="log-in-checkbox">
+            <label for="log-in-checkbox">Tôi đồng ý với điều khoản của trang web.</label>
+        </div>
+        <span class="error-message" id="log-in-error-checkbox"></span>
+        <br>
 
         <!-- Nút đăng nhập -->
         <input type="submit" value="Đăng nhập" onclick="validateLogin(event)">
-
         <!-- Liên kết tới form đăng ký -->
         <p>Bạn chưa có tài khoản?</p>
         <button class="button-move-to-sign-up" type="button" onclick="open_account_sign_up()">Đăng kí ngay</button>
     </form>
 
+    <!--Đăng kí tài khoản-->
 
     <form id="account-sign-up" class="account-sign-up">
         <button class="close-x-sign-up" onclick="close_x_overlay()">X</button>
         <h1>Đăng Kí</h1>
-        <!--Tên người dùng-->
+        <!-- Tên người dùng -->
         <label for="sign-up-username">Tên đăng nhập:</label>
         <input type="text" id="sign-up-username" name="username" placeholder="Vui lòng nhập tên đăng nhập" required>
-        <span class="error-message" id="error-username"></span>
+        <span class="error-message" id="sign-up-error-username"></span>
         <br>
         <!-- Số điện thoại -->
         <label for="sign-up-tel">Số điện thoại:</label>
         <input type="text" id="sign-up-tel" name="tel" placeholder="Vui lòng nhập số điện thoại" required>
-        <span class="error-message" id="error-tel"></span>
+        <span class="error-message" id="sign-up-error-tel"></span>
         <br>
         <!-- Mật khẩu -->
         <label for="sign-up-password">Mật khẩu:</label>
         <input type="password" id="sign-up-password" name="password" placeholder="Vui lòng nhập mật khẩu" required>
-        <span class="error-message" id="error-password"></span>
+        <span class="error-message" id="sign-up-error-password"></span>
         <br>
-        <!-- Mật khẩu -->
+        <!-- Xác nhận mật khẩu -->
         <label for="sign-up-password1">Xác nhận mật khẩu:</label>
         <input type="password" id="sign-up-password1" name="password1" placeholder="Vui lòng nhập lại mật khẩu"
             required>
-        <span class="error-message" id="error-password1"></span>
+        <span class="error-message" id="sign-up-error-password1"></span>
         <br>
         <!-- Checkbox đồng ý -->
-        <label for="sign-up-checkbox">
+        <div class="checkbox-container">
             <input type="checkbox" id="sign-up-checkbox">
-            Tôi đồng ý với điều khoản của trang web.
-        </label>
-        <span class="error-message" id="error-checkbox"></span> <!-- Phần này sẽ hiển thị lỗi -->
+            <label for="sign-up-checkbox">Tôi đồng ý với điều khoản của trang web.</label>
+        </div>
+        <span class="error-message" id="sign-up-error-checkbox"></span>
         <br>
 
-        <!--Nút đăng ký-->
+        <!-- Nút đăng ký -->
         <button type="submit">Đăng ký</button><br>
         <!-- Liên kết tới form đăng nhập -->
-        <p>Bạn đã có tài khoản?</p>
+        <p style="font-size:10px;">Bạn đã có tài khoản?</p>
         <button class="button-move-to-log-in" type="button" onclick="open_account_log_in()">Đăng nhập ngay</button>
     </form>
+
 
 
 
@@ -350,8 +358,8 @@
         </div>
         </div>
     </footer>
-    <script src="js/main.js"></script>
     <script src="js/product.js"></script>
+    <script src="js/main.js"></script>
     <script>
         // Ngừng tải lại trang khi nhấn F5 hoặc Ctrl + R
         window.addEventListener('keydown', function (event) {
@@ -365,9 +373,12 @@
                 new_tk.style.display = 'none';
             }
         });
+        displayProducts();
+        open_product('home');
+        window.onload = displayProducts;
         // Khởi tạo danh sách sản phẩm khi trang được tải
-        window.onload = displayProductsMain;
         window.onload = open_product('home');
+
     </script>
 </body>
 
