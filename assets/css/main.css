@@ -8,6 +8,21 @@ body {
   background-color: #ffffff;
 }
 
+.chua-dangnhap{
+  z-index:9999999999;
+  width:200px;
+  height:50px;
+  position:fixed;
+  top:-100px;
+  left:50%;
+  transform:translate(-50%);
+  transition: top 0.5s ease;
+  background-color:#681722;
+  color:rgb(255, 255, 255);
+  box-shadow:0 0 10px 10px rgb(122, 91, 91);
+  text-align: center;
+  border-radius: 50px;
+}
 /*HEADER*/
 
 .header {
@@ -529,6 +544,7 @@ body {
   top: 60px;
 }
 
+
 /*ACCOUNT*/
 
 /*LOG_IN*/
@@ -757,6 +773,7 @@ body {
 .button-move-to-log-in:hover {
   background-color: #0056b3;
 }
+
 
 /*HEADER-ASIDE-SEARCH*/
 
