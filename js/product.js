@@ -1,11 +1,15 @@
 
 //**********ADMIN************/
 // Lắng nghe sự kiện gửi form
+let users = JSON.parse(localStorage.getItem('users')) || [];
+let user = JSON.parse(localStorage.getItem('user')) || {};
+let products = JSON.parse(localStorage.getItem('products')) || [];
+let products_default = JSON.parse(localStorage.getItem('products_default')) || [];
 // Chỉ số sản phẩm đang chỉnh sửa
 let Index = -1;
 document.getElementById('addProductForm').addEventListener('submit', function (event) {
   event.preventDefault(); // Ngừng việc làm mới trang
-  let products = JSON.parse(localStorage.getItem('products')) || [];
+  
   // Lấy giá trị từ form
   let id = document.getElementById('id').value.trim();
   let name = document.getElementById('name').value;
@@ -42,9 +46,10 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
       // Tạo đối tượng sản phẩm mới
       let newProduct = {
         id: id,
-        title: name,
+        name: name,
         price: price,
         description: description,
+        quantity: quantity,
         category: category,
         img: imageUrl,  // URL ảnh được đọc từ FileReader
       };
@@ -69,8 +74,7 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
 
 // Kiểm tra và khởi tạo danh sách sản phẩm nếu chưa có trong localStorage . CHỖ NÀY ĐANG CÓ THỂ BỎ 
 function createproductList() {
-  let products = JSON.parse(localStorage.getItem('products')) || [];
-  let products_default = JSON.parse(localStorage.getItem('products_default')) || [];
+  
   if (localStorage.getItem('products_default') === null) {
     let defaultProducts = [
       {
@@ -236,14 +240,11 @@ function createproductList() {
 
 // Hiển thị danh sách sản phẩm trong admin
 function displayProducts() {
-  let products = JSON.parse(localStorage.getItem('products')) || [];
-  createproductList();
-
-  let productList = document.getElementById('productList');
-  productList.innerHTML = ''; // Xóa nội dung cũ
+  let productListA = document.getElementById('productListA');
+  productListA.innerHTML = ''; // Xóa nội dung cũ
 
   if (products.length === 0) {
-    productList.innerHTML = 'Chưa có sản phẩm admin !';
+    productListA.innerHTML = 'Chưa có sản phẩm admin !';
   } else {
     console.log(products.length); // Kiểm tra số sản phẩm
     products.forEach((product, index) => {
@@ -252,7 +253,7 @@ function displayProducts() {
       productDiv.innerHTML = `
         <img src="${product.img}" alt="${product.title}">
         <p>ID: ${product.id}</p>
-        <h3>Tên : ${product.title}</h3>
+        <h3>Tên : ${product.name}</h3>
         <p>Mô tả : ${product.description}</p>
         <p>Giá: ${product.price} VND</p>
         <p>Số lượng : ${product.quantity}</p>
@@ -260,7 +261,7 @@ function displayProducts() {
         <button onclick="editProduct(${index})">Sửa</button>
         <button onclick="deleteProduct(${index})">Xóa</button>
       `;
-      productList.appendChild(productDiv); //thêm 1 div con vào div cha
+      productListA.appendChild(productDiv); //thêm 1 div con vào div cha
     });
   }
 }
@@ -294,7 +295,7 @@ function editProduct(index) {
 
   // Điền thông tin vào form
   document.getElementById('id').value = product.id;
-  document.getElementById('name').value = product.title;
+  document.getElementById('name').value = product.name;
   document.getElementById('price').value = product.price;
   document.getElementById('quantity').value = product.quantity;
   document.getElementById('description').value = product.description;
@@ -309,6 +310,7 @@ function editProduct(index) {
 window.onload = function () {
   // Kiểm tra trang hiện tại và gọi hàm thích hợp
   if (window.location.href.includes('admin.html')) {
+    createproductList();
     displayProducts(); // Hiển thị sản phẩm cho trang admin
   }
   if (window.location.href.includes('main.html')) {
