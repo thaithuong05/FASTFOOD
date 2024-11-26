@@ -1,10 +1,11 @@
+
 //**********ADMIN************/
 // Lắng nghe sự kiện gửi form
 // Chỉ số sản phẩm đang chỉnh sửa
 let Index = -1;
 document.getElementById('addProductForm').addEventListener('submit', function (event) {
   event.preventDefault(); // Ngừng việc làm mới trang
-
+  let products = JSON.parse(localStorage.getItem('products')) || [];
   // Lấy giá trị từ form
   let id = document.getElementById('id').value.trim();
   let name = document.getElementById('name').value;
@@ -69,7 +70,8 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
 // Kiểm tra và khởi tạo danh sách sản phẩm nếu chưa có trong localStorage . CHỖ NÀY ĐANG CÓ THỂ BỎ 
 function createproductList() {
   let products = JSON.parse(localStorage.getItem('products')) || [];
-  if (localStorage.getItem('products') === null) {
+  let products_default = JSON.parse(localStorage.getItem('products_default')) || [];
+  if (localStorage.getItem('products_default') === null) {
     let defaultProducts = [
       {
         id: '1',
@@ -225,9 +227,10 @@ function createproductList() {
         img: 'assets/images/products/drink/404.jpg',
       },
     ];
-    products = defaultProducts;
-    localStorage.setItem('products', JSON.stringify(products));
+    products_default = defaultProducts;
   }
+  localStorage.setItem('products_default', JSON.stringify(products_default));
+    localStorage.setItem('products', JSON.stringify(products_default));
 }
 
 
