@@ -1,21 +1,21 @@
 
+
 //************MAIN****************
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
 let user = JSON.parse(localStorage.getItem('user')) || {};
-const products = JSON.parse(localStorage.getItem('products')) || [];
-
+let products = JSON.parse(localStorage.getItem('products')) || [];
 //LƯU TÀI KHOẢN NGƯỜI DÙNG LÊN LOCALSTORAGE
 // Khi người dùng nhấn đăng ký
 document.getElementById('account-sign-up').addEventListener('submit', function (event) {
   event.preventDefault(); // Ngừng form reload lại trang
 
   // Lấy giá trị các trường nhập liệu
-  const username = document.getElementById('sign-up-username').value;
-  const tel = document.getElementById('sign-up-tel').value.trim();
-  const password = document.getElementById('sign-up-password').value;
-  const password1 = document.getElementById('sign-up-password1').value;
-  const checkbox = document.getElementById('sign-up-checkbox');
+  let username = document.getElementById('sign-up-username').value;
+  let tel = document.getElementById('sign-up-tel').value.trim();
+  let password = document.getElementById('sign-up-password').value;
+  let password1 = document.getElementById('sign-up-password1').value;
+  let checkbox = document.getElementById('sign-up-checkbox');
 
   let ktra_form = true; // Biến để kiểm tra tính hợp lệ của form
 
@@ -37,17 +37,17 @@ document.getElementById('account-sign-up').addEventListener('submit', function (
   } else {
     document.getElementById('sign-up-error-tel').textContent = "";
   }
-  
-// Kiểm tra mật khẩu
-if (!password) {
-  document.getElementById('sign-up-error-password').textContent = "Mật khẩu không được để trống.";
-  ktra_form = false;
-} else if (password.length < 6) {
-  document.getElementById('sign-up-error-password').textContent = "Mật khẩu phải có ít nhất 6 ký tự.";
-  ktra_form = false;
-} else {
-  document.getElementById('sign-up-error-password').textContent = "";
-}
+
+  // Kiểm tra mật khẩu
+  if (!password) {
+    document.getElementById('sign-up-error-password').textContent = "Mật khẩu không được để trống.";
+    ktra_form = false;
+  } else if (password.length < 6) {
+    document.getElementById('sign-up-error-password').textContent = "Mật khẩu phải có ít nhất 6 ký tự.";
+    ktra_form = false;
+  } else {
+    document.getElementById('sign-up-error-password').textContent = "";
+  }
 
   // Kiểm tra xác nhận mật khẩu
   if (!password1) {
@@ -71,7 +71,7 @@ if (!password) {
   // Nếu form hợp lệ, tiếp tục xử lý đăng ký
   if (ktra_form) {
     // Tạo đối tượng người dùng mới
-    const newUser = {
+    let newUser = {
       id: tel,
       cart: [],
       username: username,
@@ -94,7 +94,7 @@ if (!password) {
 // Hàm đăng ký tài khoản mới với số điện thoại làm ID
 function registerUser(newUser) {
   // Kiểm tra xem số điện thoại đã tồn tại chưa
-  const ktra_user0 = users.some(user => user.tel === newUser.tel);
+  let ktra_user0 = users.some(user => user.tel === newUser.tel);
   if (ktra_user0) {
     alert('Số điện thoại đã được đăng ký!');
     return;
@@ -110,7 +110,7 @@ function registerUser(newUser) {
 }
 
 function ktra_tel(tel) {
-  const regex = /^0\d{9}$/;
+  let regex = /^0\d{9}$/;
   return regex.test(tel);
 }
 
@@ -119,17 +119,17 @@ function ktra_tel(tel) {
 document.getElementById('account-log-in').addEventListener('submit', function (event) {
   event.preventDefault(); // Ngừng form reload lại trang
 
-  const log_in_tel = document.getElementById('log-in-tel').value.trim();
-  const log_in_password = document.getElementById('log-in-password').value;
-  const checkbox = document.getElementById('log-in-checkbox');
+  let log_in_tel = document.getElementById('log-in-tel').value.trim();
+  let log_in_password = document.getElementById('log-in-password').value;
+  let checkbox = document.getElementById('log-in-checkbox');
 
-    // Kiểm tra nếu checkbox chưa được chọn
-    if (!checkbox.checked) {
-      document.getElementById('log-in-error-checkbox').textContent = "Bạn cần đồng ý với điều khoản.";
-      return; // Ngừng xử lý nếu không đồng ý với điều khoản
-    } else {
-      document.getElementById('log-in-error-checkbox').textContent = ""; // Xóa thông báo lỗi nếu đồng ý
-    }
+  // Kiểm tra nếu checkbox chưa được chọn
+  if (!checkbox.checked) {
+    document.getElementById('log-in-error-checkbox').textContent = "Bạn cần đồng ý với điều khoản.";
+    return; // Ngừng xử lý nếu không đồng ý với điều khoản
+  } else {
+    document.getElementById('log-in-error-checkbox').textContent = ""; // Xóa thông báo lỗi nếu đồng ý
+  }
 
   // Lấy danh sách người dùng từ localStorage (nếu có)
   let user = users.find(user => user.tel === log_in_tel);
@@ -141,17 +141,17 @@ document.getElementById('account-log-in').addEventListener('submit', function (e
       localStorage.setItem('user', JSON.stringify(user));
       alert('Đăng nhập thành công!');
 
-      const new_tk = document.getElementById('new-tk');
+      let new_tk = document.getElementById('new-tk');
       new_tk.style.display = 'none';
-      const name_tk = document.getElementById('name-tk');
+      let name_tk = document.getElementById('name-tk');
       name_tk.innerHTML = `${user.username}`;
       name_tk.style.display = 'block';
-      const icon_tk = document.getElementById('icon-tk');
+      let icon_tk = document.getElementById('icon-tk');
       // Gán sự kiện onclick
       icon_tk.addEventListener('click', open_tk);
       close_x_overlay();
-      
-      const cart = user.cart || [];
+
+      let cart = users.cart || [];
       capNhatGioHang(cart);
 
     } else {
@@ -166,11 +166,11 @@ document.getElementById('account-log-in').addEventListener('submit', function (e
 
 function log_out() {
   // Xóa thông tin người dùng khỏi localStorage
-  const user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng hiện tại
+  let user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng hiện tại
 
   // Cập nhật giỏ hàng vào danh sách người dùng
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  const userIndex = users.findIndex(u => u.tel === user.tel);
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  let userIndex = users.findIndex(u => u.tel === user.tel);
   if (userIndex !== -1) {
     users[userIndex] = user; // Cập nhật thông tin người dùng bao gồm giỏ hàng
     localStorage.setItem('users', JSON.stringify(users)); // Lưu lại danh sách users
@@ -178,18 +178,18 @@ function log_out() {
   // Xóa thông tin người dùng khỏi localStorage
   localStorage.removeItem('user');
   // Cập nhật giao diện: Ẩn tên tài khoản, nút đăng xuất, v.v.
-  const name_tk = document.getElementById('name-tk');
+  let name_tk = document.getElementById('name-tk');
   name_tk.innerHTML = '';  // Xóa tên người dùng
   name_tk.style.display = 'none';
-  const new_tk = document.getElementById('new-tk');
+  let new_tk = document.getElementById('new-tk');
   new_tk.style.display = 'block';
-  const icon_tk = document.getElementById('icon-tk');
+  let icon_tk = document.getElementById('icon-tk');
   icon_tk.removeEventListener('click', open_tk); // Xóa sự kiện onclick nếu có
-  const totalPrice = document.getElementById('totalPrice');
+  let totalPrice = document.getElementById('totalPrice');
   totalPrice.innerHTML = "";
   close_x_overlay()
 
-  const cartItems = document.getElementById('cartList');
+  let cartItems = document.getElementById('cartList');
   cartItems.innerHTML = '';  // Xóa giỏ hàng cũ
   // Hiển thị lại phần đăng nhập nếu cần
   alert('Đăng xuất thành công!');
@@ -197,8 +197,9 @@ function log_out() {
 }
 //Kiểm Tra Người Dùng
 function ktra_user() {
+  let user = JSON.parse(localStorage.getItem('user'));
   if (!user) {
-    alert("Chưa đăng nhập");
+    return;
   }
   return user;
 }
@@ -208,13 +209,16 @@ function ktra_user() {
 
 // Hàm thêm sản phẩm vào giỏ hàng
 function themvaogiohang(index) {
-  const user = ktra_user(); // Lấy thông tin người dùng từ localStorage
-  if (!user) return;
+  let user = ktra_user(); // Lấy thông tin người dùng từ localStorage
+  if (!user) {
+    chua_dangnhap();
+    return;
+  }
 
-  const product = products[index];
-  const cart = user.cart || [];
+  let product = products[index];
+  let cart = user.cart || [];
   // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
-  const existingProduct = cart.find(item => item.id === product.id);
+  let existingProduct = cart.find(item => item.id === product.id);
 
   if (existingProduct) {
     // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
@@ -226,19 +230,19 @@ function themvaogiohang(index) {
   }
 
   // Cập nhật giỏ hàng vào localStorage cho người dùng
-  user.cart=cart;
+  user.cart = cart;
   localStorage.setItem('user', JSON.stringify(user));
   capNhatGioHang(cart);
 }
 
 // Hàm cập nhật giỏ hàng
 function capNhatGioHang(cart) {
-  const cartList = document.getElementById('cartList');
+  let cartList = document.getElementById('cartList');
   cartList.innerHTML = '';  // Xóa giỏ hàng cũ
 
   // Hiển thị tất cả sản phẩm trong giỏ hàng
   cart.forEach(product => {
-    const div = document.createElement('div');
+    let div = document.createElement('div');
     div.classList.add('shopping-product');
     div.innerHTML = `
     <img src="${product.img}" alt="${product.title}">
@@ -257,19 +261,19 @@ function capNhatGioHang(cart) {
   });
 
   // Tính tổng giá trị giỏ hàng
-  const totalPrice = cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
-  const totalElement = document.getElementById('totalPrice');
+  let totalPrice = cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
+  let totalElement = document.getElementById('totalPrice');
   totalElement.textContent = `Tổng cộng : ${totalPrice.toLocaleString()} VND`;
 }
 function capNhatSoLuong(productId, action) {
-  const user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng
+  let user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng
   if (!user) return; // Nếu không có người dùng thì không làm gì
 
   // Lấy giỏ hàng từ localStorage
-  let cart = user.cart || []; 
+  let cart = user.cart || [];
 
   // Tìm sản phẩm trong giỏ hàng
-  const productt = cart.find(p => p.id === productId);
+  let productt = cart.find(p => p.id === productId);
   if (!productt) return; // Nếu không tìm thấy sản phẩm thì không làm gì
 
   // Tăng hoặc giảm số lượng sản phẩm
@@ -282,29 +286,29 @@ function capNhatSoLuong(productId, action) {
   }
 
   // Cập nhật lại giỏ hàng vào localStorage cho người dùng
-  user.cart = cart; 
-  localStorage.setItem('user', JSON.stringify(user)); 
+  user.cart = cart;
+  localStorage.setItem('user', JSON.stringify(user));
 
   // Cập nhật giỏ hàng hiển thị
   capNhatGioHang(cart);
 }
 function xoaSanPham(productId) {
-  const user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng
+  let user = JSON.parse(localStorage.getItem('user')); // Lấy thông tin người dùng
   if (!user) return; // Nếu không có người dùng thì không làm gì
 
   // Lấy giỏ hàng từ localStorage
-  let cart = user.cart || []; 
+  let cart = user.cart || [];
 
   // Tìm chỉ số của sản phẩm trong giỏ hàng
-  const productIndex = cart.findIndex(p => p.id === productId);
+  let productIndex = cart.findIndex(p => p.id === productId);
   if (productIndex === -1) return; // Nếu không tìm thấy sản phẩm thì không làm gì
 
   // Xóa sản phẩm khỏi giỏ hàng
   cart.splice(productIndex, 1);
 
   // Cập nhật giỏ hàng vào localStorage cho người dùng
-  user.cart = cart; 
-  localStorage.setItem('user', JSON.stringify(user)); 
+  user.cart = cart;
+  localStorage.setItem('user', JSON.stringify(user));
 
   // Cập nhật giỏ hàng hiển thị
   capNhatGioHang(cart);
@@ -312,15 +316,15 @@ function xoaSanPham(productId) {
 
 
 
-function chua_dangnhap(){
+function chua_dangnhap() {
   var chua_dangnhap = document.getElementById('chua-dangnhap');
-  
+
   // Hiển thị div
   chua_dangnhap.style.display = 'block'; // Hoặc dùng 'flex', 'inline', tùy vào cách bạn thiết kế
   chua_dangnhap.style.opacity = 1; // Đảm bảo nó không mờ (nếu bạn có dùng opacity)
   chua_dangnhap.style.top = '0';
   // Sau 2 giây, ẩn lại div
-  setTimeout(function() {
+  setTimeout(function () {
     chua_dangnhap.style.display = 'none'; // Ẩn lại div sau 2 giây
   }, 1500); // giây
 
@@ -330,17 +334,17 @@ function chua_dangnhap(){
 
 //************************************************************* */
 document.addEventListener('DOMContentLoaded', function () {
-
+  open_product('home');
   if (user && user.tel) {
 
-    const new_tk = document.getElementById('new-tk');
+    let new_tk = document.getElementById('new-tk');
     new_tk.style.display = 'none';
 
-    const name_tk = document.getElementById('name-tk');
+    let name_tk = document.getElementById('name-tk');
     name_tk.innerHTML = `${user.username}`;
     name_tk.style.display = 'block';
 
-    const icon_tk = document.getElementById('icon-tk');
+    let icon_tk = document.getElementById('icon-tk');
     icon_tk.addEventListener('click', open_tk);
 
     // Lấy thông tin giỏ hàng từ users
@@ -349,8 +353,10 @@ document.addEventListener('DOMContentLoaded', function () {
       capNhatGioHang(user0.cart);
     }
   } else {
+    createproductList();
     chua_dangnhap();
   }
+
 
 });
 
@@ -368,11 +374,12 @@ document.addEventListener('DOMContentLoaded', function () {
 //************************
 
 let currentPage = 1; // Trang mặc định
-const itemsPerPage = 8; // Số sản phẩm mỗi trang
+let itemsPerPage = 8; // Số sản phẩm mỗi trang
+
 //Khi bấm các nút ở list menu
 function open_product_of_team(products) {
-  const productlist = document.getElementById('productList');
-  const pagination = document.getElementById('pagination');
+  let productlist = document.getElementById('productList');
+  let pagination = document.getElementById('pagination');
   productlist.innerHTML = ''; // Xóa nội dung cũ
   pagination.innerHTML = ''; // Xóa phân trang cũ
 
@@ -382,14 +389,14 @@ function open_product_of_team(products) {
   }
 
   // Tính số trang và hiển thị sản phẩm cho trang hiện tại
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const productsToShow = products.slice(start, end);
+  let totalPages = Math.ceil(products.length / itemsPerPage);
+  let start = (currentPage - 1) * itemsPerPage;
+  let end = start + itemsPerPage;
+  let productsToShow = products.slice(start, end);
 
   // Hiển thị sản phẩm cho trang hiện tại
   productsToShow.forEach((product, index) => {
-    const productDiv = document.createElement('div');
+    let productDiv = document.createElement('div');
     productDiv.classList.add('product-item');
     productDiv.innerHTML = `
        <img src="${product.img}" alt="${product.title}">
@@ -403,14 +410,14 @@ function open_product_of_team(products) {
   // Tạo nút phân trang
 
   for (let i = 1; i <= totalPages; i++) {
-    const pageButton = document.createElement('button');
+    let pageButton = document.createElement('button');
     pageButton.textContent = i;
     pageButton.onclick = () => changePage(i, products);
     pagination.appendChild(pageButton);
     productlist.appendChild(pagination);
 
     pageButton.addEventListener("click", function () {
-      const main = document.getElementById('main');
+      let main = document.getElementById('main');
       // Cuộn đến phần tử main
       window.scrollTo({
         top: main.offsetTop - 110,  // Cuộn tới vị trí phần tử main, điều chỉnh khoảng cách (1250px)
@@ -426,9 +433,10 @@ function changePage(page, products) {
   currentPage = page; // Cập nhật trang hiện tại
   open_product_of_team(products); // Hiển thị lại sản phẩm cho trang mới
 }
-
 // Hàm hiển thị sản phẩm theo category
 function open_product(category) {
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+  createproductList();
   let list_product_of_menu = [];
 
   if (category == 'home') {
@@ -451,8 +459,8 @@ function open_product(category) {
 let lastScrollTop = 0; // Biến lưu vị trí cuộn trước đó
 
 window.addEventListener('scroll', function () {
-  const listMenu = document.getElementById('list-menu');
-  const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  let listMenu = document.getElementById('list-menu');
+  let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
   if (currentScrollTop > lastScrollTop) {
     // Cuộn xuống
@@ -466,8 +474,8 @@ window.addEventListener('scroll', function () {
 });
 
 //******CHUYỂN ẢNH POSTER******* */
-const poster = document.getElementById("poster");
-const images = [
+let poster = document.getElementById("poster");
+let images = [
   "assets/images/admin/poster_2.jpg",
   "assets/images/admin/poster_3.jpg",
   "assets/images/admin/poster_4.jpg",
@@ -476,7 +484,7 @@ let currentIndex = 0;
 // Hàm để thay đổi ảnh tự động
 function changeImage() {
   currentIndex = (currentIndex + 1) % images.length; // Chuyển đến ảnh tiếp theo và quay lại đầu nếu đến cuối
-  const currentItem = poster.children[currentIndex];
+  let currentItem = poster.children[currentIndex];
   currentItem.style.backgroundImage = `url(${images[currentIndex]})`;
   // Cuộn tự động đến ảnh tiếp theo sau mỗi 3 giây
   poster.scrollTo({
@@ -517,7 +525,7 @@ function searchProducts() {
 
 //LỌC SẢN PHẨM THEO GIÁ
 function search_price() {
-  const category_search_price = document.getElementById('category-search-price').value;
+  let category_search_price = document.getElementById('category-search-price').value;
 
   tim_nhom(category_search_price);
 }
@@ -538,9 +546,9 @@ function tim_nhom(category) {
 }
 
 function lietke_price(products) {
-  const min_price = parseFloat(document.getElementById('min-price').value) || null;
-  const max_price = parseFloat(document.getElementById('max-price').value) || null;
-  const productlist = document.getElementById('productList');
+  let min_price = parseFloat(document.getElementById('min-price').value) || null;
+  let max_price = parseFloat(document.getElementById('max-price').value) || null;
+  let productlist = document.getElementById('productList');
   productlist.innerHTML = ''; // Xóa nội dung cũ
 
   if (products.length == 0) {
@@ -557,7 +565,7 @@ function lietke_price(products) {
       ) {
         foundProduct = true; // Có ít nhất một sản phẩm thỏa mãn điều kiện giá
 
-        const productDiv = document.createElement('div');
+        let productDiv = document.createElement('div');
         productDiv.classList.add('product-item');
         productDiv.innerHTML = `
           <img src="${product.img}" alt="${product.title}">
@@ -580,10 +588,10 @@ function lietke_price(products) {
 
 //GIÁ TĂNG DẦN
 function search_price_thap_cao() {
-  const productlist = document.getElementById('productList');
+  let productlist = document.getElementById('productList');
 
   // Lấy home các sản phẩm đang được hiển thị (home các div có class 'product-item')
-  const productItems = Array.from(productlist.getElementsByClassName('product-item'));
+  let productItems = Array.from(productlist.getElementsByClassName('product-item'));
 
   // Kiểm tra nếu không có sản phẩm nào hiển thị
   if (productItems.length === 0) {
@@ -591,10 +599,10 @@ function search_price_thap_cao() {
   }
 
   // Lấy giá sản phẩm từ các phần tử đang hiển thị
-  const sortedProductItems = productItems.sort((a, b) => {
+  let sortedProductItems = productItems.sort((a, b) => {
     // Lấy giá của sản phẩm từ các phần tử HTML
-    const priceA = parseFloat(a.querySelector('p').innerText.replace('Giá: ', '').replace(' VND', '').trim());
-    const priceB = parseFloat(b.querySelector('p').innerText.replace('Giá: ', '').replace(' VND', '').trim());
+    let priceA = parseFloat(a.querySelector('p').innerText.replace('Giá: ', '').replace(' VND', '').trim());
+    let priceB = parseFloat(b.querySelector('p').innerText.replace('Giá: ', '').replace(' VND', '').trim());
 
     // So sánh giá (giảm dần hoặc tăng dần tùy theo yêu cầu)
     return priceA - priceB; // Tăng dần (đổi thành priceB - priceA để giảm dần)
@@ -610,10 +618,10 @@ function search_price_thap_cao() {
 
 //GIÁ GIẢM DẦN
 function search_price_cao_thap() {
-  const productlist = document.getElementById('productList');
+  let productlist = document.getElementById('productList');
 
   // Lấy home các sản phẩm đang được hiển thị (home các div có class 'product-item')
-  const productItems = Array.from(productlist.getElementsByClassName('product-item'));
+  let productItems = Array.from(productlist.getElementsByClassName('product-item'));
 
   // Kiểm tra nếu không có sản phẩm nào hiển thị
   if (productItems.length === 0) {
@@ -621,10 +629,10 @@ function search_price_cao_thap() {
   }
 
   // Lấy giá sản phẩm từ các phần tử đang hiển thị
-  const sortedProductItems = productItems.sort((a, b) => {
+  let sortedProductItems = productItems.sort((a, b) => {
     // Lấy giá của sản phẩm từ các phần tử HTML
-    const priceA = parseFloat(a.querySelector('p').innerText.replace('Giá: ', '').replace(' VND', '').trim());
-    const priceB = parseFloat(b.querySelector('p').innerText.replace('Giá: ', '').replace(' VND', '').trim());
+    let priceA = parseFloat(a.querySelector('p').innerText.replace('Giá: ', '').replace(' VND', '').trim());
+    let priceB = parseFloat(b.querySelector('p').innerText.replace('Giá: ', '').replace(' VND', '').trim());
 
     // So sánh giá (giảm dần hoặc tăng dần tùy theo yêu cầu)
     return priceB - priceA;
@@ -641,15 +649,15 @@ function search_price_cao_thap() {
 
 //Mở pay
 function open_pay() {
-  const open_pay = document.getElementById("open-pay");
+  let open_pay = document.getElementById("open-pay");
   open_pay.style.display = 'block';
 }
 
 
 // Cập nhật phí vận chuyển khi lựa chọn phương thức giao nhận
 function updateShippingFee(type) {
-  const shippingFeeElement = document.getElementById('shipping-fee');
-  const totalAmountElement = document.getElementById('total-amount');
+  let shippingFeeElement = document.getElementById('shipping-fee');
+  let totalAmountElement = document.getElementById('total-amount');
 
   if (type === 'delivery') {
     // Phí vận chuyển cho "Giao tận nơi"
@@ -675,20 +683,20 @@ function updateShippingFee(option) {
 
 // Chọn ngày giao hàng
 function selectDate(date) {
-  const dateButtons = document.querySelectorAll('.date-button');
+  let dateButtons = document.querySelectorAll('.date-button');
   dateButtons.forEach(button => {
     button.classList.remove('selected');
   });
 
-  const selectedButton = document.querySelector(`.date-button[onclick="selectDate('${date}')"]`);
+  let selectedButton = document.querySelector(`.date-button[onclick="selectDate('${date}')"]`);
   selectedButton.classList.add('selected');
 }
 
 // Kiểm tra và gửi đơn hàng
 function submitOrder() {
-  const name = document.getElementById('name').value;
-  const phone = document.getElementById('phone').value;
-  const address = document.getElementById('address').value;
+  let name = document.getElementById('name').value;
+  let phone = document.getElementById('phone').value;
+  let address = document.getElementById('address').value;
 
   // Kiểm tra xem thông tin người nhận có đầy đủ không
   if (!name || !phone || !address) {
@@ -697,7 +705,7 @@ function submitOrder() {
   }
 
   // Xử lý ghi chú
-  const note = document.getElementById('note').value;
+  let note = document.getElementById('note').value;
   console.log('Ghi chú:', note); // Có thể gửi ghi chú khi gửi đơn hàng
 
   // Thực hiện gửi thông tin đơn hàng ở đây (ví dụ, gửi lên server)
@@ -715,7 +723,7 @@ document.getElementById('customer-form').addEventListener('input', function () {
 let isMoved = 0;
 
 function moveto() {
-  const header_aside = document.getElementById('header-aside');
+  let header_aside = document.getElementById('header-aside');
 
   // Chuyển đổi giữa hai trạng thái di chuyển
   if (!isMoved) {
@@ -795,16 +803,16 @@ function open_account_sign_up() {
 
 
 //DỊCH CHUYỂN TỚI MAIN SẢN PHẨM KHI BẤM LIST_MENU
-const home = document.getElementById("home");
-const new1 = document.getElementById("new");
-const burger = document.getElementById("burger");
-const chicken = document.getElementById("chicken");
-const combo = document.getElementById("combo");
-const drink = document.getElementById("drink");
-const search_input = document.getElementById("search-input");
-const loc_sanpham = document.getElementById("loc-sanpham");
+let home = document.getElementById("home");
+let new1 = document.getElementById("new");
+let burger = document.getElementById("burger");
+let chicken = document.getElementById("chicken");
+let combo = document.getElementById("combo");
+let drink = document.getElementById("drink");
+let search_input = document.getElementById("search-input");
+let loc_sanpham = document.getElementById("loc-sanpham");
 
-const main = document.getElementById("main");
+let main = document.getElementById("main");
 
 home.addEventListener("click", function () {
   // Cuộn đến phần tử main
@@ -863,6 +871,3 @@ loc_sanpham.addEventListener("click", function () {
     behavior: "smooth"          // Cuộn mượt mà
   });
 });
-
-
-
