@@ -1,21 +1,19 @@
 //**********ADMIN************/
-
 // Lắng nghe sự kiện gửi form
-
 // Chỉ số sản phẩm đang chỉnh sửa
 let Index = -1;
 document.getElementById('addProductForm').addEventListener('submit', function (event) {
   event.preventDefault(); // Ngừng việc làm mới trang
 
   // Lấy giá trị từ form
-  const id = document.getElementById('id').value.trim();
-  const name = document.getElementById('name').value;
-  const price = document.getElementById('price').value;
-  const description = document.getElementById('description').value;
-  const quantity = document.getElementById('quantity').value.trim();
-  const category = document.getElementById('category').value;
-  const imgInput = document.getElementById('img');
-  const file = imgInput.files[0];  // Lấy file ảnh được chọn
+  let id = document.getElementById('id').value.trim();
+  let name = document.getElementById('name').value;
+  let price = document.getElementById('price').value;
+  let description = document.getElementById('description').value;
+  let quantity = document.getElementById('quantity').value.trim();
+  let category = document.getElementById('category').value;
+  let imgInput = document.getElementById('img');
+  let file = imgInput.files[0];  // Lấy file ảnh được chọn
 
   // Kiểm tra xem ID có được nhập hay không
   if (!id) {
@@ -24,10 +22,10 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
   }
 
   // Lấy danh sách sản phẩm từ localStorage
-  const products = JSON.parse(localStorage.getItem('products')) || [];
+
 
   // Kiểm tra xem ID đã tồn tại chưa, ngoại trừ ID của sản phẩm hiện tại đang sửa
-  const id_product_edit = products.some((product, idx) => product.id === id && idx !== Index);
+  let id_product_edit = products.some((product, idx) => product.id === id && idx !== Index);
 
   if (id_product_edit) {
     alert("ID sản phẩm đã tồn tại! Vui lòng nhập ID khác.");
@@ -35,13 +33,13 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
   }
 
   if (file) {
-    const reader = new FileReader();
+    let reader = new FileReader();
 
     reader.onload = function (e) {
-      const imageUrl = e.target.result;  // Đây là URL base64 của ảnh
+      let imageUrl = e.target.result;  // Đây là URL base64 của ảnh
 
       // Tạo đối tượng sản phẩm mới
-      const newProduct = {
+      let newProduct = {
         id: id,
         title: name,
         price: price,
@@ -70,8 +68,9 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
 
 // Kiểm tra và khởi tạo danh sách sản phẩm nếu chưa có trong localStorage . CHỖ NÀY ĐANG CÓ THỂ BỎ 
 function createproductList() {
+  let products = JSON.parse(localStorage.getItem('products')) || [];
   if (localStorage.getItem('products') === null) {
-    const defaultProducts = [
+    let defaultProducts = [
       {
         id: '1',
         title: 'MÓN MỚI KO BÁN',
@@ -226,24 +225,26 @@ function createproductList() {
         img: 'assets/images/products/drink/404.jpg',
       },
     ];
-    localStorage.setItem('products', JSON.stringify(defaultProducts));
+    products = defaultProducts;
+    localStorage.setItem('products', JSON.stringify(products));
   }
 }
 
 
 // Hiển thị danh sách sản phẩm trong admin
 function displayProducts() {
+  let products = JSON.parse(localStorage.getItem('products')) || [];
   createproductList();
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-  const productList = document.getElementById('productList');
+
+  let productList = document.getElementById('productList');
   productList.innerHTML = ''; // Xóa nội dung cũ
 
   if (products.length === 0) {
-    productList.innerHTML = 'Chưa có sản phẩm.';
+    productList.innerHTML = 'Chưa có sản phẩm admin !';
   } else {
     console.log(products.length); // Kiểm tra số sản phẩm
     products.forEach((product, index) => {
-      const productDiv = document.createElement('div');
+      let productDiv = document.createElement('div');
       productDiv.classList.add('product-item');
       productDiv.innerHTML = `
         <img src="${product.img}" alt="${product.title}">
@@ -264,7 +265,6 @@ function displayProducts() {
 
 // Thêm sản phẩm vào localStorage
 function addProduct(newProduct) {
-  const products = JSON.parse(localStorage.getItem('products')) || [];
   products.push(newProduct);
   localStorage.setItem('products', JSON.stringify(products));
   displayProducts(); // Cập nhật danh sách sản phẩm hiển thị
@@ -273,7 +273,6 @@ function addProduct(newProduct) {
 
 // Cập nhật sản phẩm trong localStorage
 function updateProduct(index, updatedProduct) {
-  const products = JSON.parse(localStorage.getItem('products')) || [];
   products[index] = updatedProduct;
   localStorage.setItem('products', JSON.stringify(products));
   displayProducts(); // Cập nhật danh sách sản phẩm hiển thị
@@ -281,7 +280,6 @@ function updateProduct(index, updatedProduct) {
 
 // Xóa sản phẩm khỏi localStorage
 function deleteProduct(index) {
-  const products = JSON.parse(localStorage.getItem('products')) || [];
   products.splice(index, 1); // Xóa sản phẩm
   localStorage.setItem('products', JSON.stringify(products)); // Lưu lại vào localStorage
   displayProducts(); // Cập nhật danh sách sản phẩm hiển thị
@@ -289,8 +287,7 @@ function deleteProduct(index) {
 
 // Chỉnh sửa sản phẩm
 function editProduct(index) {
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-  const product = products[index];
+  let product = products[index];
 
   // Điền thông tin vào form
   document.getElementById('id').value = product.id;
@@ -303,30 +300,6 @@ function editProduct(index) {
   Index = index; // Lưu chỉ số sản phẩm đang chỉnh sửa
 }
 
-// Hiển thị danh sách sản phẩm trong main
-function displayProductsMain() {
-  createproductList();
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-  const productList = document.getElementById('productList');
-  productList.innerHTML = ''; // Xóa nội dung cũ
-
-  if (products.length == 0) {
-    productList.innerHTML = 'Không có sản phẩm.';
-  } else {
-    products.forEach((product, index) => {
-      const productDiv = document.createElement('div');
-      productDiv.classList.add('product-item');
-      productDiv.innerHTML = `
-        <img src="${product.img}" alt="${product.title}">
-        <h3>${product.title}</h3>
-        <p>Giá: ${product.price} VND</p>
-        <button onclick="themvaogiohang(${index})">Đặt hàng</button>
-      `;
-      productList.appendChild(productDiv);
-    });
-  }
-}
-
 
 
 // Khởi tạo danh sách sản phẩm khi trang được tải
@@ -336,13 +309,10 @@ window.onload = function () {
     displayProducts(); // Hiển thị sản phẩm cho trang admin
   }
   if (window.location.href.includes('main.html')) {
-    displayProductsMain(); // Hiển thị lại danh sách sản phẩm
+    createproductList();
+    open_product('home');
   }
 };
-
-
-
-
 
 
 
