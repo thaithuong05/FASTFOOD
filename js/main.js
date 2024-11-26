@@ -151,7 +151,7 @@ document.getElementById('account-log-in').addEventListener('submit', function (e
       icon_tk.addEventListener('click', open_tk);
       close_x_overlay();
 
-      let cart = users.cart || [];
+      let cart = user.cart || [];
       capNhatGioHang(cart);
 
     } else {
