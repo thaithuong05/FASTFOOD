@@ -2,9 +2,7 @@
 
 //************MAIN****************
 
-let users = JSON.parse(localStorage.getItem('users')) || [];
-let user = JSON.parse(localStorage.getItem('user')) || {};
-let products = JSON.parse(localStorage.getItem('products')) || [];
+
 //LƯU TÀI KHOẢN NGƯỜI DÙNG LÊN LOCALSTORAGE
 // Khi người dùng nhấn đăng ký
 document.getElementById('account-sign-up').addEventListener('submit', function (event) {
@@ -139,7 +137,8 @@ document.getElementById('account-log-in').addEventListener('submit', function (e
     if (user.password === log_in_password) {
       // Nếu đăng nhập thành công
       localStorage.setItem('user', JSON.stringify(user));
-      alert('Đăng nhập thành công!');
+      let cart = user.cart || [];
+      capNhatGioHang(cart);
 
       let new_tk = document.getElementById('new-tk');
       new_tk.style.display = 'none';
@@ -151,9 +150,8 @@ document.getElementById('account-log-in').addEventListener('submit', function (e
       icon_tk.addEventListener('click', open_tk);
       close_x_overlay();
 
-      let cart = user.cart || [];
-      capNhatGioHang(cart);
 
+      alert('Đăng nhập thành công!');
     } else {
       // Nếu mật khẩu không đúng
       document.getElementById('log-in-error-tel').textContent = 'Số điện thoại hoặc mật khẩu không đúng.';
@@ -171,12 +169,12 @@ function log_out() {
   // Cập nhật giỏ hàng vào danh sách người dùng
   let users = JSON.parse(localStorage.getItem('users')) || [];
   let userIndex = users.findIndex(u => u.tel === user.tel);
-  if (userIndex !== -1) {
-    users[userIndex] = user; // Cập nhật thông tin người dùng bao gồm giỏ hàng
-    localStorage.setItem('users', JSON.stringify(users)); // Lưu lại danh sách users
-  }
+  users[userIndex] = user; // Cập nhật thông tin người dùng bao gồm giỏ hàng
+  localStorage.setItem('users', JSON.stringify(users)); // Lưu lại danh sách users
+
+  let user_none = [];
   // Xóa thông tin người dùng khỏi localStorage
-  localStorage.removeItem('user');
+  localStorage.setItem('user', JSON.stringify(user_none));
   // Cập nhật giao diện: Ẩn tên tài khoản, nút đăng xuất, v.v.
   let name_tk = document.getElementById('name-tk');
   name_tk.innerHTML = '';  // Xóa tên người dùng
