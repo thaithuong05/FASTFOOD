@@ -6,10 +6,10 @@ let user = JSON.parse(localStorage.getItem('user')) || {};
 let products = JSON.parse(localStorage.getItem('products')) || [];
 let products_default = JSON.parse(localStorage.getItem('products_default')) || [];
 // Chỉ số sản phẩm đang chỉnh sửa
-let Index = -1;
+let Id = -1;
 document.getElementById('addProductForm').addEventListener('submit', function (event) {
   event.preventDefault(); // Ngừng việc làm mới trang
-  
+
   // Lấy giá trị từ form
   let id = document.getElementById('id').value.trim();
   let name = document.getElementById('name').value;
@@ -25,24 +25,22 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
     alert("Vui lòng nhập ID sản phẩm.");
     return;  // Dừng lại nếu ID không được nhập
   }
-
-  // Lấy danh sách sản phẩm từ localStorage
+  // Kiểm tra xem ID đã tồn tại chưa, ngoại trừ ID của sản phẩm hiện tại đang sửa
+ 
 
 
   // Kiểm tra xem ID đã tồn tại chưa, ngoại trừ ID của sản phẩm hiện tại đang sửa
-  let id_product_edit = products.some((product, idx) => product.id === id && idx !== Index);
-
-  if (id_product_edit) {
+  if (Id !== -1 && products.some(p => p.id === id && p.id !== Id)) {
     alert("ID sản phẩm đã tồn tại! Vui lòng nhập ID khác.");
-    return; // Dừng lại nếu ID trùng
+    return;
   }
+
 
   if (file) {
     let reader = new FileReader();
 
     reader.onload = function (e) {
       let imageUrl = e.target.result;  // Đây là URL base64 của ảnh
-
       // Tạo đối tượng sản phẩm mới
       let newProduct = {
         id: id,
@@ -54,16 +52,16 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
         img: imageUrl,  // URL ảnh được đọc từ FileReader
       };
 
-      if (Index >= 0) {
+      if (Id >= 0) {
         // Nếu đang chỉnh sửa, cập nhật sản phẩm
-        updateProduct(Index, newProduct);
+        updateProduct(Id, newProduct);
       } else {
         // Nếu không, thêm sản phẩm mới
         addProduct(newProduct);
       }
 
       document.getElementById('addProductForm').reset(); // Xóa dữ liệu trong form sau khi thêm
-      Index = -1; // Đặt lại chỉ số chỉnh sửa
+      Id = -1; // Đặt lại chỉ số chỉnh sửa
       displayProducts(); // Cập nhật danh sách sản phẩm hiển thị
     };
 
@@ -74,12 +72,12 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
 
 // Kiểm tra và khởi tạo danh sách sản phẩm nếu chưa có trong localStorage . CHỖ NÀY ĐANG CÓ THỂ BỎ 
 function createproductList() {
-  
+
   if (localStorage.getItem('products_default') === null) {
     let defaultProducts = [
       {
         id: '1',
-        title: 'MÓN MỚI KO BÁN',
+        name: 'MÓN MỚI KO BÁN',
         price: 60000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -88,7 +86,7 @@ function createproductList() {
       },
       {
         id: '2',
-        title: 'COMBO KO NGON',
+        name: 'COMBO KO NGON',
         price: 50000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -97,7 +95,7 @@ function createproductList() {
       },
       {
         id: '3',
-        title: 'BURGER KẸP VÀNG',
+        name: 'BURGER KẸP VÀNG',
         price: 45000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -106,7 +104,7 @@ function createproductList() {
       },
       {
         id: '4',
-        title: 'GÀ HẢO HẠN',
+        name: 'GÀ HẢO HẠN',
         price: 40000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -115,7 +113,7 @@ function createproductList() {
       },
       {
         id: '5',
-        title: 'DRINK KHẠC KHỌT',
+        name: 'DRINK KHẠC KHỌT',
         price: 35000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -124,7 +122,7 @@ function createproductList() {
       },
       {
         id: '6',
-        title: 'MÓN MỚI KO BÁN',
+        name: 'MÓN MỚI KO BÁN',
         price: 32000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -133,7 +131,7 @@ function createproductList() {
       },
       {
         id: '7',
-        title: 'MÓN MỚI KO BÁN',
+        name: 'MÓN MỚI KO BÁN',
         price: 32000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -142,7 +140,7 @@ function createproductList() {
       },
       {
         id: '8',
-        title: 'MÓN MỚI KO BÁN',
+        name: 'MÓN MỚI KO BÁN',
         price: 31000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -151,7 +149,7 @@ function createproductList() {
       },
       {
         id: '9',
-        title: 'BURGER KẸP VÀNG',
+        name: 'BURGER KẸP VÀNG',
         price: 30000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -160,7 +158,7 @@ function createproductList() {
       },
       {
         id: '10',
-        title: 'BURGER KẸP VÀNG',
+        name: 'BURGER KẸP VÀNG',
         price: 20000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -169,7 +167,7 @@ function createproductList() {
       },
       {
         id: '11',
-        title: 'BURGER KẸP VÀNG',
+        name: 'BURGER KẸP VÀNG',
         price: 21000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -178,7 +176,7 @@ function createproductList() {
       },
       {
         id: '12',
-        title: 'GÀ HẢO HẠN',
+        name: 'GÀ HẢO HẠN',
         price: 22000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -187,7 +185,7 @@ function createproductList() {
       },
       {
         id: '13',
-        title: 'DRINK KHẠC KHỌT',
+        name: 'DRINK KHẠC KHỌT',
         price: 23000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -196,7 +194,7 @@ function createproductList() {
       },
       {
         id: '14',
-        title: 'GÀ HẢO HẠN',
+        name: 'GÀ HẢO HẠN',
         price: 24000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -205,7 +203,7 @@ function createproductList() {
       },
       {
         id: '15',
-        title: 'DRINK KHẠC KHỌT',
+        name: 'DRINK KHẠC KHỌT',
         price: 25000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -214,7 +212,7 @@ function createproductList() {
       },
       {
         id: '16',
-        title: 'GÀ HẢO HẠN',
+        name: 'GÀ HẢO HẠN',
         price: 26000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -223,7 +221,7 @@ function createproductList() {
       },
       {
         id: '17',
-        title: 'DRINK KHẠC KHỌT',
+        name: 'DRINK KHẠC KHỌT',
         price: 27000,
         description: 'Một món chay ngon miệng với nấm đùi gà...',
         quantity: '5',
@@ -232,9 +230,9 @@ function createproductList() {
       },
     ];
     products_default = defaultProducts;
-  }
-  localStorage.setItem('products_default', JSON.stringify(products_default));
+    localStorage.setItem('products_default', JSON.stringify(products_default));
     localStorage.setItem('products', JSON.stringify(products_default));
+  }
 }
 
 
@@ -247,19 +245,19 @@ function displayProducts() {
     productListA.innerHTML = 'Chưa có sản phẩm admin !';
   } else {
     console.log(products.length); // Kiểm tra số sản phẩm
-    products.forEach((product, index) => {
+    products.forEach((product) => {
       let productDiv = document.createElement('div');
       productDiv.classList.add('product-item');
       productDiv.innerHTML = `
-        <img src="${product.img}" alt="${product.title}">
-        <p>ID: ${product.id}</p>
-        <h3>Tên : ${product.name}</h3>
-        <p>Mô tả : ${product.description}</p>
-        <p>Giá: ${product.price} VND</p>
-        <p>Số lượng : ${product.quantity}</p>
-        <p>Danh mục: ${product.category}</p>
-        <button onclick="editProduct(${index})">Sửa</button>
-        <button onclick="deleteProduct(${index})">Xóa</button>
+        <img src="${product.img}" alt="${product.name}">
+        <p>*ID: ${product.id}</p>
+        <h3>*Tên : ${product.name}</h3>
+        <p>*Mô tả : ${product.description}</p>
+        <p>*Giá: ${product.price} VND</p>
+        <p>*Số lượng : ${product.quantity}</p>
+        <p>*Danh mục: ${product.category}</p>
+        <button onclick="editProduct(${product.id})">Sửa</button>
+        <button onclick="deleteProduct(${product.id})">Xóa</button>
       `;
       productListA.appendChild(productDiv); //thêm 1 div con vào div cha
     });
@@ -276,22 +274,26 @@ function addProduct(newProduct) {
 
 
 // Cập nhật sản phẩm trong localStorage
-function updateProduct(index, updatedProduct) {
-  products[index] = updatedProduct;
+function updateProduct(Id, updatedProduct) {
+  let index = products.findIndex(u => u.id == Id);
+  if (index !== -1) {
+    products[index] = updatedProduct;
   localStorage.setItem('products', JSON.stringify(products));
   displayProducts(); // Cập nhật danh sách sản phẩm hiển thị
+  }
 }
 
 // Xóa sản phẩm khỏi localStorage
-function deleteProduct(index) {
-  products.splice(index, 1); // Xóa sản phẩm
+function deleteProduct(id) {
+  let product1 = products.findIndex(u => u.id == id);
+  products.splice(product1, 1); // Xóa sản phẩm
   localStorage.setItem('products', JSON.stringify(products)); // Lưu lại vào localStorage
   displayProducts(); // Cập nhật danh sách sản phẩm hiển thị
 }
 
 // Chỉnh sửa sản phẩm
-function editProduct(index) {
-  let product = products[index];
+function editProduct(productid) {
+  let product = products.find(u => u.id == productid);
 
   // Điền thông tin vào form
   document.getElementById('id').value = product.id;
@@ -301,7 +303,7 @@ function editProduct(index) {
   document.getElementById('description').value = product.description;
   document.getElementById('category').value = product.category;
 
-  Index = index; // Lưu chỉ số sản phẩm đang chỉnh sửa
+  Id = product.id; // Lưu chỉ số sản phẩm đang chỉnh sửa
 }
 
 
@@ -318,7 +320,3 @@ window.onload = function () {
     open_product('home');
   }
 };
-
-
-
-//************TẠO PHÂN TRANG**************** */
