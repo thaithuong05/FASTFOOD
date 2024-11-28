@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   font-family: SFProDisplay, sans-serif;
+  font-family: 'Montserrat Alternates', sans-serif;
 }
 
 body {
@@ -20,6 +21,36 @@ body {
   background-color:#681722;
   color:rgb(255, 255, 255);
   box-shadow:0 0 10px 10px rgb(122, 91, 91);
+  text-align: center;
+  border-radius: 50px;
+}
+.da-dangnhap{
+  z-index:9999999999;
+  width:200px;
+  height:50px;
+  position:fixed;
+  top:-100px;
+  left:50%;
+  transform:translate(-50%);
+  transition: top 0.5s ease;
+  background-color:#80ee98;
+  color:rgb(0, 0, 0);
+  box-shadow:0 0 10px 10px rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 50px;
+}
+.da-dangki{
+  z-index:9999999999;
+  width:200px;
+  height:50px;
+  position:fixed;
+  top:-100px;
+  left:50%;
+  transform:translate(-50%);
+  transition: top 0.5s ease;
+  background-color:#00ff00;
+  color:rgb(0, 0, 0);
+  box-shadow:0 0 10px 10px rgb(255, 255, 255);
   text-align: center;
   border-radius: 50px;
 }
@@ -533,17 +564,102 @@ body {
   background-color: #fff;
 }
 
+/*Thông tin tài khoản*/
 .tk {
   display: none;
-  width: 500px;
+  width: 100vw;
   height: 100vh;
   position: fixed;
   z-index: 1001;
   background-color: #fff;
   right: 0;
-  top: 60px;
+  top: 0;
+}
+.close-x {
+  position: absolute;
+  background-color:#681722;
+  font-size:20px;
+  top:13px;
+  right: 21%;
+  border:none;
+  border-radius: 10px;
+}
+.tk h3{
+  background-color:#681722;
+  font-size:20px;
+  text-align: center;
+  margin:0 20%;
+  padding:15px;
+  border-bottom:2px solid rgb(0, 0, 0);
+}
+.tk-form{
+  position:absolute;
+  width:60%;
+  top:54.73px;
+  bottom:50px;
+  margin:0 20%;
+  padding:20px 20px;
 }
 
+
+/* Label cho các trường nhập liệu */
+.tk-form label {
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #1c1b1b;
+}
+
+/* Các trường input */
+.tk-form input[type="tel"],
+.tk-form input[type="password"],
+.tk-form input[type="text"],
+.tk-form input[type="email"]  {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.tk-form input[type="tel"]:active {
+  border: 1px solid #ddd;
+}
+
+.tk-form input[type="tel"]:focus {
+  border: 1px solid #ddd;
+}
+/* Nút lưu */
+.tk-form input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.tk-form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.tk-dangxuat{
+  width: 100%;
+  padding: 12px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.tk-dãnguat:active{
+  background-color: #45a049;
+}
 
 /*ACCOUNT*/
 
@@ -569,7 +685,12 @@ body {
 /* Nút đóng (X) */
 .close-x-log-in {
   position: absolute;
-  right: 0px;
+  background-color:#f9f9f9;
+  font-size:20px;
+  top:3px;
+  right: 3px;
+  border:none;
+  border-radius: 10px;
 }
 
 /* Tiêu đề form */
@@ -582,11 +703,9 @@ body {
 
 /* Label cho các trường nhập liệu */
 .account-log-in label {
+  margin-bottom: 8px;
   font-size: 14px;
   color: #333;
-  margin-bottom: 5px;
-  display: block;
-  text-align: left;
 }
 
 /* Các trường input */
@@ -678,7 +797,12 @@ body {
 
 .close-x-sign-up {
   position: absolute;
-  right: 0px;
+  background-color:#f9f9f9;
+  font-size:20px;
+  top:3px;
+  right: 3px;
+  border:none;
+  border-radius: 10px;
 }
 
 .account-sign-up h1 {
