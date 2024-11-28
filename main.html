@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://example.com/fonts/SFProDisplay.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap" rel="stylesheet">    <link rel="stylesheet" href="assets/css/main.css">
     <title>LUFFY FOOD</title>
 </head>
 
@@ -14,6 +14,14 @@
     <div id="chua-dangnhap" class="chua-dangnhap">
         <!--Lỗi khi chưa đăng nhập-->
         <p>Chưa đăng nhập !</p>
+    </div>
+    <div id="da-dangnhap" class="da-dangnhap">
+        <!--Lỗi khi chưa đăng nhập-->
+        <p>Đăng nhập thành công !</p>
+    </div>
+    <div id="da-dangki" class="da-dangki">
+        <!--Lỗi khi chưa đăng nhập-->
+        <p>Đăng kí thành công !</p>
     </div>
     <!--HEADER-->
     <div class="header">
@@ -46,9 +54,60 @@
 
 
     <div id="tk" class="tk">
-        <button class="close-x-shopping" onclick="close_x_overlay()">X</button>
-        <p>Tài Khoản</p>
-        <button onclick="log_out()">Đăng xuất</button>
+        <div class="tk-1">
+            <button class="close-x" onclick="close_x_overlay()">X</button>
+            <h3>Thông tin tài khoản</h3>
+        </div>
+
+        <form class="tk-form" id="tk-form">
+            <!-- Họ và tên -->
+            <label for="tk-name">Họ và tên</label><br>
+            <input type="text" id="tk-name" name="fullname" placeholder="Vui lòng nhập họ và tên" required>
+            <span class="error-message" id="tk-error-fullname"></span>
+            <br>
+
+            <!-- Số điện thoại -->
+            <label for="tk-tel">Số điện thoại</label><br>
+            <input type="tel" id="tk-tel" name="tel" placeholder="Số điện thoại" required readonly>
+            <!-- readonly ở đây -->
+            <span class="error-message" id="tk-error-tel"></span>
+            <br>
+
+            <!-- Email -->
+            <label for="tk-email">Email</label><br>
+            <input type="email" id="tk-email" name="email" placeholder="Vui lòng nhập email">
+            <span class="error-message" id="tk-error-email"></span>
+            <br>
+
+            <!-- Địa chỉ -->
+            <label for="tk-address">Địa chỉ</label><br>
+            <input type="text" id="tk-address" name="address" placeholder="Vui lòng nhập địa chỉ">
+            <span class="error-message" id="tk-error-address"></span>
+            <br>
+
+            <!-- Mật khẩu hiện tại -->
+            <label for="tk-current-password">Mật khẩu hiện tại</label><br>
+            <input type="password" id="tk-current-password" name="current-password"
+                placeholder="Vui lòng nhập mật khẩu hiện tại">
+            <span class="error-message" id="tk-error-current-password"></span>
+            <br>
+
+            <!-- Mật khẩu mới -->
+            <label for="tk-new-password">Mật khẩu mới</label><br>
+            <input type="password" id="tk-new-password" name="new-password" placeholder="Vui lòng nhập mật khẩu mới">
+            <span class="error-message" id="tk-error-new-password"></span>
+            <br>
+
+            <!-- Xác nhận mật khẩu mới -->
+            <label for="tk-confirm-password">Xác nhận mật khẩu mới</label><br>
+            <input type="password" id="tk-confirm-password" name="confirm-password"
+                placeholder="Vui lòng xác nhận mật khẩu mới">
+            <span class="error-message" id="tk-error-confirm-password"></span>
+            <br>
+
+            <input id="save" type="submit" value="Lưu thay đổi">
+            <button class="tk-dangxuat" onclick="log_out()">Đăng xuất</button>
+        </form>
     </div>
 
 
@@ -193,7 +252,7 @@
         <button class="close-x-sign-up" onclick="close_x_overlay()">X</button>
         <h1>Đăng Kí</h1>
         <!-- Tên người dùng -->
-        <label for="sign-up-username">Tên đăng nhập:</label>
+        <label for="sign-up-username">Họ và tên:</label>
         <input type="text" id="sign-up-username" name="username" placeholder="Vui lòng nhập tên đăng nhập" required>
         <span class="error-message" id="sign-up-error-username"></span>
         <br>
