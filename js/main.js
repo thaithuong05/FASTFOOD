@@ -149,6 +149,7 @@ document.getElementById('account-log-in').addEventListener('submit', function (e
       icon_tk.addEventListener('click', open_tk);
       close_x_overlay();
       ship();
+      open_product('home');
       da_dangnhap();
     } else {
       document.getElementById('log-in-error-tel').textContent = 'Số điện thoại hoặc mật khẩu không đúng.';
@@ -269,6 +270,7 @@ function ktra_user() {
 
 // Hàm thêm sản phẩm vào giỏ hàng
 function themvaogiohang(productid) {
+  let products = JSON.parse(localStorage.getItem('products')) || [];
   let user1 = ktra_user();
   if (!user1) {
     chua_dangnhap();
