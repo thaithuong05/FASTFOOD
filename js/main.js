@@ -289,7 +289,7 @@ function themvaogiohang(productid) {
   }
   user1.cart = user_cart;
   localStorage.setItem('user', JSON.stringify(user1));
-  ship(product1);
+  ship();
   capNhatGioHang(user_cart);
 
 }
@@ -297,6 +297,7 @@ function themvaogiohang(productid) {
 let soluong = 0;
 
 function ship() {
+  let user = JSON.parse(localStorage.getItem('user')) || {};
   let user_cart = user.cart || [];
   // Tính tổng số lượng sản phẩm trong giỏ hàng
   soluong = user_cart.reduce((total, item) => total + item.quantity, 0);
