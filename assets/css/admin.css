@@ -19,6 +19,7 @@ body {
   justify-content: space-between;
   padding: 0 11%;
  background-color: #fff;
+ border-bottom:1px solid black;
 }
 .overlay-admin {
   position: fixed;
@@ -30,7 +31,22 @@ body {
   display: none;
   z-index: 1000;
 }
-
+.them-spAD {
+  z-index: 9999999999;
+  width: auto;
+  height: auto;
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translate(-50%);
+  transition: top 0.5s ease;
+  background-color: #06d7a0;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0 10px 10px rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 50px;
+  padding: 5px;
+}
 .close-x-addproduct{
   position:absolute;
   top:5px;
@@ -109,6 +125,7 @@ body {
   padding:10px;
   background-color:#ffffff;
   transition:width 2s ease;
+  border-right:1px solid black;
 }
 .chucnang-admin-div-i{
  font-size: 20px;
@@ -265,8 +282,6 @@ body {
 .ql-users:hover {
   background-color: #a46363;
 }
-
-
 
 .ql-user {
   width:100%;
@@ -563,24 +578,30 @@ body {
   background-color: #0056b3;
 }
 
-/* Media query for smaller screens */
-@media screen and (max-width: 1200px) {
-  .productList {
-    grid-template-columns: repeat(6, 1fr);
-    /* 4 columns on medium screens */
-  }
+.thongkes{
+  width: auto;
+  height: 30px;
+  padding:20px;
+  margin:20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  border:1px solid rgb(0, 0, 0);
+  cursor:pointer;
+  transition:background-color 0.5s ease;
+}
+.thongkes:hover {
+  background-color: #a46363;
 }
 
-@media screen and (max-width: 768px) {
-  .productList {
-    grid-template-columns: repeat(4, 1fr);
-    /* 2 columns on smaller screens */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .productList {
-    grid-template-columns: repeat(4, 1fr);
-    /* 1 column on mobile screens */
-  }
+.thongke{
+  width:100%;
+  min-height:100%;
+  margin:20px;
+  display:none;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  background-color: #ffffff;
 }
