@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Cửa Hàng</title>
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+  <!--FORM ĐĂNG NHẬP-->
+  <div class="header">
+    <div class="header-name">
+      <p>LUFFY FOOD</p>
+    </div>
+  </div>
+
+  <!--Overlay-->
+  <div class="overlay-admin" id="overlay-admin"></div>
+  <!--DANH SÁCH CHỨC NĂNG-->
+  <div class="chucnang-admin">
+    <div class="logo-admin">
+      <img src="assets/images/admin/logo1.jpg" alt="LOGO">
+    </div>
+    <div id="tonghops" onclick="tonghops()" class="tonghops">Trang chủ</div>
+    <div id="add-products" onclick="add_products()" class="add-products">Sản phẩm</div>
+    <div id="ql-users" onclick="ql_users()" class="ql-users">Khách hàng</div>
+    <div id="ql-hoadons" onclick="ql_hoadons()" class="ql-hoadons">Hóa đơn</div>
+    <div id="log-out-admin" class="log-out-admin"><a style="text-decoration: none;" href="main.html">Đăng xuất</a>
+    </div>
+  </div>
+
+  <!--Nội dung admin-->
+  <div id="open-admin" class="open-admin">
+
+    <div class="tonghop" id="tonghop">
+      <div class="khung">
+        <div class="tonghop-sp">
+          <h2 id="tonghop-sp-h2">0</h2>
+          <div>
+            <p class="ten-tonghop">Sản phẩm</p>
+            <img class="tonghop_img" src="assets/images/admin/tonghop_sp.jpg">
+          </div>
+        </div>
+      </div>
+
+      <div class="khung">
+        <div class="tonghop-user">
+          <h2 id="tonghop-user-h2">0</h2>
+          <div>
+            <p class="ten-tonghop">Khách hàng</p>
+            <img class="tonghop_img" src="assets/images/admin/tonghop_user.jpg">
+          </div>
+        </div>
+      </div>
+
+      <div class="khung">
+        <div class="tonghop-hoadon">
+          <h2 id="tonghop-hoadon-h2">0</h2>
+          <div>
+            <p class="ten-tonghop">Hóa đơn</p>
+            <img class="tonghop_img" src="assets/images/admin/tonghop_hoadon.jpg">
+          </div>
+        </div>
+      </div>
+
+      <div class="khung">
+        <div class="tonghop-doanhthu">
+          <h2 id="tonghop-doanhthu-h2">0</h2>
+          <div>
+            <p class="ten-tonghop">Doanh thu</p>
+            <img class="tonghop_img" src="assets/images/admin/tonghop_doanhthu.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--THÊM SẢN PHẨM-->
+    <div id="add-product" class="add-product">
+
+      <div class="add-product-chucnang">
+        <div>
+          <select id="category-search-price" onchange="search_price()" class="header-aside-left-select">
+            <option value="home">Trang chủ</option>
+            <option value="new">Món mới</option>
+            <option value="combo">Combo</option>
+            <option value="burger">Burger</option>
+            <option value="chicken">Gà rán</option>
+            <option value="drink">Đồ uống</option>
+          </select>
+        </div>
+
+        <div id="button-open-form-addproduct" class="button-open-form-addproduct" onclick="open_form_addproduct()">
+          Thêm sản phẩm
+        </div>
+      </div>
+
+      <form id="addProductForm" class="addProductForm">
+
+        <div class="addProductForm-div1">
+
+          <div class="close-x-addproduct" id="close-x-addproduct" onclick="close_x_addproduct()">X</div>
+          <label for="id">ID : </label>
+          <input type="text" id="id" name="id"><br><br>
+          <label for="img" style="display:none;">URL Ảnh:</label>
+          <input type="file" id="img" name="img" accept="image/*" onchange="displayImagePreview(event)"><br>
+          <button type="button" onclick="document.getElementById('img').click();">Chọn ảnh</button><br>
+          <img id="imagePreview" src="" alt="Địa chỉ ảnh sản phẩm"
+            style="max-width: 200px; max-height: 200px; display: none;">
+
+        </div>
+
+        <div class="addProductForm-div2">
+          <label for="name">Tên sản phẩm:</label>
+          <input type="text" id="name" name="name" required><br><br>
+
+          <label for="price">Giá:</label>
+          <input type="number" id="price" name="price" required><br><br>
+
+          <label for="quantity">Số lượng:</label>
+          <input type="number" id="quantity" name="quantity" required><br><br>
+
+
+          <label for="description">Mô tả:</label>
+          <input type="text" id="description" name="description" required><br><br>
+
+          <label for="category">Danh mục:</label>
+          <select id="category">
+            <option value="home">Trang chủ</option>
+            <option value="new">Món mới</option>
+            <option value="combo">Combo</option>
+            <option value="burger">Burger</option>
+            <option value="chicken">Gà rán</option>
+            <option value="drink">Đồ uống</option>
+          </select><br><br>
+
+          <button type="submit">Thêm sản phẩm</button>
+        </div>
+
+      </form>
+
+      <div id="productListA" class="productListA"></div>
+      <div id="paginationA" class="paginationA">
+        <!--Phân trang-->
+      </div>
+
+    </div>
+
+    <!--QUẢN LÍ TÀI KHOẢN NGƯỜI DÙNG-->
+    <div id="ql-user" class="ql-user">
+      <h1 class="h1">Tài Khoản Người Dùng</h1>
+      <div class="ql-user-list" id="ql-user-list">
+
+      </div>
+    </div>
+
+    <!--Quản lí hóa đơn-->
+    <div id="ql-hoadon" class="ql-hoadon">
+      <h1 class="h1">Hóa Đơn Người Dùng</h1>
+      <div class="ql-hoadon-list" id="ql-hoadon-list">
+
+      </div>
+    </div>
+
+  </div>
+  <script src="js/product.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    window.addEventListener('keydown', function (event) {
+      // Kiểm tra xem phím người dùng nhấn có phải là F5 (keyCode 116) hoặc Ctrl + R
+      if ((event.keyCode === 116) || (event.ctrlKey && event.key === 'r')) {
+        event.preventDefault(); // Ngừng hành động mặc định của F5 và Ctrl + R
+        alert('Tải lại trang bị vô hiệu hóa!');
+        const open_admin = document.getElementById('open-admin');
+
+        open_admin.style.display = 'flex';
+      }
+    });
+    createproductList();
+    displayProduct();
+    displayUsers();
+    capnhat_hoadon();
+    capnhat_hoadon_admin();
+    window.onload = function () {
+      displayProducts();
+      displayUsers();
+      capnhat_hoadon();
+      capnhat_hoadon_admin();
+    };
+  </script>
+</body>
+
+</html>
