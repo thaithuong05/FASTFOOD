@@ -15,15 +15,20 @@ const tonghop_sp_h2 = document.getElementById('tonghop-sp-h2');
 const tonghop_user_h2 = document.getElementById('tonghop-user-h2');
 const tonghop_hoadon_h2 = document.getElementById('tonghop-hoadon-h2');
 
+const thongkee = document.getElementById('thongke');
+
 const overlay_admin=document.getElementById('overlay-admin');
 const addproductform = document.getElementById('addProductForm');
 const imgg =document.getElementById('imagePreview');
+
+
 
 function tonghops(){
   tonghop.style.display = 'flex';
   add_product.style.display = 'none';
   ql_user.style.display = 'none';
   ql_hoadon.style.display = 'none';
+  thongkee.style.display = 'none';
 }
 
 //Mở quản lí thêm sản phẩm
@@ -32,6 +37,7 @@ function add_products() {
   tonghop.style.display = 'none';
   ql_user.style.display = 'none';
   ql_hoadon.style.display = 'none';
+  thongkee.style.display = 'none';
 }
 
 function ql_users() {
@@ -39,10 +45,19 @@ function ql_users() {
   tonghop.style.display = 'none';
   ql_hoadon.style.display = 'none';
   add_product.style.display = 'none';
+  thongkee.style.display = 'none';
 }
 
 function ql_hoadons() {
   ql_hoadon.style.display = 'block';
+  tonghop.style.display = 'none';
+  add_product.style.display = 'none';
+  ql_user.style.display = 'none';
+  thongkee.style.display = 'none';
+}
+function thongkes(){
+  thongkee.style.display = 'flex';
+  ql_hoadon.style.display = 'none';
   tonghop.style.display = 'none';
   add_product.style.display = 'none';
   ql_user.style.display = 'none';
@@ -137,12 +152,18 @@ function changePageA(page, products) {
   currentPageADMIN = page;  // Cập nhật trang hiện tại
   displayProducts();  // Hiển thị lại sản phẩm cho trang hiện tại
 }
+// Hàm sắp xếp sản phẩm theo ID (hoặc tên, giá,... tùy theo yêu cầu)
+function sortProducts() {
+  products.sort((a, b) => a.id - b.id);  // Sắp xếp theo ID tăng dần (hoặc thay bằng a.name.localeCompare(b.name) nếu cần sắp xếp theo tên)
+}
 
 // Thêm sản phẩm vào localStorage
 function addProduct(newProduct) {
   products.push(newProduct);
+  sortProducts();  // Sắp xếp lại sản phẩm sau khi thêm
   localStorage.setItem('products', JSON.stringify(products));
   displayProducts();  // Hiển thị lại danh sách sản phẩm
+  them_thanhcongAD();
 }
 
 // Cập nhật sản phẩm trong localStorage
@@ -150,8 +171,10 @@ function updateProduct(Id, updatedProduct) {
   let index = products.findIndex(u => u.id == String(Id));
   if (index !== -1) {
     products[index] = updatedProduct;
+    sortProducts();  // Sắp xếp lại sản phẩm sau khi sửa
     localStorage.setItem('products', JSON.stringify(products));
     displayProducts();  // Hiển thị lại danh sách sản phẩm
+    them_thanhcongAD();
   }
 }
 
@@ -164,6 +187,7 @@ function deleteProduct(id) {
       products.splice(productIndex, 1);
       localStorage.setItem('products', JSON.stringify(products));
       displayProducts();  // Hiển thị lại danh sách sản phẩm
+      them_thanhcongAD();
     }
   }
 }
