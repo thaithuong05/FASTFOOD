@@ -4,6 +4,17 @@ let users = JSON.parse(localStorage.getItem('users')) || [];
 let user = JSON.parse(localStorage.getItem('user')) || {};
 let products = JSON.parse(localStorage.getItem('products')) || [];
 let products_default = JSON.parse(localStorage.getItem('products_default')) || [];
+
+
+function them_thanhcongAD() {
+  var them_thanhcong = document.getElementById('them-spAD');
+  them_thanhcong.style.display = 'block';
+  them_thanhcong.style.opacity = 1;
+  them_thanhcong.style.top = '25px';
+  setTimeout(function () {
+    them_thanhcong.style.display = 'none';
+  }, 1000); // giây
+}
 // Chỉ số sản phẩm đang chỉnh sửa
 let Id = -1;
 document.getElementById('addProductForm').addEventListener('submit', function (event) {
@@ -19,9 +30,9 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
   let imgInput = document.getElementById('img');
   let file = imgInput.files[0];  // Lấy file ảnh được chọn
 
-  // Kiểm tra xem ID có được nhập hay không
-  if (!id) {
-    alert("Vui lòng nhập ID sản phẩm.");
+  // Kiểm tra xem các trường bắt buộc có được nhập không
+  if (!id || !name || !price || !quantity || !category) {
+    alert("Vui lòng điền đầy đủ thông tin sản phẩm.");
     return;
   }
   // Kiểm tra xem ID đã tồn tại chưa, ngoại trừ ID của sản phẩm hiện tại đang sửa
@@ -30,7 +41,7 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
     return;
   }
   // Kiểm tra trùng ID khi sửa, bỏ qua sản phẩm hiện tại đang sửa
-  if (Id >= 0 && products.some(p => p.id === String(id) && p.id !== Id)) {
+  if (Id >= 0 && products.some(p => p.id === String(id) && p.id !== String(Id))) {
     alert("ID sản phẩm đã tồn tại! Vui lòng nhập ID khác.");
     return;
   }
@@ -48,7 +59,7 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
         description: description,
         quantity: quantity,
         category: category,
-        img: imageUrl || product.img,  // URL ảnh được đọc từ FileReader
+        img: imageUrl,  // URL ảnh được đọc từ FileReader
       };
 
       if (Id >= 0) {
@@ -65,6 +76,29 @@ document.getElementById('addProductForm').addEventListener('submit', function (e
 
     // Đọc file ảnh dưới dạng base64 (Data URL)
     reader.readAsDataURL(file);
+  }else {
+    // Nếu không có ảnh mới, giữ lại ảnh cũ hoặc không thay đổi
+    let newProduct = {
+      id: id,
+      name: name,
+      price: price,
+      description: description,
+      quantity: quantity,
+      category: category,
+      img: Id >= 0 ? products.find(p => p.id === String(Id)).img : '',  // Nếu sửa, giữ ảnh cũ, nếu thêm mới thì không có ảnh
+    };
+
+    if (Id >= 0) {
+      updateProduct(Id, newProduct);  // Cập nhật sản phẩm
+    } else {
+      addProduct(newProduct);  // Thêm sản phẩm mới
+    }
+
+    // Reset form và đóng popup
+    document.getElementById('addProductForm').reset();
+    close_x_addproduct();
+    Id = -1;
+    displayProducts();
   }
 });
 
