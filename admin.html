@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quản Lý Cửa Hàng</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/admin.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap"
     rel="stylesheet">
@@ -13,6 +14,9 @@
 
 <body>
 
+  <div id="them-spAD" class="them-spAD">
+    <i class="fa-solid fa-check"></i>
+</div>
   <!--FORM ĐĂNG NHẬP-->
   <div class="header">
     <div class="header-name">
@@ -31,8 +35,9 @@
     <div id="add-products" onclick="add_products()" class="add-products">Sản phẩm</div>
     <div id="ql-users" onclick="ql_users()" class="ql-users">Khách hàng</div>
     <div id="ql-hoadons" onclick="ql_hoadons()" class="ql-hoadons">Hóa đơn</div>
-    <div id="log-out-admin" class="log-out-admin"><a style="text-decoration: none;" href="main.html">Đăng xuất</a>
-    </div>
+    <div id="thongkes" onclick="thongkes()" class="thongkes">Thống kê</div>
+    <div id="log-out-admin" class="log-out-admin"><a style="text-decoration: none;" href="main.html">Đăng xuất</a></div>
+    
   </div>
 
   <!--Nội dung admin-->
@@ -110,7 +115,7 @@
           <label for="img" style="display:none;">URL Ảnh:</label>
           <input type="file" id="img" name="img" accept="image/*" onchange="displayImagePreview(event)"><br>
           <button type="button" onclick="document.getElementById('img').click();">Chọn ảnh</button><br>
-          <img id="imagePreview" src="" alt="Địa chỉ ảnh sản phẩm"
+          <img id="imagePreview" src="" alt="Ảnh sản phẩm"
             style="max-width: 200px; max-height: 200px; display: none;">
 
         </div>
@@ -167,6 +172,9 @@
       </div>
     </div>
 
+    <div id="thongke" class="thongke">
+      <h1>Thống kê</h1>
+    </div>
   </div>
   <script src="js/product.js"></script>
   <script src="js/admin.js"></script>
@@ -182,14 +190,12 @@
       }
     });
     createproductList();
-    displayProduct();
+    displayProducts();
     displayUsers();
-    capnhat_hoadon();
     capnhat_hoadon_admin();
     window.onload = function () {
       displayProducts();
       displayUsers();
-      capnhat_hoadon();
       capnhat_hoadon_admin();
     };
   </script>
