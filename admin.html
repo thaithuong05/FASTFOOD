@@ -107,9 +107,9 @@
 
       <form id="addProductForm" class="addProductForm">
 
-        <div class="addProductForm-div1">
+        <div class="close-x-addproduct" id="close-x-addproduct" onclick="close_x_addproduct()">X</div>
 
-          <div class="close-x-addproduct" id="close-x-addproduct" onclick="close_x_addproduct()">X</div>
+        <div class="addProductForm-div1">
           <label for="id">ID : </label>
           <input type="text" id="id" name="id"><br><br>
           <label for="img" style="display:none;">URL Ảnh:</label>
@@ -158,10 +158,64 @@
 
     <!--QUẢN LÍ TÀI KHOẢN NGƯỜI DÙNG-->
     <div id="ql-user" class="ql-user">
-      <h1 class="h1">Tài Khoản Người Dùng</h1>
-      <div class="ql-user-list" id="ql-user-list">
 
-      </div>
+      <h1 class="h1">Tài Khoản Người Dùng</h1>
+
+      <div class="button-add-usernew" onclick="open_form_add_usernew()">Thêm người dùng</div>
+
+      <form id="add-usernew" class="add-usernew">
+
+<div class="close-x-add-usernew" id="close-x-add-usernew" onclick="close_x_addusernew()">X</div>
+        <h3>Thêm người dùng</h3>
+        <label for="add-username">Họ và tên:</label><br>
+        <input type="text" id="add-username" name="username" placeholder="Vui lòng nhập tên đăng nhập" required>
+        <span class="error-message" id="add-error-username"></span>
+        <br>
+        <!-- Số điện thoại -->
+        <label for="add-tel">Số điện thoại:</label><br>
+        <input type="text" id="add-tel" name="tel" placeholder="Vui lòng nhập số điện thoại" required>
+        <span class="error-message" id="add-error-tel"></span>
+        <br>
+        <!-- Mật khẩu -->
+        <label for="add-password">Mật khẩu:</label><br>
+        <input type="password" id="add-password" name="password" placeholder="Vui lòng nhập mật khẩu" required>
+        <span class="error-message" id="add-error-password"></span>
+        <br>
+
+        <button type="submit">Đăng kí</button>
+      </form>
+
+      <form id="edit-user" class="edit-user">
+        <div class="close-x-edit-user" id="close-x-edit-user" onclick="close_x_edituser()">X</div>
+        <h3>Chỉnh sửa thông tin</h3>
+        <label for="edit-username">Họ và tên:</label><br>
+        <input type="text" id="edit-username" name="username" placeholder="Vui lòng nhập tên đăng nhập" required>
+        <span class="error-message" id="edit-error-username"></span>
+        <br>
+        <!-- Số điện thoại -->
+        <label for="edit-tel">Số điện thoại:</label><br>
+        <input type="text" id="edit-tel" name="tel" placeholder="Vui lòng nhập số điện thoại" required>
+        <span class="error-message" id="edit-error-tel"></span>
+        <br>
+        <!-- Mật khẩu -->
+        <label for="edit-password">Mật khẩu:</label><br>
+        <input type="text" id="edit-password"  name="password" placeholder="Vui lòng nhập mật khẩu" required>
+        <span class="error-message" id="edit-error-password"></span>
+        <br>
+
+    <!-- Nút bật/tắt -->
+     <label>Trạng thái</label>
+    <label class="switch">
+      <input type="checkbox" id="edit-status">
+      <span class="slider round"></span>
+  </label>
+
+        <button onclick="edit_userADMIN()" type="submit">Lưu</button>
+      </form>
+
+      <table class="ql-user-list" id="ql-user-list">
+
+      </table>
     </div>
 
     <!--Quản lí hóa đơn-->
