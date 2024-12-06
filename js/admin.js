@@ -696,7 +696,88 @@ function hoadon_daxacnhan() {
 
 
 
+function filterByDate() {
+  let startDate = document.getElementById('startDate').value;
+  let endDate = document.getElementById('endDate').value;
+  
+  // Kiểm tra xem người dùng có chọn ngày bắt đầu và kết thúc không
+  if (!startDate || !endDate) {
+    alert("Vui lòng chọn cả ngày bắt đầu và ngày kết thúc.");
+    return;
+  }
 
+  // Chuyển đổi các giá trị ngày thành đối tượng Date
+  let start = new Date(startDate);
+  let end = new Date(endDate);
+
+  if (start > end) {
+    alert("Ngày bắt đầu không thể lớn hơn ngày kết thúc.");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  let ql_hoadon_list = document.getElementById('ql-hoadon-list');
+  ql_hoadon_list.innerHTML = ''; // Xóa nội dung hiện tại
+  let a = 0;
+
+  // Create a new header row for the table
+  let headerRow = document.createElement('tr');
+  headerRow.classList.add('tr-hoadon');
+  headerRow.innerHTML = `
+      <th>Mã hóa đơn</th>
+      <th>Khách hàng</th>
+      <th>Ngày đặt</th>
+      <th>Tổng tiền</th>
+      <th>Trạng thái</th>
+      <th>Thao tác</th>
+    `;
+  ql_hoadon_list.appendChild(headerRow); // Append header row to table
+
+  // Tạo mảng chứa tất cả các hóa đơn của tất cả người dùng
+  let allOrders = [];
+
+  users.forEach(user => {
+    if (user.hoadon.length > 0) {
+      // Thêm tất cả các hóa đơn của người dùng vào mảng `allOrders`
+      user.hoadon.forEach(order => {
+        allOrders.push({ order, userTel: user.tel });
+      });
+    }
+  });
+
+  // Lọc các hóa đơn theo ngày
+  let filteredOrders = allOrders.filter(item => {
+    let orderDate = new Date(item.order.orderId); // Dùng `orderId` làm dấu thời gian
+    return orderDate >= start && orderDate <= end; // Kiểm tra xem ngày hóa đơn có trong khoảng không
+  });
+
+  // Sắp xếp mảng hóa đơn theo `orderId` (thời gian)
+  filteredOrders.sort((a, b) => b.order.orderId - a.order.orderId); // Sắp xếp giảm dần theo thời gian (orderId)
+
+  // Lặp qua mảng `filteredOrders` và hiển thị các hóa đơn lọc được
+  filteredOrders.forEach(item => {
+    let order = item.order;
+    let userTel = item.userTel; // Dùng `userTel` đã lưu trong `allOrders`
+    
+    let tr1 = document.createElement('tr');
+    let orderDate = new Date(order.orderId); // Dùng `orderId` làm dấu thời gian
+    let formattedDate = orderDate.toLocaleString(); // Định dạng ngày giờ
+    tr1.classList.add('tr-hoadon1');
+    tr1.innerHTML = `
+      <td>${order.orderId}</td>
+      <td>${userTel}</td>
+      <td>${formattedDate}</td>
+      <td>${Number(order.totalpay_all).toLocaleString()} VND</td>
+      <td>${order.status}</td>
+      <td><button class="button-chitiet-hoadon" onclick="chitiet_hoadon(${userTel},${order.orderId})">Xem</button></td>
+    `;
+    ql_hoadon_list.appendChild(tr1); // Thêm hóa đơn vào danh sách
+    a++;
+  });
+
+  // Cập nhật tổng số hóa đơn sau khi lọc
+  tonghop_hoadon_h2.innerHTML = `${a}`;
+}
 
 
 
