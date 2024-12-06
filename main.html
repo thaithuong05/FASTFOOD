@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://example.com/fonts/SFProDisplay.css" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <title>LUFFY FOOD</title>
+</head>
+
+<body>
+
+    <!--Mờ Màn Hình-->
+    <div class="overlay" id="overlay" onclick="close_x_overlay()"></div>
+
+    <div id="chua-dangnhap" class="chua-dangnhap">
+        <p>Chưa đăng nhập</p>
+    </div>
+    <div id="da-dangnhap" class="da-dangnhap">
+        <p>Đăng nhập thành công</p>
+    </div>
+    <div id="da-dangki" class="da-dangki">
+        <p>Đăng kí thành công</p>
+    </div>
+    <div id="them-sp" class="them-sp">
+        <i class="fa-solid fa-check"></i>
+    </div>
+
+    <div class="hoadon-tk" id="hoadon-tk">
+        <button class="close-x-hoadon" onclick="close_x_hoadon()">X</button>
+        <h2>Hóa đơn</h2>
+        <div class="hoadon-list-tk-0">
+            <div class="hoadon-list-tk" id="hoadon-list-tk">
+
+            </div>
+        </div>
+    </div>
+
+    <!--HEADER-->
+    <div class="header">
+        <div class="header-left">
+            <img src="assets/images/admin/logo.jpg" alt="LOGO">
+        </div>
+        <div class="header-between">
+            <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Tìm kiếm sản phẩm">
+            <i class="fa-solid fa-magnifying-glass" onclick="searchProducts()"></i>
+        </div>
+        <div class="header-right">
+            <div class="nut-loc"><button id="loc-sanpham" onclick="moveto()">Lọc</button></div>
+            <div class="button-shopping">
+                <i id="button-shopping" onclick="open_shopping()" class="fa-solid fa-cart-shopping"></i>
+                <div id="soluong-sp" onclick="open_shopping()">O</div>
+            </div>
+            <div class="button-account">
+                <div id="new-tk" class="button-account-1" style="display:block;">
+                    <span class="button-account-1-log-in" onclick="open_account_log_in()">Đăng nhập</span>/
+                    <span class=button-account-1-sign-up onclick="open_account_sign_up()">Đăng kí</span>
+                </div>
+                <div id="name-tk" style="display:none;"></div>
+                <div id="tk0" class="button-account-0" style="display:block;">
+                    <i id="icon-tk" class="fa-solid fa-user"></i>
+                    <div id="button-account-child0" class="button-account-child0">
+                        <div id="ql-admin" class="ql-admin">Quản Lí Cửa Hàng</div>
+                        <div onclick="open_tk()" id="thongtin-tk">Tài khoản</div>
+                        <div id="tk-hoadon" onclick="open_hoadon()">Đơn hàng</div>
+                        <div onclick="log_out()">Đăng xuất</div>
+                    </div>
+                    <div class="overlay-for-con" id="overlay-for-con" onclick="close_x_overlay_for_con()"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tk" class="tk">
+        <div class="tk-1">
+            <button class="close-x" onclick="close_x_overlay()">X</button>
+            <h3>Thông tin tài khoản</h3>
+        </div>
+        <form class="tk-form" id="tk-form">
+            <!-- Họ và tên -->
+            <label for="tk-name">Họ và tên</label><br>
+            <input type="text" id="tk-name" name="fullname" placeholder="Vui lòng nhập họ và tên" required>
+            <span class="error-message" id="tk-error-fullname"></span>
+            <br>
+
+            <!-- Số điện thoại -->
+            <label for="tk-tel">Số điện thoại</label><br>
+            <input type="tel" id="tk-tel" name="tel" placeholder="Số điện thoại" required readonly>
+            <!-- readonly ở đây -->
+            <span class="error-message" id="tk-error-tel"></span>
+            <br>
+
+            <!-- Email -->
+            <label for="tk-email">Email</label><br>
+            <input type="email" id="tk-email" name="email" placeholder="Vui lòng nhập email">
+            <span class="error-message" id="tk-error-email"></span>
+            <br>
+
+            <!-- Địa chỉ -->
+            <label for="tk-address">Địa chỉ</label><br>
+            <input type="text" id="tk-address" name="address" placeholder="Vui lòng nhập địa chỉ">
+            <span class="error-message" id="tk-error-address"></span>
+            <br>
+
+            <!-- Mật khẩu hiện tại -->
+            <label for="tk-current-password">Mật khẩu hiện tại</label><br>
+            <input type="password" id="tk-current-password" name="current-password"
+                placeholder="Vui lòng nhập mật khẩu hiện tại">
+            <span class="error-message" id="tk-error-current-password"></span>
+            <br>
+
+            <!-- Mật khẩu mới -->
+            <label for="tk-new-password">Mật khẩu mới</label><br>
+            <input type="password" id="tk-new-password" name="new-password" placeholder="Vui lòng nhập mật khẩu mới">
+            <span class="error-message" id="tk-error-new-password"></span>
+            <br>
+
+            <!-- Xác nhận mật khẩu mới -->
+            <label for="tk-confirm-password">Xác nhận mật khẩu mới</label><br>
+            <input type="password" id="tk-confirm-password" name="confirm-password"
+                placeholder="Vui lòng xác nhận mật khẩu mới">
+            <span class="error-message" id="tk-error-confirm-password"></span>
+            <br>
+
+            <input id="save" type="submit" value="Lưu thay đổi">
+        </form>
+    </div>
+
+    <!--Shopping-->
+    <div class="shopping" id="shopping">
+        <button class="close-x-shopping" onclick="close_x_overlay()">X</button>
+        <h1>Giỏ hàng</h1>
+        <div id="cartList" class="shopping-products">
+            <!--Danh sach san pham-->
+        </div>
+        <div class="shopping-pay">
+            <span id="totalPrice"></span><br>
+            <button onclick="open_pay()">Thanh toán</button>
+        </div>
+    </div>
+
+
+    <!-- Nội dung chính của thanh toán -->
+    <div id="open-pay" class="open-pay">
+        <div class="pay-container">
+            <button class="close-x-shopping" onclick="close_x_overlay()">X</button>
+            <!-- Phần 1: Thông tin đơn hàng -->
+            <div class="pay-1">
+                <h2>THÔNG TIN ĐƠN HÀNG</h2>
+                <div class="pay-1-con1">
+                    <p>Hình thức giao nhận</p>
+                    <div class="pay-1-con1div">
+                        <button id="delivery" class="selected" onclick="updateShippingFee('delivery')">
+                            Giao tận nơi
+                        </button>
+                        <button id="pickup" onclick="updateShippingFee('pickup')">
+                            Tự đến lấy
+                        </button>
+                    </div>
+                </div>
+                <div class="pay-1-con2">
+                    <p>Thời gian giao hàng</p>
+                    <label>
+                        <input type="radio" name="delivery-time" value="asap"> Giao ngay khi xong
+                    </label>
+                    <label>
+                        <input type="radio" name="delivery-time" value="time-slot"> Giao vào giờ
+                        <select id="delivery-time">
+                            <option>08:00 - 09:00</option>
+                            <option>09:00 - 10:00</option>
+                            <!-- Thêm các giờ khác -->
+                        </select>
+                    </label>
+                </div>
+                <div class="pay-1-con3-note">
+                    <p>Ghi chú đơn hàng</p>
+                    <textarea id="note" placeholder="Nhập ghi chú"></textarea>
+                </div>
+            </div>
+            <!-- Phần 2: Đơn hàng -->
+            <div class="pay-2">
+                <h2>Đơn hàng</h2>
+                <div class="pay-2-div1">
+                    <div id="name-product1"></div> <!-- Các sản phẩm trong giỏ hàng -->
+                </div>
+                <hr>
+                <p class="pay-2-p">Tiền hàng: <span id="total-pay">0</span></p>
+                <p class="pay-2-p">Phí vận chuyển: <span id="phi-van-chuyen">0</span></p>
+                <p class="pay-2-p">Mỗi sản phẩm phí vận chuyển : 5.000 VND</p>
+                <hr>
+                <p class="pay-2-p">Tổng tiền: <span id="total-pay-all">0</span></p>
+                <button class="pay-2-submit" onclick="submitOrder()">Đặt hàng</button>
+            </div>
+            <!-- Phần 3: Thông tin người nhận -->
+            <div class="pay-3">
+                <h2>THÔNG TIN NGƯỜI NHẬN</h2>
+                <form class="pay-3-form" id="pay-3-form">
+                    <label for="name-to">Tên người nhận</label><br>
+                    <input type="text" id="name-to" placeholder="Nhập tên người nhận"><br>
+                    <label for="phone-to">Số điện thoại nhận hàng</label><br>
+                    <input type="tel" id="phone-to" placeholder="Nhập số điện thoại"><br>
+                    <label for="address-to">Địa chỉ</label><br>
+                    <input type="text" id="address-to" placeholder="Nhập địa chỉ">
+                </form>
+                <p id="err1" style="color: red; display: none;">Vui lòng nhập đầy đủ thông tin!</p>
+            </div>
+            <!--Phần 4 Hóa Đơn-->
+            <div class="pay-4">
+                <div class="hoadon-list" id="hoadon-list"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--ACCOUNT-->
+
+    <!--Đăng nhập tài khoản-->
+    <form class="account-log-in" id="account-log-in">
+        <button class="close-x-log-in" type="button" onclick="close_x_overlay()">X</button>
+        <h1>Đăng Nhập</h1>
+        <!-- Số điện thoại -->
+        <label for="log-in-tel">Số điện thoại *</label>
+        <input type="tel" id="log-in-tel" placeholder="Nhập số điện thoại" required>
+        <span class="error-message" id="log-in-error-tel"></span>
+        <br>
+        <!-- Mật khẩu -->
+        <label for="log-in-password">Nhập mật khẩu</label>
+        <input type="password" id="log-in-password" placeholder="Nhập mật khẩu" required>
+        <span class="error-message" id="log-in-error-tel"></span>
+        <br>
+        <!-- Checkbox đồng ý -->
+        <div class="checkbox-container">
+            <input type="checkbox" id="log-in-checkbox">
+            <label for="log-in-checkbox">Tôi đồng ý với điều khoản của trang web.</label>
+        </div>
+        <span class="error-message" id="log-in-error-checkbox"></span>
+        <br>
+        <!-- Nút đăng nhập -->
+        <input type="submit" value="Đăng nhập" onclick="validateLogin(event)">
+        <!-- Liên kết tới form đăng ký -->
+        <p>Bạn chưa có tài khoản?</p>
+        <button class="button-move-to-sign-up" type="button" onclick="open_account_sign_up()">Đăng kí ngay</button>
+    </form>
+
+    <!--Đăng kí tài khoản-->
+
+    <form id="account-sign-up" class="account-sign-up">
+        <button class="close-x-sign-up" onclick="close_x_overlay()">X</button>
+        <h1>Đăng Kí</h1>
+        <!-- Tên người dùng -->
+        <label for="sign-up-username">Họ và tên:</label>
+        <input type="text" id="sign-up-username" name="username" placeholder="Vui lòng nhập tên đăng nhập" required>
+        <span class="error-message" id="sign-up-error-username"></span>
+        <br>
+        <!-- Số điện thoại -->
+        <label for="sign-up-tel">Số điện thoại:</label>
+        <input type="text" id="sign-up-tel" name="tel" placeholder="Vui lòng nhập số điện thoại" required>
+        <span class="error-message" id="sign-up-error-tel"></span>
+        <br>
+        <!-- Mật khẩu -->
+        <label for="sign-up-password">Mật khẩu:</label>
+        <input type="password" id="sign-up-password" name="password" placeholder="Vui lòng nhập mật khẩu" required>
+        <span class="error-message" id="sign-up-error-password"></span>
+        <br>
+        <!-- Xác nhận mật khẩu -->
+        <label for="sign-up-password1">Xác nhận mật khẩu:</label>
+        <input type="password" id="sign-up-password1" name="password1" placeholder="Vui lòng nhập lại mật khẩu"
+            required>
+        <span class="error-message" id="sign-up-error-password1"></span>
+        <br>
+        <!-- Checkbox đồng ý -->
+        <div class="checkbox-container">
+            <input type="checkbox" id="sign-up-checkbox">
+            <label for="sign-up-checkbox">Tôi đồng ý với điều khoản của trang web.</label>
+        </div>
+        <span class="error-message" id="sign-up-error-checkbox"></span>
+        <br>
+        <!-- Nút đăng ký -->
+        <button type="submit">Đăng ký</button><br>
+        <!-- Liên kết tới form đăng nhập -->
+        <p style="font-size:10px;">Bạn đã có tài khoản?</p>
+        <button class="button-move-to-log-in" type="button" onclick="open_account_log_in()">Đăng nhập ngay</button>
+    </form>
+
+    <!--LIST-MENU-->
+    <div class="list-menu" id="list-menu">
+        <div class="list-menu-div">
+            <button onclick="open_product('home')" id="home">Trang chủ</button>
+            <button onclick="open_product('new')" id="new">Món mới</button>
+            <button onclick="open_product('combo')" id="combo">Combo</button>
+            <button onclick="open_product('burger')" id="burger">Burger</button>
+            <button onclick="open_product('chicken')" id="chicken">Gà rán</button>
+            <button onclick="open_product('drink')" id="drink">Đồ uống</button>
+        </div>
+    </div>
+
+    <!--BUTTON-SEARCH-->
+    <aside class="header-aside" id="header-aside">
+        <div class="header-aside-left">
+            <p>Phân loại</p>
+            <select id="category-search-price" onchange="search_price()" class="header-aside-left-select">
+                <option value="home">Trang chủ</option>
+                <option value="new">Món mới</option>
+                <option value="combo">Combo</option>
+                <option value="burger">Burger</option>
+                <option value="chicken">Gà rán</option>
+                <option value="drink">Đồ uống</option>
+            </select>
+        </div>
+        <div class="header-aside-between">
+            <p>Giá từ </p>
+            <input class="header-aside-between-input" onkeyup="search_price()" type="number" id="min-price"
+                placeholder="Tối thiểu">
+            <p>đến</p>
+            <input class="header-aside-between-input" onchange="search_price()" type="number" id="max-price"
+                placeholder="Tối đa">
+            <div class="header-aside-between-i">
+                <i class="fa-solid fa-magnifying-glass" onclick="search_price()"></i>
+            </div>
+        </div>
+        <div class="header-aside-right">
+            <div class="header-aside-right-i">
+                <i class="fa-solid fa-up-long" onclick="search_price_thap_cao()"></i>
+            </div>
+            <div class="header-aside-right-i">
+                <i class="fa-solid fa-down-long" onclick="search_price_cao_thap()"></i>
+            </div>
+            <div class="header-aside-right-i" onclick="moveto()">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </aside>
+
+    <!--POSTER-->
+    <div class="poster-container">
+        <div class="poster" id="poster">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+
+    <main class="main" id="main">
+        <h1 class="main-h1"><span class="main-h1-border-bottom">Khám Phá Thực Đơn</span></h1>
+        <div id="productList" class="productList">
+            <!--Danh sách sản phẩm-->
+        </div>
+        <div id="pagination" class="pagination">
+            <!--Phân trang-->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <!--TOP-->
+            <div class="footer-top">
+                <div class="footer-top-left">
+                    <img class="footer-top-left-logo-img" src="assets/images/admin/logo1.jpg">
+                    <p>LUFFY FOOD</p>
+                </div>
+            </div>
+            <!--BOTTOM-->
+            <div class="footer-bottom">
+                <div class="footer-bottom-1">
+                    <ul>
+                        <li>
+                            <h3>Về chúng tôi</h3>
+                        </li>
+                        <li>
+                            <p>Luffy Food là thương hiệu được thành lập vào năm 2024 với tiêu chí đặt chất lượng sản
+                                phẩm lên hàng
+                                đầu.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-bottom-2">
+                    <ul>
+                        <li>
+                            <h3>Liên kết</h3>
+                        </li>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Thực đơn</a></li>
+                        <li><a href="#">Điều khoản</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                    </ul>
+                </div>
+                <div class="footer-bottom-3">
+                    <ul>
+                        <li>
+                            <h3>Thực đơn</h3>
+                        </li>
+                        <li><a href="#">Món mới</a></li>
+                        <li><a href="#">Combo</a></li>
+                        <li><a href="#">Burger</a> </li>
+                        <li><a href="#">Chicken</a></li>
+                        <li><a href="#">Đồ uống</a></li>
+                    </ul>
+                </div>
+                <div class="footer-bottom-4">
+                    <h3>Liên hệ</h3>
+                    <p>Địa chỉ: 273 An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh</p>
+                    <p>Điện thoại: 0123 456 789</p>
+                    <p>Email: <a href="mailto:abc@domain.com">luffyfood@gmail.com</a>, <a
+                            href="mailto:infoabc@domain.com">thaivanthuong290605@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+    <script>
+        // Kiểm tra nếu ADMIN0 chưa tồn tại trong localStorage thì thêm vào
+        if (!localStorage.getItem('ADMIN0')) {
+            let username = 'admin';  // Khai báo giá trị cho username
+            let ADMIN0 = {
+                tel: '0987654321',
+                password: '123456',
+                cart: [],
+                username: username,
+                email: [],
+                address: [],
+                hoadon: []
+            };
+
+            let ADMIN0_JSON = JSON.stringify(ADMIN0);
+            localStorage.setItem('ADMIN0', ADMIN0_JSON);
+            let users = JSON.parse(localStorage.getItem('users')) || []; // Lấy dữ liệu users đã có, nếu chưa có thì khởi tạo mảng rỗng
+            users.push(ADMIN0);  // Thêm ADMIN0 vào mảng users
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+    </script>
+    <script src="js/product.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+
+        createproductList();
+        open_product('home');
+        capnhat_hoadon();
+        capnhat_hoadon_admin();
+        window.onload = function () {
+            displayProducts();
+            open_product('home');
+            capnhat_hoadon();
+            capnhat_hoadon_admin();
+        };
+
+    </script>
+</body>
+
+</html>
