@@ -1041,30 +1041,27 @@ function submitOrder() {
       let formattedDate = orderDate.toLocaleString(); // Định dạng ngày giờ
       div.classList.add('hoadon-con');
       div.innerHTML = `
-<div  class="div-chitiet-hoadon-1">
-        <div class="khung-list-sp-hoadon">
-        ${order1.items.map(item => {
-    return `
-                            <div>
-                                <img src="${item.img}" alt="${item.name}"> <p><strong>${item.name}</strong> - ${item.quantity} x ${item.price.toLocaleString()} VND</p>
-                            </div>
-                        `;
-  }).join('')}
-        </div>
-    </div>
-     <br>
-     <div class="div-chitiet-hoadon-2">
-            <h3>Hóa đơn ${order1.orderId}</h3>
+            <h3>Hóa đơn #${order1.orderId}</h3>
             <p><strong>Ngày tạo hóa đơn:</strong> ${formattedDate}</p> <!-- Thêm ngày giờ -->
             <p><strong>Tên người nhận:</strong> ${order1.name}</p>
             <p><strong>Số điện thoại:</strong> ${order1.phone}</p>
             <p><strong>Địa chỉ:</strong> ${order1.address}</p>
-            <p><strong>Ghi chú:</strong> ${order1.note ? order1.note : 'Không có'}</p>
+            <p><strong>Ghi chú:</strong> ${order1.note ? order.note : 'Không có'}</p>
             <p><strong>Trạng thái:</strong> ${order1.status}</p>
+            <p><strong>Tổng tiền:</strong> ${order1.totalpay_all.toLocaleString()} VND</p>
             <p><strong>Phí vận chuyển:</strong> ${order1.totalphi.toLocaleString()} VND</p>
-                        <p><strong>Tổng tiền:</strong> ${order1.totalpay_all.toLocaleString()} VND</p>
-           <button id="div-chitiet-hoadon-2-button" class="div-chitiet-hoadon-2-button" onclick="xuli_hoadon(${Number(user1.tel)},${order.orderId})">Xử lí</button>
-     </div>
+            <div class="order-products">
+                <h4>Sản phẩm trong đơn hàng:</h4>
+                <div class="order-items-list">
+                    ${order1.items.map(item => {
+        return `
+                            <div class="order-item-detail">
+                                <p><strong>${item.name}</strong> - ${item.quantity} x ${item.price.toLocaleString()} VND</p>
+                            </div>
+                        `;
+      }).join('')}
+                </div>
+            </div>
   `;
       hoadon_list.appendChild(div);
 
