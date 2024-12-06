@@ -1016,5 +1016,7 @@ function capnhat_thongke_admin() {
   total_soluong_banra.innerHTML = `${D}`;
   let thongke_doanhthu = document.getElementById('thongke-doanhthu');
   thongke_doanhthu.innerHTML = `${C.toLocaleString()} VND`;
+  let tonghop_doanhthu_h2 = document.getElementById('tonghop-doanhthu-h2');
+  tonghop_doanhthu_h2.innerHTML=`${C.toLocaleString()} VND`;
 }
 
