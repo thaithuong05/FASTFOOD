@@ -511,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function () {
 //************************
 
 let currentPage = 1; // Trang mặc định
-let itemsPerPage = 8; // Số sản phẩm mỗi trang
+let itemsPerPage = 12; // Số sản phẩm mỗi trang
 
 //Khi bấm các nút ở list menu
 function open_product_of_team(products) {
