@@ -980,7 +980,9 @@ loc_sanpham.addEventListener("click", function () {
 function open_pay() {
   let open_pay = document.getElementById("open-pay");
   open_pay.style.display = 'block';
-
+  document.getElementById('address-to').value = user.address || [];
+  document.getElementById('name-to').value = user.username || [];
+  document.getElementById('phone-to').value = user.tel || [];
 }
 
 // Hàm xử lý khi người dùng đặt hàng
