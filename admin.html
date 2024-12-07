@@ -314,16 +314,7 @@
   <script src="js/product.js"></script>
   <script src="js/admin.js"></script>
   <script>
-    window.addEventListener('keydown', function (event) {
-      // Kiểm tra xem phím người dùng nhấn có phải là F5 (keyCode 116) hoặc Ctrl + R
-      if ((event.keyCode === 116) || (event.ctrlKey && event.key === 'r')) {
-        event.preventDefault(); // Ngừng hành động mặc định của F5 và Ctrl + R
-        alert('Tải lại trang bị vô hiệu hóa!');
-        const open_admin = document.getElementById('open-admin');
 
-        open_admin.style.display = 'flex';
-      }
-    });
     createproductList();
     displayProducts();
     displayUsers();
