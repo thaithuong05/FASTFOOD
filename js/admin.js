@@ -342,12 +342,12 @@ function displayUsers() {
       let dateObj = new Date(user.ngaytao);
       // Kiểm tra xem đối tượng Date có hợp lệ hay không
       if (!isNaN(dateObj.getTime())) {
-        createdAtFormatted = dateObj.toLocaleDateString('vi-VN'); // Convert to human-readable format
+        createdAtFormatted = dateObj.toLocaleDateString('vi-VN'); 
       } else {
-        createdAtFormatted = 'Ngày không hợp lệ';  // Show an error message if the date is invalid
+        createdAtFormatted = 'Ngày không hợp lệ';  
       }
     }
-    // Create a new row for each user
+ 
     let userRow = document.createElement('tr');
     userRow.classList.add('tr-user1');
     userRow.innerHTML = `
@@ -361,28 +361,28 @@ function displayUsers() {
         <button onclick="deleteUser('${user.id}')">Xóa</button>
       </td>
     `;
-    ql_user_list.appendChild(userRow); // Append the new row to the table
+    ql_user_list.appendChild(userRow); 
     a++;
   });
 
   if (a === 0) {
-    // If no users exist, show a message
+  
     let noUsersRow = document.createElement('tr');
     noUsersRow.innerHTML = '<td colspan="7">Chưa có tài khoản người dùng !</td>';
     ql_user_list.appendChild(noUsersRow);
   }
 
-  // Update the total user count
+
   tonghop_user_h2.innerHTML = `${users.length}`;
 }
 
-// Function to toggle the lock state of a user
+
 function toggleLock(userId) {
   let user = users.find(u => u.id === userId);
   if (user) {
-    user.status = !user.status; // Toggle lock status
-    localStorage.setItem('users', JSON.stringify(users)); // Save updated users list to localStorage
-    displayUsers(); // Re-display the users after the update
+    user.status = !user.status; 
+    localStorage.setItem('users', JSON.stringify(users));
+    displayUsers(); 
   }
 }
 
