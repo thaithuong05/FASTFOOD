@@ -377,15 +377,6 @@ function displayUsers() {
 }
 
 
-function toggleLock(userId) {
-  let user = users.find(u => u.id === userId);
-  if (user) {
-    user.status = !user.status; 
-    localStorage.setItem('users', JSON.stringify(users));
-    displayUsers(); 
-  }
-}
-
 function editUser(id) {
   let users = JSON.parse(localStorage.getItem('users')) || [];
   localStorage.setItem('users', JSON.stringify(users));
