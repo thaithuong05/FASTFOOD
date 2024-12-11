@@ -738,7 +738,7 @@ document.getElementById('edit-user').addEventListener('submit', function (event)
       displayUsers();
       close_x_edituser(); // Đóng form chỉnh sửa
     } else {
-      alert('Không tìm thấy người dùng với số điện thoại này.');
+      alert('Lỗi');
     }
   }
 });
