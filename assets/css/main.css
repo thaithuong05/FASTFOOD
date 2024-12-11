@@ -600,6 +600,8 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   max-width: 600px;
+  max-height:800px;
+  overflow:auto;
   margin: 0 auto;
   background-color: #f4f4f4;
   padding: 20px;
