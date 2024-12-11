@@ -573,6 +573,8 @@ function editUser(id) {
     localStorage.setItem('users', JSON.stringify(users));
     alert("Thông tin người dùng đã được cập nhật!");
     displayUsers(); // Cập nhật danh sách người dùng
+  }else{
+    alert('Lỗi');
   }
 }
 
