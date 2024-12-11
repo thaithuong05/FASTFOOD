@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Cửa Hàng</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap"
+    rel="stylesheet">
+</head>
+<body>
+
+  <div id="them-spAD" class="them-spAD">
+    <i class="fa-solid fa-check"></i>
+  </div>
+
+  <!--FORM ĐĂNG NHẬP-->
+  <div class="header">
+    <div class="header-name">
+      <p>LUFFY FOOD</p>
+    </div>
+  </div>
+
+  <!--Overlay-->
+  <div class="overlay-admin" id="overlay-admin"></div>
+
+  <!--DANH SÁCH CHỨC NĂNG-->
+  <div class="chucnang-admin">
+    <div class="logo-admin">
+      <img src="assets/images/admin/logo1.jpg" alt="LOGO">
+      <p>LUFFY FOOD</p>
+    </div>
+    <div id="tonghops" onclick="tonghops()" class="tonghops">Trang chủ</div>
+    <div id="add-products" onclick="add_products()" class="add-products">Sản phẩm</div>
+    <div id="ql-users" onclick="ql_users()" class="ql-users">Khách hàng</div>
+    <div id="ql-hoadons" onclick="ql_hoadons()" class="ql-hoadons">Hóa đơn</div>
+    <div id="thongkes" onclick="thongkes()" class="thongkes">Thống kê</div>
+    <div id="log-out-admin" class="log-out-admin"><a style="text-decoration: none;" href="main.html">Đăng xuất</a></div>
+  </div>
+
+  <!--Nội dung admin-->
+  <div id="open-admin" class="open-admin">
+    <div class="tonghop" id="tonghop">
+      <div class="khung">
+        <div class="tonghop-sp">
+          <h2 id="tonghop-sp-h2">0</h2>
+          <div>
+            <p class="ten-tonghop">Sản phẩm</p>
+            <img class="tonghop_img" src="assets/images/admin/tonghop_sp.jpg">
+          </div>
+        </div>
+      </div>
+      <div class="khung">
+        <div class="tonghop-user">
+          <h2 id="tonghop-user-h2">0</h2>
+          <div>
+            <p class="ten-tonghop">Khách hàng</p>
+            <img class="tonghop_img" src="assets/images/admin/tonghop_user.jpg">
+          </div>
+        </div>
+      </div>
+      <div class="khung">
+        <div class="tonghop-hoadon">
+          <h2 id="tonghop-hoadon-h2">0</h2>
+          <div>
+            <p class="ten-tonghop">Hóa đơn</p>
+            <img class="tonghop_img" src="assets/images/admin/tonghop_hoadon.jpg">
+          </div>
+        </div>
+      </div>
+      <div class="khung">
+        <div class="tonghop-doanhthu">
+          <h2 id="tonghop-doanhthu-h2">0</h2>
+          <div>
+            <p class="ten-tonghop">Doanh thu</p>
+            <img class="tonghop_img" src="assets/images/admin/tonghop_doanhthu.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--THÊM SẢN PHẨM-->
+    <div id="add-product" class="add-product">
+      <div class="add-product-chucnang">
+        <div class="add-product-chucnang-div1">
+          <select id="category-search-price" onchange="search_price()" class="header-aside-left-select">
+            <option value="home">Trang chủ</option>
+            <option value="new">Món mới</option>
+            <option value="combo">Combo</option>
+            <option value="burger">Burger</option>
+            <option value="chicken">Gà rán</option>
+            <option value="drink">Đồ uống</option>
+          </select>
+        </div>
+        <div class="add-product-chucnang-div2">
+          <input type="text" id="search-productAD" placeholder="Tìm kiếm sản phẩm..." oninput="search_productAD()">
+        </div>
+        <div id="button-open-form-addproduct" class="button-open-form-addproduct" onclick="open_form_addproduct()">
+          Thêm sản phẩm
+        </div>
+      </div>
+      <!--form-->
+      <form id="addProductForm" class="addProductForm">
+        <div class="close-x-addproduct" id="close-x-addproduct" onclick="close_x_addproduct()">X</div>
+        <div class="addProductForm-div1">
+          <label for="id">ID : </label>
+          <input type="text" id="id" name="id"><br><br>
+          <label for="img" style="display:none;">URL Ảnh:</label>
+          <input type="file" id="img" name="img" accept="image/*" onchange="displayImagePreview(event)"><br>
+          <button type="button" onclick="document.getElementById('img').click();">Chọn ảnh</button><br>
+          <img id="imagePreview" src="" alt="Ảnh sản phẩm" style="max-width: 200px; max-height: 200px; display: none;">
+        </div>
+
+        <div class="addProductForm-div2">
+          <label for="name">Tên sản phẩm:</label>
+          <input type="text" id="name" name="name" required><br><br>
+          <label for="price">Giá:</label>
+          <input type="number" id="price" name="price" required><br><br>
+          <label for="quantity">Số lượng:</label>
+          <input type="number" id="quantity" name="quantity" required><br><br>
+          <label for="description">Mô tả:</label>
+          <input type="text" id="description" name="description" required><br><br>
+          <label for="category">Danh mục:</label>
+          <select id="category">
+            <option value="home">Trang chủ</option>
+            <option value="new">Món mới</option>
+            <option value="combo">Combo</option>
+            <option value="burger">Burger</option>
+            <option value="chicken">Gà rán</option>
+            <option value="drink">Đồ uống</option>
+          </select><br><br>
+          <button type="submit">Thêm sản phẩm</button>
+        </div>
+      </form>
+       <!--Danh sách sp-->
+      <div id="productListA" class="productListA"></div>
+      <div id="paginationA" class="paginationA">
+        <!--Phân trang-->
+      </div>
+    </div>
+
+    <!--QUẢN LÍ TÀI KHOẢN NGƯỜI DÙNG-->
+    <div id="ql-user" class="ql-user">
+      <div class="ql-user-chucnang">
+        <div class="button-add-usernew" onclick="open_form_add_usernew()">Thêm người dùng</div>
+        <div class="ql-user-chucnang-div2">
+          <input type="text" id="search-user" placeholder="Tìm kiếm theo số điện thoại hoặc tên..."
+            oninput="search_user()">
+        </div>
+        <div class="ql-user-chucnang-div3">
+          <label for="statusFilter">Lọc theo trạng thái:</label>
+          <select id="statusFilter" onchange="filterByStatus()">
+            <option value="all">Tất cả</option>
+            <option value="true">Mở</option>
+            <option value="false">Khóa</option>
+          </select>
+        </div>
+        <div class="ql-user-chucnang-div4">
+          <label for="startDate_user">Từ ngày:</label>
+          <input type="date" id="startDate_user">
+          <label for="endDate_user">Đến ngày:</label>
+          <input type="date" id="endDate_user">
+          <button onclick="loc_date_user()">Lọc</button>
+        </div>
+      </div>
+
+      <form id="add-usernew" class="add-usernew">
+        <div class="close-x-add-usernew" id="close-x-add-usernew" onclick="close_x_addusernew()">X</div>
+        <h3>Thêm người dùng</h3>
+        <label for="add-username">Họ và tên:</label><br>
+        <input type="text" id="add-username" name="username" placeholder="Vui lòng nhập tên đăng nhập" required>
+        <span class="error-message" id="add-error-username"></span>
+        <br>
+        <!-- Số điện thoại -->
+        <label for="add-tel">Số điện thoại:</label><br>
+        <input type="text" id="add-tel" name="tel" placeholder="Vui lòng nhập số điện thoại" required>
+        <span class="error-message" id="add-error-tel"></span>
+        <br>
+        <!-- Mật khẩu -->
+        <label for="add-password">Mật khẩu:</label><br>
+        <input type="password" id="add-password" name="password" placeholder="Vui lòng nhập mật khẩu" required>
+        <span class="error-message" id="add-error-password"></span>
+        <br>
+        <button type="submit">Đăng kí</button>
+      </form>
+
+      <form id="edit-user" class="edit-user">
+        <div class="close-x-edit-user" id="close-x-edit-user" onclick="close_x_edituser()">X</div>
+        <h3>Chỉnh sửa thông tin</h3>
+        <label for="edit-username">Họ và tên:</label><br>
+        <input type="text" id="edit-username" name="username" placeholder="Vui lòng nhập tên đăng nhập" required>
+        <span class="error-message" id="edit-error-username"></span>
+        <br>
+        <!-- Số điện thoại -->
+        <label for="edit-tel">Số điện thoại:</label><br>
+        <input type="text" id="edit-tel" name="tel" placeholder="Vui lòng nhập số điện thoại" required>
+        <span class="error-message" id="edit-error-tel"></span>
+        <br>
+        <!-- Mật khẩu -->
+        <label for="edit-password">Mật khẩu:</label><br>
+        <input type="text" id="edit-password" name="password" placeholder="Vui lòng nhập mật khẩu" required>
+        <span class="error-message" id="edit-error-password"></span>
+        <br>
+        <!-- Nút bật/tắt -->
+        <label>Trạng thái</label>
+        <label class="switch">
+          <input type="checkbox" id="edit-status">
+          <span class="slider round"></span>
+        </label>
+        <button onclick="edit_userADMIN()" type="submit">Lưu</button>
+      </form>
+
+      <table class="ql-user-list" id="ql-user-list">
+         <!--Danh sách tài khoản-->
+      </table>
+    </div>
+
+    <!--Quản lí hóa đơn-->
+    <div id="ql-hoadon" class="ql-hoadon">
+      <div class="ql-hoadon-chucnang">
+        <div class="ql-hoadon-chucnang-div1">
+          <select id="loc_hoadon">
+            <option value="all">Tất cả</option>
+            <option value="hoadon_ed">Đã xác nhận</option>
+            <option value="hoadon_ing">Đang chờ</option>
+          </select>
+        </div>
+        <div class="ql-hoadon-chucnang-div2">
+          <input type="text" id="search-hoadon" placeholder="Tìm kiếm theo tên hoặc số điện thoại"
+            oninput="search_hoadon()">
+        </div>
+        <div class="ql-hoadon-chucnang-div3">
+          <label for="startDate_hoadon">Từ ngày:</label>
+          <input type="date" id="startDate_hoadon">
+          <label for="endDate_hoadon">Đến ngày:</label>
+          <input type="date" id="endDate_hoadon">
+          <button onclick="loc_date_hoadon()">Lọc theo ngày</button>
+        </div>
+      </div>
+      <table class="ql-hoadon-list" id="ql-hoadon-list">
+       <!--Danh sách hóa đơn-->
+      </table>
+      <div class="chitiet-container-hoadon" id="chitiet-container-hoadon">
+        <div onclick="close_x_chitiet_hoadon()" class="close-x-chitiet-hoadon" id="close-x-chitiet-hoadon">X</div>
+        <div class="chitiet-hoadon" id="chitiet-hoadon"></div>
+      </div>
+    </div>
+
+    <!--tHỐNG KÊ-->
+    <div id="thongke" class="thongke">
+      <div class="thongke-div0">
+        <div class="thongke-div">
+          <p><span>Sản phẩm được bán ra : </span></p>
+          <div id="total-sp-banra">
+          </div>
+        </div>
+        <div class="thongke-div">
+          <p><span>Số lượng sản phẩm bán ra : </span></p>
+          <div id="total-soluong-banra">
+          </div>
+        </div>
+        <div class="thongke-div-total">
+          <p><span>Doanh thu : </span></p>
+          <div id="thongke-doanhthu">
+          </div>
+        </div>
+      </div>
+
+      <div id="chitiet-thongke0" class="chitiet-thongke0">
+        <h2>Chi tiết</h2>
+        <div class="close-x-chitiet-thongke" id="close-x-chitiet-thongke" onclick="close_x_chitiet_thongke()">X</div>
+        <table id="xem-chitiet" class="xem-chitiet">
+          <!-- Thông tin hóa đơn sẽ hiển thị ở đây -->
+        </table>
+      </div>
+
+      <table class="ql-thongke-list" id="ql-thongke-list">
+       <!--Danh sách thống kê-->
+      </table>
+    </div>
+  </div>
+  <script src="js/product.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    createproductList();
+    displayProducts();
+    displayUsers();
+    capnhat_hoadon_admin();
+    capnhat_thongke_admin();
+    window.onload = function () {
+      displayProducts();
+      displayUsers();
+      capnhat_hoadon_admin();
+      capnhat_thongke_admin();
+    };
+  </script>
+</body>
+</html>
