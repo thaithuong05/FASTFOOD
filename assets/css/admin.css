@@ -1171,3 +1171,74 @@ input:checked+.slider:before {
 .table-chitiet-thongke tr {
   color: #000000;
 }
+
+
+@media (max-width:600px) {
+  .open-admin {
+    margin-left: 100px;
+    width: calc(100%-100px);
+    height: 100%;
+    margin-top: 50px;
+    display: flex;
+    background-color: #fff;
+  }
+
+  .chucnang-admin {
+    position: fixed;
+    width: 100px;
+    height: 100%;
+    padding: 0px;
+    background-color: #ffffff;
+    transition: width 2s ease;
+    border-right: 1px solid black;
+  }
+
+  .thongke-div {
+    height: 60px;
+    font-size: 15px;
+  }
+
+  .thongke-div-total {
+    height: 60px;
+    font-size: 15px;
+  }
+
+  .product-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+}
+
+
+@media (max-width:400px) {
+  .open-admin {
+    margin-left: 100px;
+    width: calc(100%-100px);
+    height: 100%;
+    margin-top: 50px;
+  }
+
+  .thongke-div {
+    height: 60px;
+    font-size: 10px;
+  }
+
+  .thongke-div-total {
+    height: 60px;
+    font-size: 10px;
+  }
+
+  .product-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+}
+
+
+
+
+
