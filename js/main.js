@@ -1095,6 +1095,7 @@ function capnhat_hoadon() {
             <p><strong>Ghi chú:</strong> ${order.note ? order.note : 'Không có'}</p>
             <p><strong>Trạng thái:</strong><span style="color: ${order.status === 'Đang chờ' ? 'red' : (order.status === 'Đã xác nhận' ? 'green' : 'black')}">${String(order.status)}</span></p>
             <p><strong>Phí vận chuyển:</strong> ${order.totalphi.toLocaleString()} VND</p>
+            <p><strong>Hình thức:</strong> ${order.hinhthuc}</p>
             <p style="font-size:15px;color:red;"><strong>Tổng tiền:</strong> ${order.totalpay_all.toLocaleString()} VND</p>
      </div>
 `;
